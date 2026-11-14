@@ -54,3 +54,18 @@ def split_info(split: str) -> dict:
         rows += pf.metadata.num_rows
         columns = pf.schema_arrow.names
     return {"split": split, "books": rows, "columns": columns}
+
+
+def first_long_book(tokenizer, split: str, min_tokens: int) -> dict:
+    """The first book of `split` with at least `min_tokens` tokens: {"title", "ids"}.
+
+    Books too short to qualify are skipped on their character count, without
+    being tokenized. `ids` is a list of token ids with no special tokens.
+    """
+    for book in stream_books(split, columns=("short_book_title", "text")):
+        if len(book["text"]) < min_tokens * 3:  # under 3 characters per token cannot be enough
+            continue
+        ids = tokenizer(book["text"], add_special_tokens=False)["input_ids"]
+        if len(ids) >= min_tokens:
+            return {"title": book["short_book_title"], "ids": ids}
+    raise LookupError(f"no book in PG-19 {split} has {min_tokens} tokens")

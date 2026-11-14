@@ -1,0 +1,51 @@
+# A1: core engine invariants (tests T1 to T5) and prefill throughput.
+experiment: A1_engine
+seed: 0
+block: 2048                # prefill block size, tokens (specification 4.7 rule 1)
+
+text:
+  source: pg19             # filler text for every test
+  split: validation
+  min_tokens: 100001       # the first book with at least this many tokens is used
+
+t1:                        # chunked prefill equals one-shot prefill
+  tokens: 6000
+  f32_max_abs_logit_diff: 1.0e-4
+
+t2:                        # re-basing cached keys by a constant rotation is exact
+  page_tokens: 512
+  delta: 5000
+  max_abs_diff: 1.0e-3
+
+t2_diagnostic:             # not in the specification; added after T2 failed its absolute threshold
+  max_rel_diff: 1.0e-3     # max abs diff divided by the largest magnitude in the same tensor, per layer
+  continuation_tokens: 64  # tokens read through the re-based cache to compare logits
+  max_abs_logit_diff: 1.0e-2
+  f64_max_rel_diff: 1.0e-6 # float64 model with float64 rotary angles, relative as above
+
+t3:                        # stitching sanity
+  page_tokens: 512
+  page_starts: [0, 2048]   # token offsets of the two pages in the document (non-adjacent)
+  system: "You are a helpful assistant."
+  instruction: "Answer the question using the context below."
+  opener: "Context:"
+  question: "What is the passage about? Answer in one short sentence."
+  max_rel_diff: 1.0e-3     # layout check, relative to the largest magnitude in the tensor
+
+t4:                        # YaRN accepts long positions; next-token loss recorded
+  yarn_factor: 4
+  native_tokens: 16384
+  mid_tokens: 49152
+  long_tokens: 100000
+  tail_tokens: 2048        # loss is also reported on the last tail_tokens tokens, identical in every condition
+
+t5:                        # memory guard
+  tokens: 65536
+  max_peak_vram_gib: 12.0
+
+throughput:
+  lengths: [8192, 32768, 65536]
+  models: [reader_dev, reader]
+  dtype: bfloat16
+  warmup_tokens: 2048
+  repeats: 3               # timed runs per model and length
