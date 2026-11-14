@@ -20,7 +20,7 @@ sys.path.insert(0, str(REPO_ROOT))
 
 from pcm.models import chat_segments, yarn_factor_for  # noqa: E402
 from pcm.runlog import atomic_write_json  # noqa: E402
-from pcm.tasks.common import get_tokenizer, iter_jsonl, load_task_config  # noqa: E402
+from pcm.tasks.common import count_tokens, get_tokenizer, iter_jsonl, load_task_config  # noqa: E402
 
 OUT = REPO_ROOT / "results" / "A2_tasks"
 FIG = OUT / "figures"
@@ -226,6 +226,7 @@ def examples(cfg: dict) -> dict:
             "distractors": [d["text"] for d in (ex.get("distractors") or [])[:4]],
             "excerpt": _excerpt(ex, ev[0] if ev else None),
             "prompt_prefix": chat.prefix, "prompt_suffix": chat.suffix,
+            "prompt_overhead_tokens": count_tokens(tok, chat.prefix) + count_tokens(tok, chat.suffix),
         }
     return out
 
