@@ -145,11 +145,20 @@ def build_chat(tokenizer, prefix_parts: Sequence[str], context_text: str, questi
     parts = [p for p in prefix_parts]
     system = parts[0] if parts else ""
     before = [p for p in parts[1:] if p]
-    user = "\n\n".join(before) + ("\n" if before else "") + CONTEXT_SENTINEL + "\n\n" + question
+    user_before = "\n\n".join(before) + ("\n" if before else "")
+    return chat_segments(tokenizer, system, user_before, "\n\n" + question, context_text)
+
+
+def chat_segments(tokenizer, system: str, user_before: str, user_after: str, context_text: str) -> Chat:
+    """Chat prompt whose user turn is user_before + context + user_after, thinking disabled.
+
+    Task modules build user_before and user_after from their official templates;
+    an empty system string means no system turn.
+    """
     messages = []
     if system:
         messages.append({"role": "system", "content": system})
-    messages.append({"role": "user", "content": user})
+    messages.append({"role": "user", "content": user_before + CONTEXT_SENTINEL + user_after})
     rendered = tokenizer.apply_chat_template(
         messages, tokenize=False, add_generation_prompt=True, enable_thinking=False
     )

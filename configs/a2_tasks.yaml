@@ -1,0 +1,165 @@
+# A2: task suite and evaluation harness (specification, sections 5.1 to 5.4).
+# Read by pcm/tasks/*, pcm/eval/*, scripts/make_data.py and scripts/report.py.
+experiment: A2_tasks
+tokenizer: reader               # all lengths are counted with this tokenizer (both readers share it)
+
+# Grid of section 5.2. Nominal names map to context lengths in tokens.
+lengths:
+  8k: 8192
+  16k: 16384
+  32k: 32768
+  64k: 65536
+  128k: 131072
+  256k: 262144
+phase_b_lengths:
+  512k: 524288
+  1M: 1048576
+
+# ---------------- synthetic tasks (S1 to S4) ----------------
+synth:
+  data_dir: data/synth           # data/synth/<task>/<length>_s<seed>.jsonl
+  cache_dir: data/cache/pg19     # PG-19 books with token offsets, built once per tokenizer
+  n_per_cell: 100                # section 5.2 (300 at 256K for final comparisons: generated later, same generator)
+  test_seeds: [0, 1, 2]          # seed 0 for screening; 1 and 2 for final numbers (section 5.2)
+  materialise_seeds: [0]         # what scripts/make_data.py writes by default
+  seed_limit: 1000               # test seeds are < seed_limit, train seeds >= seed_limit
+  length_tolerance: 0.01         # measured context tokens in [(1 - tol) * target, target]
+  depth_margin: 0.01             # stratified evidence is placed at least this far inside its decile
+  haystack_splits: [validation, test]   # PG-19 splits used as haystack (train never)
+  book_separator: "\n\n"
+  max_attempts: 8                # resampling budget for needles that occur in the haystack, and for length fitting
+
+  # Generator parameters per task. The decile of example i is i mod 10.
+  tasks:
+    S1:
+      family: S1
+      needle: "The special magic number for {key} is: {value}."
+      instruction: "A special magic number is hidden within the following text. Make sure to memorize it. I will quiz you about it afterwards."
+      question: "What is the special magic number for {key} mentioned in the text? Answer with the number only."
+      scoring: contains_all
+      max_new_tokens: 16
+      chance: 0.0
+    S2_multikey:
+      family: S2
+      needle: "The special magic number for {key} is: {value}."
+      n_needles: 4                 # one gold key and three similar keys (sharing the adjective or the noun)
+      instruction: "Some special magic numbers are hidden within the following text. Make sure to memorize them. I will quiz you about one of them afterwards."
+      question: "What is the special magic number for {key} mentioned in the text? Answer with the number only."
+      scoring: contains_exclusive   # gold value present, no distractor value present
+      max_new_tokens: 16
+      chance: 0.0
+    S2_multivalue:
+      family: S2
+      needle: "One of the special magic numbers for {key} is: {value}."
+      n_values: 4
+      instruction: "Some special magic numbers are hidden within the following text. Make sure to memorize them. I will quiz you about them afterwards."
+      question: "What are all the special magic numbers for {key} mentioned in the text? Answer with the numbers only, separated by commas."
+      scoring: contains_all
+      max_new_tokens: 48
+      chance: 0.0
+    S3_h2: &chain
+      family: S3
+      hops: 2                      # binding statements on the gold chain; hop 0 names the asked variable, the last hop holds the value
+      distractor_chains: 3         # chains of the same length with other names and values
+      value_statement: "VAR {name} = {value}."
+      link_statement: "VAR {name} = VAR {prev}."
+      instruction: "Variable assignments are hidden within the following text. A line of the form VAR X = VAR Y gives X the same value as Y. Make sure to memorize them. I will quiz you about them afterwards."
+      question: "What is the numeric value of VAR {name}? Answer with the number only."
+      scoring: contains_exclusive   # gold value present, no distractor-chain value present
+      max_new_tokens: 16
+      chance: 0.0
+    S3_h3:
+      <<: *chain
+      hops: 3
+    S3_h4:
+      <<: *chain
+      hops: 4
+    S4_count:
+      family: S4
+      marker: "The bell of the {key} tower rang once."
+      markers_per_8k: [4, 8]       # count drawn uniformly from this range, scaled by length / 8192
+      instruction: "Some sentences about a tower bell are scattered through the following text. Keep count of them. I will ask you about them afterwards."
+      question: "How many times did the bell of the {key} tower ring in the text? Answer with a number only."
+      scoring: first_int
+      max_new_tokens: 8
+      chance: 0.0
+    S4_freq:
+      family: S4
+      marker: "The signal word is {word}."
+      n_candidates: 5
+      markers_per_8k: [10, 14]
+      weights: [5, 4, 3, 2, 1]      # multinomial weights for the candidates' counts; the top count is made unique
+      instruction: "Some sentences naming a signal word are scattered through the following text. Keep track of them. I will ask you about them afterwards."
+      question: "Several sentences in the text name a signal word. Which signal word is named most often? Answer with the word only."
+      scoring: contains_exclusive   # gold word present, no other candidate present
+      max_new_tokens: 8
+      chance: 0.2
+
+  # Prompt shape for synthetic tasks: user turn = before + context + after.
+  prompt:
+    system: "You are a helpful assistant."
+    before: "{instruction}\n\n<text>\n"
+    after: "\n</text>\n\n{question}"
+
+  # Vocabularies. Test and train lists are disjoint (checked by tests/test_synth.py).
+  vocab:
+    test:
+      key_adjectives: [amber, azure, brisk, crimson, dusky, frosty, gilded, hollow, ivory, jagged, lunar, misty, noble, ochre, pallid, quiet, russet, silver, tawny, umber, velvet, wistful, ashen, briny, cobalt, dappled, ember, fallow, golden, hazel]
+      key_nouns: [otter, heron, falcon, badger, lantern, anchor, beacon, compass, harbor, meadow, quarry, thicket, willow, glacier, canyon, orchard, ferret, magpie, walrus, bison, kettle, saddle, chisel, spindle, trellis, lagoon, summit, tundra, marlin, pelican]
+      value_range: [1000000, 4999999]
+      name_first_letters: ABCDEFGHIJKLM
+      marker_words: [anemone, basalt, cinnabar, damask, epaulet, filigree, gazebo, halyard, isthmus, jonquil, kumquat, lorgnette, mandolin, nautilus, obelisk, parapet, quatrain, rosette, sextant, tamarind, ukulele, vellum, wimple, xylophone, yarrow, zither, abacus, bobbin, cupola, dulcimer, ermine, fresco, gimlet, hassock, ingot, jerkin, kestrel, lanyard, metronome, nosegay]
+    train:
+      key_adjectives: [bitter, calm, dim, eager, faint, grim, hardy, idle, jolly, keen, lofty, mellow, nimble, odd, plain, rapid, shy, stout, tidy, vivid, wary, young, zesty, bold, crisp, dry, fierce, gentle, humble, lean]
+      key_nouns: [sparrow, raven, beaver, moose, candle, barrel, bridge, castle, garden, island, ladder, mirror, needle, pillar, ribbon, shovel, tunnel, valley, wagon, basket, cradle, donkey, eagle, fox, goose, hammer, jacket, kite, lizard, mule]
+      value_range: [5000000, 9999999]
+      name_first_letters: NOPQRSTUVWXYZ
+      marker_words: [bauble, caravel, dirigible, escarpment, fennel, galleon, harpoon, igloo, jamboree, kazoo, lychee, marimba, nectarine, ocarina, papaya, quinoa, rhubarb, sombrero, tambourine, unicycle, vuvuzela, wombat, yodel, zeppelin, accordion, bagpipe, chameleon, didgeridoo, emu, flamingo, gondola, harmonica, iguana, jackal, koala, llama, mongoose, narwhal, okapi, platypus]
+
+# ---------------- BABILong ----------------
+babilong:
+  tasks: [qa1, qa2, qa3, qa4, qa5, qa6, qa7, qa8, qa9, qa10]
+  lengths: ["0k", "1k", "2k", "4k", "8k", "16k", "32k", "64k", "128k", "256k"]
+  meta_dir: data/meta/babilong   # cached token lengths and located facts per (task, length)
+  # Official prompt (third_party/babilong/babilong/prompts.py): instruction, examples and post prompt all on,
+  # chat template on, system prompt as in the official run scripts (scripts/run_*.sh).
+  system: "You are a helpful assistant."
+  use_instruction: true
+  use_examples: true
+  use_post_prompt: true
+  max_new_tokens: 20             # official run script
+  min_fact_words: 2              # a located fact sentence has at least this many words
+  chance:                        # 1 / number of labels in TASK_LABELS of the official scorer
+    qa1: 0.1667
+    qa2: 0.1667
+    qa3: 0.1667
+    qa4: 0.1667
+    qa5: 0.1429
+    qa6: 0.5
+    qa7: 0.25
+    qa8: 0.25
+    qa9: 0.5
+    qa10: 0.3333
+
+# ---------------- InfiniteBench ----------------
+infbench:
+  tasks: [passkey, number_string, kv_retrieval, longbook_choice_eng]
+  meta_dir: data/meta/infbench
+  # Official chat-model prompt: create_msgs of third_party/InfiniteBench/src/eval_utils.py with this
+  # template set (its key in MODEL_TO_PROMPT_TEMPLATE: the chat templates of src/prompt.py) and its system
+  # message; max_new_tokens from DATA_NAME_TO_MAX_NEW_TOKENS.
+  template_set: gpt4
+  chance:
+    passkey: 0.0
+    number_string: 0.0
+    kv_retrieval: 0.0
+    longbook_choice_eng: 0.25
+
+# ---------------- metrics ----------------
+metrics:
+  bootstrap_resamples: 10000
+  bootstrap_seed: 0
+  ci: 0.95
+  ecl_ratio: 0.9                 # accuracy >= ratio x reference at every length up to L
+  ecl_floor_min: 0.3             # and above max(ecl_floor_min, 2 x chance)
+  reference_length: 8k

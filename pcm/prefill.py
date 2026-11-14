@@ -6,6 +6,7 @@ applied only where logits are needed.
 """
 from __future__ import annotations
 
+import time
 from typing import Sequence
 
 import torch
@@ -109,19 +110,28 @@ def generate_greedy(
     max_new_tokens: int,
     stop_ids: Sequence[int] = (),
     block: int = 2048,
+    timings: dict | None = None,
 ) -> list[int]:
     """Greedy continuation of `prompt_ids` given `cache`. Returns the new token ids.
 
     Generation stops before a token in `stop_ids` (which is not returned) or
-    after max_new_tokens. The caller's cache is not modified.
+    after max_new_tokens. The caller's cache is not modified. With a `timings`
+    dict, the device is synchronised at three points and the dict receives
+    prefill_s (start to first generated token chosen: time to first token),
+    decode_s (the remaining steps) and new_tokens.
     """
+    if timings is not None:
+        _sync(model.device)
+        t0 = time.perf_counter()
     ids = _as_row(prompt_ids, model.device)
     lib = _library_cache(model, cache, ids.shape[1] + max_new_tokens)
     logits = _forward_blocks(model, ids, lib, block, 0, True)
     stops = set(int(s) for s in stop_ids)
     out: list[int] = []
-    for _ in range(max_new_tokens):
-        token = int(logits.argmax())
+    for step_i in range(max_new_tokens):
+        token = int(logits.argmax())  # .item() waits for the device
+        if timings is not None and step_i == 0:
+            t1 = time.perf_counter()
         if token in stops:
             break
         out.append(token)
@@ -129,7 +139,17 @@ def generate_greedy(
             break
         step = torch.tensor([[token]], dtype=torch.long, device=ids.device)
         logits = _forward_blocks(model, step, lib, 1, 0, True)
+    if timings is not None:
+        _sync(model.device)
+        t2 = time.perf_counter()
+        t1 = t1 if max_new_tokens > 0 else t2
+        timings.update({"prefill_s": t1 - t0, "decode_s": t2 - t1, "new_tokens": len(out)})
     return out
+
+
+def _sync(device) -> None:
+    if torch.device(device).type == "cuda":
+        torch.cuda.synchronize(device)
 
 
 @torch.no_grad()
