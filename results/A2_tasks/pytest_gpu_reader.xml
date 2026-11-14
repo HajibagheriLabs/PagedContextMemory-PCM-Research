@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="32.660" timestamp="2026-11-14T17:23:36.019899+03:30" hostname="local"><testcase classname="tests.test_runner" name="test_native_tiny_run_on_gpu" time="32.371" /></testsuite></testsuites>

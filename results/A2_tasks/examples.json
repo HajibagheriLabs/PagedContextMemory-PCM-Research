@@ -1,0 +1,833 @@
+{
+  "synth:S1": {
+    "id": "S1-8k-s0-0003",
+    "length": "8k",
+    "length_tokens": 8176,
+    "question": "What is the special magic number for dappled-thicket mentioned in the text? Answer with the number only.",
+    "answers": [
+      "1486621"
+    ],
+    "exclude": [],
+    "scoring": "contains_all",
+    "depth_decile": 3,
+    "evidence": [
+      {
+        "text": "The special magic number for dappled-thicket is: 1486621.",
+        "hop": 0,
+        "tok_start": 3140,
+        "tok_end": 3161,
+        "decile": 3,
+        "role": "evidence"
+      }
+    ],
+    "n_evidence": 1,
+    "n_distractors": 0,
+    "distractors": [],
+    "excerpt": "[...] om some impassable obstacle, he can no longer\nadvance on horseback, to dismount and pass over such obstacle, with\nhis ammunition holsters and chamber, on foot. <<The special magic number for dappled-thicket is: 1486621.>> The sticks, which are\nseven feet in length, and four in number, answering to the number of\nRockets, are collected in a bundle by means of a strap with four loo [...]",
+    "prompt_prefix": "<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\nA special magic number is hidden within the following text. Make sure to memorize it. I will quiz you about it afterwards.\n\n<text>\n",
+    "prompt_suffix": "\n</text>\n\nWhat is the special magic number for dappled-thicket mentioned in the text? Answer with the number only.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "prompt_overhead_tokens": 79
+  },
+  "synth:S2_multikey": {
+    "id": "S2_multikey-8k-s0-0003",
+    "length": "8k",
+    "length_tokens": 8176,
+    "question": "What is the special magic number for pallid-quarry mentioned in the text? Answer with the number only.",
+    "answers": [
+      "4673032"
+    ],
+    "exclude": [
+      "1447983",
+      "1465163",
+      "2631755"
+    ],
+    "scoring": "contains_exclusive",
+    "depth_decile": 3,
+    "evidence": [
+      {
+        "text": "The special magic number for pallid-quarry is: 4673032.",
+        "hop": 0,
+        "tok_start": 2654,
+        "tok_end": 2674,
+        "decile": 3,
+        "role": "evidence"
+      }
+    ],
+    "n_evidence": 1,
+    "n_distractors": 3,
+    "distractors": [
+      "The special magic number for ivory-quarry is: 1465163.",
+      "The special magic number for pallid-ferret is: 2631755.",
+      "The special magic number for pallid-marlin is: 1447983."
+    ],
+    "excerpt": "[...] nd no\nacceptance with her. Man was created in God’s image, and the Almighty\ndid not desire that His creatures should despise or underrate the work\nof His Hand. <<The special magic number for pallid-quarry is: 4673032.>> The attitude of regarding the world as a desert, and human\nbeings as miserable sinners incapable of rendering the highest service,\nnever commended itself to he [...]",
+    "prompt_prefix": "<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\nSome special magic numbers are hidden within the following text. Make sure to memorize them. I will quiz you about one of them afterwards.\n\n<text>\n",
+    "prompt_suffix": "\n</text>\n\nWhat is the special magic number for pallid-quarry mentioned in the text? Answer with the number only.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "prompt_overhead_tokens": 80
+  },
+  "synth:S2_multivalue": {
+    "id": "S2_multivalue-8k-s0-0003",
+    "length": "8k",
+    "length_tokens": 8176,
+    "question": "What are all the special magic numbers for crimson-tundra mentioned in the text? Answer with the numbers only, separated by commas.",
+    "answers": [
+      "2866656",
+      "4634622",
+      "2916594",
+      "1708705"
+    ],
+    "exclude": [],
+    "scoring": "contains_all",
+    "depth_decile": 3,
+    "evidence": [
+      {
+        "text": "One of the special magic numbers for crimson-tundra is: 2866656.",
+        "hop": 0,
+        "tok_start": 3127,
+        "tok_end": 3148,
+        "decile": 3,
+        "role": "evidence"
+      },
+      {
+        "text": "One of the special magic numbers for crimson-tundra is: 1708705.",
+        "hop": 0,
+        "tok_start": 3557,
+        "tok_end": 3578,
+        "decile": 4,
+        "role": "evidence"
+      },
+      {
+        "text": "One of the special magic numbers for crimson-tundra is: 2916594.",
+        "hop": 0,
+        "tok_start": 5346,
+        "tok_end": 5367,
+        "decile": 6,
+        "role": "evidence"
+      },
+      {
+        "text": "One of the special magic numbers for crimson-tundra is: 4634622.",
+        "hop": 0,
+        "tok_start": 7049,
+        "tok_end": 7070,
+        "decile": 8,
+        "role": "evidence"
+      }
+    ],
+    "n_evidence": 4,
+    "n_distractors": 0,
+    "distractors": [],
+    "excerpt": "[...] ay\nexplain to him the whole of his experiences. When he imagines that he\nhas found such a key to life he offers it to, but does not force it on\nhis fellow men. <<One of the special magic numbers for crimson-tundra is: 2866656.>>\n\nOctober 9, 1872.--I have been taking tea at the M's. These English\nhomes are very attractive. They are the recompense and the result of a\nlong-lived civilizat [...]",
+    "prompt_prefix": "<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\nSome special magic numbers are hidden within the following text. Make sure to memorize them. I will quiz you about them afterwards.\n\n<text>\n",
+    "prompt_suffix": "\n</text>\n\nWhat are all the special magic numbers for crimson-tundra mentioned in the text? Answer with the numbers only, separated by commas.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "prompt_overhead_tokens": 82
+  },
+  "synth:S3_h2": {
+    "id": "S3_h2-8k-s0-0003",
+    "length": "8k",
+    "length_tokens": 8176,
+    "question": "What is the numeric value of VAR GXIVR? Answer with the number only.",
+    "answers": [
+      "2611408"
+    ],
+    "exclude": [
+      "4861545",
+      "2419261",
+      "1510098"
+    ],
+    "scoring": "contains_exclusive",
+    "depth_decile": 3,
+    "evidence": [
+      {
+        "text": "VAR GXIVR = VAR ETDMQ.",
+        "hop": 0,
+        "tok_start": 1330,
+        "tok_end": 1340,
+        "decile": 1,
+        "role": "evidence"
+      },
+      {
+        "text": "VAR ETDMQ = 2611408.",
+        "hop": 1,
+        "tok_start": 3181,
+        "tok_end": 3195,
+        "decile": 3,
+        "role": "evidence"
+      }
+    ],
+    "n_evidence": 2,
+    "n_distractors": 6,
+    "distractors": [
+      "VAR IAWCT = 1510098.",
+      "VAR CACSP = 4861545.",
+      "VAR GDOWC = 2419261.",
+      "VAR KFFOF = VAR CACSP."
+    ],
+    "excerpt": "[...] Honours must see that this rule\nis observed, and care must be taken that no payment is made to the\nCompany's servants in coin on which they would have to lose. <<VAR GXIVR = VAR ETDMQ.>>\n\n49. The applications from outstations.--The rules laid down in the\nannexed Memoir must be observed.\n\n50. With regard to the Company's sloops and other vessels [...]",
+    "prompt_prefix": "<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\nVariable assignments are hidden within the following text. A line of the form VAR X = VAR Y gives X the same value as Y. Make sure to memorize them. I will quiz you about them afterwards.\n\n<text>\n",
+    "prompt_suffix": "\n</text>\n\nWhat is the numeric value of VAR GXIVR? Answer with the number only.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "prompt_overhead_tokens": 89
+  },
+  "synth:S3_h3": {
+    "id": "S3_h3-8k-s0-0003",
+    "length": "8k",
+    "length_tokens": 8176,
+    "question": "What is the numeric value of VAR ICXWN? Answer with the number only.",
+    "answers": [
+      "4131627"
+    ],
+    "exclude": [
+      "3056982",
+      "1293398",
+      "1471945"
+    ],
+    "scoring": "contains_exclusive",
+    "depth_decile": 3,
+    "evidence": [
+      {
+        "text": "VAR JRHGA = 4131627.",
+        "hop": 2,
+        "tok_start": 2997,
+        "tok_end": 3011,
+        "decile": 3,
+        "role": "evidence"
+      },
+      {
+        "text": "VAR GBDSE = VAR JRHGA.",
+        "hop": 1,
+        "tok_start": 3984,
+        "tok_end": 3994,
+        "decile": 4,
+        "role": "evidence"
+      },
+      {
+        "text": "VAR ICXWN = VAR GBDSE.",
+        "hop": 0,
+        "tok_start": 7917,
+        "tok_end": 7927,
+        "decile": 9,
+        "role": "evidence"
+      }
+    ],
+    "n_evidence": 3,
+    "n_distractors": 9,
+    "distractors": [
+      "VAR ISVVR = VAR JQDWV.",
+      "VAR GWCYD = VAR KNEKM.",
+      "VAR KNEKM = 3056982.",
+      "VAR KPGEN = VAR LMYNB."
+    ],
+    "excerpt": "[...] great man, and he owned both\nhouses and land. Then, too, he had taken to being religious; and\nthat, everybody knew, he didn't take to for nothing--nobody does. <<VAR JRHGA = 4131627.>>\nPeople began to whisper about these things.\n\n\"Just at this time the road over the ledge had to be altered. Folks\nin bygone days had a great fancy for going str [...]",
+    "prompt_prefix": "<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\nVariable assignments are hidden within the following text. A line of the form VAR X = VAR Y gives X the same value as Y. Make sure to memorize them. I will quiz you about them afterwards.\n\n<text>\n",
+    "prompt_suffix": "\n</text>\n\nWhat is the numeric value of VAR ICXWN? Answer with the number only.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "prompt_overhead_tokens": 89
+  },
+  "synth:S3_h4": {
+    "id": "S3_h4-8k-s0-0003",
+    "length": "8k",
+    "length_tokens": 8176,
+    "question": "What is the numeric value of VAR HJPNY? Answer with the number only.",
+    "answers": [
+      "1574646"
+    ],
+    "exclude": [
+      "4675289",
+      "4725043",
+      "3485517"
+    ],
+    "scoring": "contains_exclusive",
+    "depth_decile": 3,
+    "evidence": [
+      {
+        "text": "VAR CIGOD = 1574646.",
+        "hop": 3,
+        "tok_start": 2880,
+        "tok_end": 2894,
+        "decile": 3,
+        "role": "evidence"
+      },
+      {
+        "text": "VAR HJPNY = VAR LEIEF.",
+        "hop": 0,
+        "tok_start": 3592,
+        "tok_end": 3603,
+        "decile": 4,
+        "role": "evidence"
+      },
+      {
+        "text": "VAR EDVXG = VAR CIGOD.",
+        "hop": 2,
+        "tok_start": 4701,
+        "tok_end": 4712,
+        "decile": 5,
+        "role": "evidence"
+      },
+      {
+        "text": "VAR LEIEF = VAR EDVXG.",
+        "hop": 1,
+        "tok_start": 7913,
+        "tok_end": 7924,
+        "decile": 9,
+        "role": "evidence"
+      }
+    ],
+    "n_evidence": 4,
+    "n_distractors": 12,
+    "distractors": [
+      "VAR HCYDC = VAR JHEPZ.",
+      "VAR CUNHP = 4675289.",
+      "VAR BEJLZ = VAR KQGNK.",
+      "VAR KQGNK = 4725043."
+    ],
+    "excerpt": "[...] ht as day--and thought of the soul who had\njust passed out of a long and troubled life into the clearness of life\neternal, it seemed as if all was right still. <<VAR CIGOD = 1574646.>> Small cares and worries\ndwindled down or melted away--as the petty uglinesses around melted\nin the radiance of this glorious harvest moon, which seemed to wrap [...]",
+    "prompt_prefix": "<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\nVariable assignments are hidden within the following text. A line of the form VAR X = VAR Y gives X the same value as Y. Make sure to memorize them. I will quiz you about them afterwards.\n\n<text>\n",
+    "prompt_suffix": "\n</text>\n\nWhat is the numeric value of VAR HJPNY? Answer with the number only.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "prompt_overhead_tokens": 90
+  },
+  "synth:S4_count": {
+    "id": "S4_count-8k-s0-0003",
+    "length": "8k",
+    "length_tokens": 8176,
+    "question": "How many times did the bell of the ochre-pelican tower ring in the text? Answer with a number only.",
+    "answers": [
+      "8"
+    ],
+    "exclude": [],
+    "scoring": "first_int",
+    "depth_decile": null,
+    "evidence": [
+      {
+        "text": "The bell of the ochre-pelican tower rang once.",
+        "hop": 0,
+        "tok_start": 880,
+        "tok_end": 893,
+        "decile": 1,
+        "role": "evidence"
+      },
+      {
+        "text": "The bell of the ochre-pelican tower rang once.",
+        "hop": 0,
+        "tok_start": 1337,
+        "tok_end": 1350,
+        "decile": 1,
+        "role": "evidence"
+      },
+      {
+        "text": "The bell of the ochre-pelican tower rang once.",
+        "hop": 0,
+        "tok_start": 3139,
+        "tok_end": 3152,
+        "decile": 3,
+        "role": "evidence"
+      },
+      {
+        "text": "The bell of the ochre-pelican tower rang once.",
+        "hop": 0,
+        "tok_start": 3423,
+        "tok_end": 3436,
+        "decile": 4,
+        "role": "evidence"
+      },
+      {
+        "text": "The bell of the ochre-pelican tower rang once.",
+        "hop": 0,
+        "tok_start": 5230,
+        "tok_end": 5243,
+        "decile": 6,
+        "role": "evidence"
+      },
+      {
+        "text": "The bell of the ochre-pelican tower rang once.",
+        "hop": 0,
+        "tok_start": 5572,
+        "tok_end": 5585,
+        "decile": 6,
+        "role": "evidence"
+      }
+    ],
+    "n_evidence": 8,
+    "n_distractors": 0,
+    "distractors": [],
+    "excerpt": "[...] \n   With your looks so weary and words so strange,\n   Lit my soul from some hidden flame\n   To a passionate longing without a name,\n             Who shall say? <<The bell of the ochre-pelican tower rang once.>>\n   Not I, who am but a broken boat,\n   Content for a while to drift afloat\n   In the little noontide of love's delights\n             Between two Nights.\n\n\n\n\n\nV [...]",
+    "prompt_prefix": "<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\nSome sentences about a tower bell are scattered through the following text. Keep count of them. I will ask you about them afterwards.\n\n<text>\n",
+    "prompt_suffix": "\n</text>\n\nHow many times did the bell of the ochre-pelican tower ring in the text? Answer with a number only.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "prompt_overhead_tokens": 81
+  },
+  "synth:S4_freq": {
+    "id": "S4_freq-8k-s0-0003",
+    "length": "8k",
+    "length_tokens": 8176,
+    "question": "Several sentences in the text name a signal word. Which signal word is named most often? Answer with the word only.",
+    "answers": [
+      "mandolin"
+    ],
+    "exclude": [
+      "hassock",
+      "filigree",
+      "parapet",
+      "metronome"
+    ],
+    "scoring": "contains_exclusive",
+    "depth_decile": null,
+    "evidence": [
+      {
+        "text": "The signal word is parapet.",
+        "hop": 0,
+        "tok_start": 29,
+        "tok_end": 37,
+        "decile": 0,
+        "role": "evidence"
+      },
+      {
+        "text": "The signal word is mandolin.",
+        "hop": 0,
+        "tok_start": 1486,
+        "tok_end": 1493,
+        "decile": 1,
+        "role": "evidence"
+      },
+      {
+        "text": "The signal word is mandolin.",
+        "hop": 0,
+        "tok_start": 1994,
+        "tok_end": 2001,
+        "decile": 2,
+        "role": "evidence"
+      },
+      {
+        "text": "The signal word is mandolin.",
+        "hop": 0,
+        "tok_start": 3987,
+        "tok_end": 3994,
+        "decile": 4,
+        "role": "evidence"
+      },
+      {
+        "text": "The signal word is filigree.",
+        "hop": 0,
+        "tok_start": 4064,
+        "tok_end": 4072,
+        "decile": 4,
+        "role": "evidence"
+      },
+      {
+        "text": "The signal word is metronome.",
+        "hop": 0,
+        "tok_start": 4492,
+        "tok_end": 4500,
+        "decile": 5,
+        "role": "evidence"
+      }
+    ],
+    "n_evidence": 12,
+    "n_distractors": 0,
+    "distractors": [],
+    "excerpt": "[...] \"Without saying good-by?\" she reproached him. The injured wonder in her\neyes he thought a little overdone.\n\n\"Good-by.\" <<The signal word is parapet.>> He could not halt, but, raising his cap stiffly, managed to\nadd, \"A pleasant voyage,\" and passed on, feeling as though she had\nmurdered something.\n\nHe found hi [...]",
+    "prompt_prefix": "<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\nSome sentences naming a signal word are scattered through the following text. Keep track of them. I will ask you about them afterwards.\n\n<text>\n",
+    "prompt_suffix": "\n</text>\n\nSeveral sentences in the text name a signal word. Which signal word is named most often? Answer with the word only.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "prompt_overhead_tokens": 80
+  },
+  "babilong:qa1": {
+    "id": "babilong-qa1-8k-000",
+    "length": "8k",
+    "length_tokens": 7284,
+    "question": "Where is Mary? ",
+    "answers": [
+      "bathroom"
+    ],
+    "exclude": null,
+    "scoring": "official",
+    "depth_decile": null,
+    "evidence": [
+      {
+        "text": "John travelled to the hallway.",
+        "hop": null,
+        "tok_start": 2645,
+        "tok_end": 2651,
+        "decile": 3,
+        "role": null
+      },
+      {
+        "text": "Mary journeyed to the bathroom.",
+        "hop": null,
+        "tok_start": 2709,
+        "tok_end": 2716,
+        "decile": 3,
+        "role": null
+      },
+      {
+        "text": "Daniel went back to the bathroom.",
+        "hop": null,
+        "tok_start": 4590,
+        "tok_end": 4597,
+        "decile": 6,
+        "role": null
+      },
+      {
+        "text": "John moved to the bedroom.",
+        "hop": null,
+        "tok_start": 6213,
+        "tok_end": 6219,
+        "decile": 8,
+        "role": null
+      }
+    ],
+    "n_evidence": 4,
+    "n_distractors": 0,
+    "distractors": [],
+    "excerpt": "[...] it down and rest yourselves. You will be tired out by the end\nof the afternoon, at all events; so don't frisk about more than you can\nhelp at present;\" and Mr. <<John travelled to the hallway.>> Schermerhorn left the camp; while the boys,\nunder strong pressure of Jerry, and the distant notes of a band which\nsuddenly began to make itself heard, dressed  [...]",
+    "prompt_prefix": "<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\nI will give you context with the facts about positions of different persons hidden in some random text and a question. You need to answer the question based only on the information from the facts. If a person was in different locations, use the latest location to answer the question.\n\n<example>\nCharlie went to the hallway. Judith come back to the kitchen. Charlie travelled to balcony. Where is Charlie?\nAnswer: The most recent location of Charlie is balcony.\n</example>\n\n<example>\nAlan moved to the garage. Charlie went to the beach. Alan went to the shop. Rouse travelled to balcony. Where is Alan?\nAnswer: The most recent location of Alan is shop.\n</example>\n\nAlways return your answer in the following format: The most recent location of ’person’ is ’location’. Do not write anything else after that.\n\n<context>\n",
+    "prompt_suffix": "\n</context>\n\nQuestion: Where is Mary?<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "prompt_overhead_tokens": 202
+  },
+  "babilong:qa2": {
+    "id": "babilong-qa2-8k-000",
+    "length": "8k",
+    "length_tokens": 7629,
+    "question": "Where is the football? ",
+    "answers": [
+      "kitchen"
+    ],
+    "exclude": null,
+    "scoring": "official",
+    "depth_decile": null,
+    "evidence": [
+      {
+        "text": "Mary journeyed to the bathroom.",
+        "hop": null,
+        "tok_start": 893,
+        "tok_end": 900,
+        "decile": 1,
+        "role": null
+      },
+      {
+        "text": "Sandra went to the garden.",
+        "hop": null,
+        "tok_start": 1223,
+        "tok_end": 1229,
+        "decile": 1,
+        "role": null
+      },
+      {
+        "text": "Daniel went back to the garden.",
+        "hop": null,
+        "tok_start": 1354,
+        "tok_end": 1361,
+        "decile": 1,
+        "role": null
+      },
+      {
+        "text": "Daniel went to the office.",
+        "hop": null,
+        "tok_start": 1901,
+        "tok_end": 1907,
+        "decile": 2,
+        "role": null
+      },
+      {
+        "text": "Sandra grabbed the milk there.",
+        "hop": null,
+        "tok_start": 2216,
+        "tok_end": 2222,
+        "decile": 2,
+        "role": null
+      },
+      {
+        "text": "Sandra put down the milk there.",
+        "hop": null,
+        "tok_start": 2399,
+        "tok_end": 2406,
+        "decile": 3,
+        "role": null
+      }
+    ],
+    "n_evidence": 20,
+    "n_distractors": 0,
+    "distractors": [],
+    "excerpt": "[...]  subjects. The\nland which, to put it in the mildest form, the King held in trust for\nthe common service of the nation was now again employed to its proper\nuse. <<Mary journeyed to the bathroom.>> It was therefore reasonable that a restriction which belonged\nto a past state of things should be swept away, and that Sovereigns\nwho had given up an usurped p [...]",
+    "prompt_prefix": "<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\nI give you context with the facts about locations and actions of different persons hidden in some random text and a question.You need to answer the question based only on the information from the facts.\nIf a person got an item in the first location and travelled to the second location the item is also in the second location. If a person dropped an item in the first location and moved to the second location the item remains in the first location.\n\n<example>\nCharlie went to the kitchen. Charlie got a bottle. Charlie moved to the balcony. Where is the bottle?\nAnswer: The bottle is in the balcony.\n</example>\n<example>\nAlan moved to the garage. Alan got a screw driver. Alan moved to the kitchen. Where is the screw driver?\nAnswer: The screw driver is in the kitchen.\n</example>\n\nAlways return your answer in the following format: The ’item’ is in ’location’. Do not write anything else after that.\n\n<context>\n",
+    "prompt_suffix": "\n</context>\n\nQuestion: Where is the football?<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "prompt_overhead_tokens": 225
+  },
+  "babilong:qa3": {
+    "id": "babilong-qa3-8k-000",
+    "length": "8k",
+    "length_tokens": 7475,
+    "question": "Where was the football before the garden? ",
+    "answers": [
+      "kitchen"
+    ],
+    "exclude": null,
+    "scoring": "official",
+    "depth_decile": null,
+    "evidence": [
+      {
+        "text": "Daniel moved to the bathroom.",
+        "hop": null,
+        "tok_start": 28,
+        "tok_end": 34,
+        "decile": 0,
+        "role": null
+      },
+      {
+        "text": "John got the football.",
+        "hop": null,
+        "tok_start": 34,
+        "tok_end": 39,
+        "decile": 0,
+        "role": null
+      },
+      {
+        "text": "Sandra grabbed the milk.",
+        "hop": null,
+        "tok_start": 139,
+        "tok_end": 144,
+        "decile": 0,
+        "role": null
+      },
+      {
+        "text": "Sandra put down the milk.",
+        "hop": null,
+        "tok_start": 264,
+        "tok_end": 270,
+        "decile": 0,
+        "role": null
+      },
+      {
+        "text": "Daniel journeyed to the bedroom.",
+        "hop": null,
+        "tok_start": 375,
+        "tok_end": 382,
+        "decile": 0,
+        "role": null
+      },
+      {
+        "text": "Sandra took the milk.",
+        "hop": null,
+        "tok_start": 544,
+        "tok_end": 549,
+        "decile": 0,
+        "role": null
+      }
+    ],
+    "n_evidence": 30,
+    "n_distractors": 0,
+    "distractors": [],
+    "excerpt": "[...] She possessed in a rare degree the\nornament of a meek and quiet spirit and lived in an atmosphere of love\nand peace. <<Daniel moved to the bathroom.>> John got the football. Her home and room were to her children and her children's\nchildren what Jerusalem was to the saints of old. There they loved to\nresort a [...]",
+    "prompt_prefix": "<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\nI give you context with the facts about locations and actions of different persons hidden in some random text and a question. You need to answer the question based only on the information from the facts.\nIf a person got an item in the first location and travelled to the second location the item is also in the second location. If a person dropped an item in the first location and moved to the second location the item remains in the first location.\n\n<example>\nJohn journeyed to the bedroom. Mary grabbed the apple. Mary went back to the bathroom. Daniel journeyed to the bedroom. Daniel moved to the garden. Mary travelled to the kitchen. Where was the apple before the kitchen?\nAnswer: Before the kitchen the apple was in the bathroom.\n</example>\n<example>\nJohn went back to the bedroom. John went back to the garden. John went back to the kitchen. Sandra took the football. Sandra travelled to the garden. Sandra journeyed to the bedroom. Where was the football before the bedroom?\nAnswer: Before the bedroom the football was in the garden.\n</example>\n\nAlways return your answer in the following format: Before the $location_1$ the $item$ was in the $location_2$. Do not write anything else after that.\n\n<context>\n",
+    "prompt_suffix": "\n</context>\n\nQuestion: Where was the football before the garden?<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "prompt_overhead_tokens": 291
+  },
+  "babilong:qa4": {
+    "id": "babilong-qa4-8k-000",
+    "length": "8k",
+    "length_tokens": 7626,
+    "question": "What is the bathroom east of?",
+    "answers": [
+      "bedroom"
+    ],
+    "exclude": null,
+    "scoring": "official",
+    "depth_decile": null,
+    "evidence": [
+      {
+        "text": "The hallway is east of the bathroom.",
+        "hop": null,
+        "tok_start": 651,
+        "tok_end": 659,
+        "decile": 0,
+        "role": null
+      },
+      {
+        "text": "The bedroom is west of the bathroom.",
+        "hop": null,
+        "tok_start": 5784,
+        "tok_end": 5792,
+        "decile": 7,
+        "role": null
+      }
+    ],
+    "n_evidence": 2,
+    "n_distractors": 0,
+    "distractors": [],
+    "excerpt": "[...] r was temperamental to this noble\nson of the jungle; yet the religious superstition which Spain had\nbequeathed to this oppressed land still shackled his limbs. <<The hallway is east of the bathroom.>> As they descended the hill Carmen seized an opportunity to speak to\nJose alone. \"Some day, Padre,\" she whispered, \"you and I will open the\ndoor and let the bad [...]",
+    "prompt_prefix": "<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\nI will give you context with the facts about different people, their location and actions, hidden in some random text and a question. You need to answer the question based only on the information from the facts.\n\n<example>\nThe hallway is south of the kitchen. The bedroom is north of the kitchen. What is the kitchen south of?\nAnswer: bedroom\n</example>\n<example>\nThe garden is west of the bedroom. The bedroom is west of the kitchen. What is west of the bedroom?\nAnswer: garden\n</example>\n\nYour answer should contain only one word - location. Do not write anything else after that.\n\n<context>\n",
+    "prompt_suffix": "\n</context>\n\nQuestion: What is the bathroom east of?<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "prompt_overhead_tokens": 163
+  },
+  "babilong:qa5": {
+    "id": "babilong-qa5-8k-000",
+    "length": "8k",
+    "length_tokens": 7592,
+    "question": "Who did Fred give the football to? ",
+    "answers": [
+      "Jeff"
+    ],
+    "exclude": null,
+    "scoring": "official",
+    "depth_decile": null,
+    "evidence": [
+      {
+        "text": "Fred picked up the football there.",
+        "hop": null,
+        "tok_start": 955,
+        "tok_end": 962,
+        "decile": 1,
+        "role": null
+      },
+      {
+        "text": "Fred gave the football to Jeff.",
+        "hop": null,
+        "tok_start": 3492,
+        "tok_end": 3499,
+        "decile": 4,
+        "role": null
+      },
+      {
+        "text": "Bill went back to the bathroom.",
+        "hop": null,
+        "tok_start": 3958,
+        "tok_end": 3965,
+        "decile": 5,
+        "role": null
+      },
+      {
+        "text": "Jeff grabbed the milk there.",
+        "hop": null,
+        "tok_start": 5562,
+        "tok_end": 5568,
+        "decile": 7,
+        "role": null
+      },
+      {
+        "text": "Jeff gave the football to Fred.",
+        "hop": null,
+        "tok_start": 5726,
+        "tok_end": 5733,
+        "decile": 7,
+        "role": null
+      },
+      {
+        "text": "Fred handed the football to Jeff.",
+        "hop": null,
+        "tok_start": 5904,
+        "tok_end": 5911,
+        "decile": 7,
+        "role": null
+      }
+    ],
+    "n_evidence": 8,
+    "n_distractors": 0,
+    "distractors": [],
+    "excerpt": "[...] nd you know it,\" said Dan, firmly. \"Give me what you have\nleft, and I'll make no trouble about it. If you don't, you're booked for\nanother term at the island.\" <<Fred picked up the football there.>> Mike tried to save his ill-gotten gains, but Dan was persistent, and\nfinally extracted from him four dollars and a half. The rest Mike\npretended he had spent.  [...]",
+    "prompt_prefix": "<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\nI will give you context with the facts about locations and their relations hidden in some random text and a question. You need to answer the question based only on the information from the facts.\n\n<example>\nMary picked up the apple there. Mary gave the apple to Fred. Mary moved to the bedroom. Bill took the milk there. Who did Mary give the apple to?\nAnswer: Fred\n</example>\n<example>\nJeff took the football there. Jeff passed the football to Fred. Jeff got the milk there. Bill travelled to the bedroom. Who gave the football?\nAnswer: Jeff\n</example>\n<example>\nFred picked up the apple there. Fred handed the apple to Bill. Bill journeyed to the bedroom. Jeff went back to the garden. What did Fred give to Bill?\nAnswer: apple\n</example>\n\nYour answer should contain only one word. Do not write anything else after that. Do not explain your answer.\n\n<context>\n",
+    "prompt_suffix": "\n</context>\n\nQuestion: Who did Fred give the football to?<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "prompt_overhead_tokens": 227
+  },
+  "infbench:passkey": {
+    "id": "infbench-passkey-0",
+    "length": "full",
+    "length_tokens": 125305,
+    "question": "What is the pass key?",
+    "answers": [
+      "71432"
+    ],
+    "exclude": null,
+    "scoring": "official",
+    "depth_decile": 0,
+    "evidence": [
+      {
+        "text": "The pass key is 71432. Remember it. 71432 is the pass key.",
+        "hop": 0,
+        "tok_start": 0,
+        "tok_end": 25,
+        "decile": 0,
+        "role": null
+      }
+    ],
+    "n_evidence": 1,
+    "n_distractors": 0,
+    "distractors": [],
+    "excerpt": "[...] <<The pass key is 71432. Remember it. 71432 is the pass key.>> The grass is green. The sky is blue. The sun is yellow. Here we go. There and back again. The grass is green. The sky is blue. The sun is yellow. Here we go. T [...]",
+    "prompt_prefix": "<|im_start|>system\nYou are a helpful assistant<|im_end|>\n<|im_start|>user\nThere is an important info hidden inside a lot of irrelevant text. Find it and memorize them. I will quiz you about the important information there.\n\n",
+    "prompt_suffix": "\n\nWhat is the pass key?<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "prompt_overhead_tokens": 59
+  },
+  "infbench:number_string": {
+    "id": "infbench-number_string-0",
+    "length": "full",
+    "length_tokens": 125317,
+    "question": "What is the sequence of digits?",
+    "answers": [
+      "3000077442"
+    ],
+    "exclude": null,
+    "scoring": "official",
+    "depth_decile": 0,
+    "evidence": [
+      {
+        "text": "The sequence of digits is 3000077442. Remember it. 3000077442 is the sequence of digits.",
+        "hop": 0,
+        "tok_start": 0,
+        "tok_end": 37,
+        "decile": 0,
+        "role": null
+      }
+    ],
+    "n_evidence": 1,
+    "n_distractors": 0,
+    "distractors": [],
+    "excerpt": "[...] <<The sequence of digits is 3000077442. Remember it. 3000077442 is the sequence of digits.>> The grass is green. The sky is blue. The sun is yellow. Here we go. There and back again. The grass is green. The sky is blue. The sun is yellow. Here we go. T [...]",
+    "prompt_prefix": "<|im_start|>system\nYou are a helpful assistant<|im_end|>\n<|im_start|>user\nThere is an important info hidden inside a lot of irrelevant text. Find it. I will quiz you about the important information there.\n\n",
+    "prompt_suffix": "\n\nWhat is the sequence of digits?<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "prompt_overhead_tokens": 56
+  },
+  "infbench:kv_retrieval": {
+    "id": "infbench-kv_retrieval-0",
+    "length": "full",
+    "length_tokens": 169035,
+    "question": "\nKey: \"798c2306-5ad1-42a9-a8de-f2a118b33744\"\nThe value associated with the specified key is: ",
+    "answers": [
+      "5e6b7b90-710d-4953-9b18-3e96b2cadbf2"
+    ],
+    "exclude": null,
+    "scoring": "official",
+    "depth_decile": 0,
+    "evidence": [
+      {
+        "text": "\"798c2306-5ad1-42a9-a8de-f2a118b33744\": \"5e6b7b90-710d-4953-9b18-3e96b2cadbf2\"",
+        "hop": 0,
+        "tok_start": 3,
+        "tok_end": 72,
+        "decile": 0,
+        "role": null
+      }
+    ],
+    "n_evidence": 1,
+    "n_distractors": 0,
+    "distractors": [],
+    "excerpt": "[...] JSON data:\n{<<\"798c2306-5ad1-42a9-a8de-f2a118b33744\": \"5e6b7b90-710d-4953-9b18-3e96b2cadbf2\">>, \"6ab6ea3e-f288-4f33-ba46-7f42bb75b03f\": \"cb59052b-9128-4979-9c0e-e1de4adcf73b\", \"3ebf05c3-35af-483b-b46e-1bf3c67f3682\": \"a9ee6345-2331-4914-b32b-25a780931d45\" [...]",
+    "prompt_prefix": "<|im_start|>system\nYou are a helpful assistant<|im_end|>\n<|im_start|>user\nExtract the value corresponding to the specified key in the JSON object below.\n\n",
+    "prompt_suffix": "\n\n\nKey: \"798c2306-5ad1-42a9-a8de-f2a118b33744\"\nThe value associated with the specified key is: <|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "prompt_overhead_tokens": 83
+  },
+  "infbench:longbook_choice_eng": {
+    "id": "infbench-longbook_choice_eng-0",
+    "length": "full",
+    "length_tokens": 266658,
+    "question": "Which of the following is NOT one of Alain's chores at Hall Farm?",
+    "answers": [
+      "Walking Georgie"
+    ],
+    "exclude": null,
+    "scoring": "official",
+    "depth_decile": null,
+    "evidence": [],
+    "n_evidence": 0,
+    "n_distractors": 0,
+    "distractors": [],
+    "excerpt": "\n\n With a single drop of ink for a mirror, the Egyptian sorcerer undertakes to reveal to any chance comer far-reaching visions of the past. This is what I undertake to do for you, reader. With this drop of ink at the end of my pen, I will show you the roomy workshop of Mr. Jonathan Burge, carpenter and builder, in the  [...]",
+    "prompt_prefix": "<|im_start|>system\nYou are a helpful assistant<|im_end|>\n<|im_start|>user\nRead the book and answer the question.\n\n",
+    "prompt_suffix": "\n\nQuestion: Which of the following is NOT one of Alain's chores at Hall Farm?\n\nOnly one of the following options is correct, tell me the answer using one single letter (A, B, C, or D). Don't say anything else.\nA. Walking Georgie\nB. Taking care of Totty\nC. Working in the dairy\nD. Light housework<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "prompt_overhead_tokens": 108
+  }
+}
