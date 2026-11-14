@@ -216,3 +216,47 @@ def accuracy_by_decile(rows: Iterable[Mapping], n_resamples: int = 10_000, seed:
         if d is not None and r.get("score") is not None:
             groups[int(d)].append(float(r["score"]))
     return {d: bootstrap_ci(v, n_resamples, seed) for d, v in sorted(groups.items())}
+
+
+# ---------------------------------------------------------------- error kinds
+_SEVEN_DIGITS = re.compile(r"(?<!\d)\d{7}(?!\d)")
+_UUID = re.compile(r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+
+
+def error_kind(prediction: str, row: Mapping) -> str:
+    """"correct", "wrong" (an answer of the expected form, but not the right one) or "format"
+    (no answer of the expected form at all: empty, refusal, prose without the value).
+
+    row needs benchmark, task ("bench:name" or the bare name), score, answers; synthetic rows
+    also exclude; BABILong rows also question; InfiniteBench rows also label.
+    """
+    if row.get("score") == 1.0:
+        return "correct"
+    bench = row.get("benchmark", "synth")
+    task = str(row["task"]).split(":")[-1]
+    p = prediction or ""
+    if bench == "synth":
+        if task == "S4_count":
+            ok = _INT.search(p.replace(",", "")) is not None
+        elif task == "S4_freq":
+            ok = any(_present(p, w) for w in list(row["answers"]) + list(row.get("exclude") or []))
+        else:  # S1, S2, S3: seven-digit values
+            ok = _SEVEN_DIGITS.search(p) is not None
+        return "wrong" if ok else "format"
+    if bench == "babilong":
+        from pcm.tasks.official import babilong as off
+
+        o = off()
+        out = o.compare_answers.__globals__["preprocess_output"](p) if "preprocess_output" in o.compare_answers.__globals__ else p.lower()
+        labels = {lab.lower() for lab in o.TASK_LABELS[task]}
+        in_question = {lab for lab in labels if lab in str(row.get("question", "")).lower()}
+        return "wrong" if {lab for lab in labels if lab in out} - in_question else "format"
+    if bench == "infbench":
+        if task in ("passkey", "number_string"):
+            ok = re.search(r"\d", p) is not None
+        elif task == "kv_retrieval":
+            ok = _UUID.search(p) is not None
+        else:  # longbook_choice_eng: a letter A-D or one of the options
+            ok = re.search(r"\b[A-D]\b", p) is not None
+        return "wrong" if ok else "format"
+    raise ValueError(f"unknown benchmark {bench!r}")

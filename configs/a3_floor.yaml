@@ -1,0 +1,66 @@
+# A3: E0 (floor: native reader inside its window) and E1 (truncation baseline M0), Gate G0.
+# Specification sections 5.3 to 5.5. Run with scripts/run_a3.py; tasks and data from configs/a2_tasks.yaml.
+n: 100        # examples per cell (section 5.2). InfiniteBench: 100 rows spread evenly over each task (D-022)
+seed: 0       # data seed (screening)
+pilot_n: 5    # examples per cell in the pilot
+
+common: &common
+  dtype: bfloat16
+  block: 2048          # prefill block (section 4.7 rule 1)
+  window: 32768        # prompt + max_new_tokens must fit (D-023)
+  min_free_vram_gib: 12.0
+  min_free_ram_gib: 2.0
+
+methods:
+  native-1.7B: {<<: *common, method: native, name: native-1.7B, reader: reader}
+  native-0.6B: {<<: *common, method: native, name: native-0.6B, reader: reader_dev}
+  # Model card, non-thinking mode: Temperature=0.7, TopP=0.8, TopK=20, MinP=0. Fixed seed; each example's
+  # generator is seeded by (seed, example id).
+  sampled-1.7B:
+    <<: *common
+    method: native
+    name: sampled-1.7B
+    reader: reader
+    sampling: {temperature: 0.7, top_p: 0.8, top_k: 20, min_p: 0.0, seed: 0}
+  m0-tail-1.7B: {<<: *common, method: truncate, mode: tail, name: m0-tail-1.7B, reader: reader}
+  m0-headtail-1.7B: {<<: *common, method: truncate, mode: head_tail, name: m0-headtail-1.7B, reader: reader}
+
+task_sets:
+  synth: [synth:S1, synth:S2_multikey, synth:S2_multivalue, synth:S3_h2, synth:S3_h3, synth:S3_h4, synth:S4_count, synth:S4_freq]
+  babilong: [babilong:qa1, babilong:qa2, babilong:qa3, babilong:qa4, babilong:qa5, babilong:qa6, babilong:qa7, babilong:qa8, babilong:qa9, babilong:qa10]
+  infbench: [infbench:passkey, infbench:number_string, infbench:kv_retrieval, infbench:longbook_choice_eng]
+  sampling_subset: [synth:S1, synth:S2_multikey, synth:S2_multivalue, synth:S3_h2, synth:S4_freq, babilong:qa1, babilong:qa2, babilong:qa3, babilong:qa4, babilong:qa5]
+
+# Cells run in this order. The cells that decide Gate G0 (8K and below) come first.
+# InfiniteBench is absent from E0: no row fits the window (reports/A2_tasks.md, D-022).
+experiments:
+  E0_floor:
+    - {method: native-1.7B, tasks: synth, lengths: [8k]}
+    - {method: native-1.7B, tasks: babilong, lengths: [0k, 1k, 2k, 4k, 8k]}
+    - {method: sampled-1.7B, tasks: sampling_subset, lengths: [8k], indices: [0, 2, 4, 6, 8]}  # 10 cells x 5 = 50 examples
+    - {method: native-0.6B, tasks: synth, lengths: [8k]}
+    - {method: native-0.6B, tasks: babilong, lengths: [0k, 1k, 2k, 4k, 8k]}
+    - {method: native-1.7B, tasks: synth, lengths: [16k, 32k]}
+    - {method: native-1.7B, tasks: babilong, lengths: [16k, 32k]}
+  E1_truncation:
+    - {method: m0-tail-1.7B, tasks: synth, lengths: [64k, 128k, 256k]}
+    - {method: m0-tail-1.7B, tasks: babilong, lengths: [64k, 128k, 256k]}
+    - {method: m0-tail-1.7B, tasks: infbench, lengths: [full]}
+    - {method: m0-headtail-1.7B, tasks: synth, lengths: [64k, 128k, 256k]}
+    - {method: m0-headtail-1.7B, tasks: babilong, lengths: [64k, 128k, 256k]}
+    - {method: m0-headtail-1.7B, tasks: infbench, lengths: [full]}
+
+# Gate G0 (section 5.5), as interpreted in D-024.
+gate:
+  method: native-1.7B
+  length: 8k
+  pass_accuracy: 0.5          # a family passes with accuracy >= 50% ...
+  pass_chance_multiple: 2.0   # ... or >= 2 x its chance level
+  min_families: 3
+  families:                   # family accuracy = unweighted mean of its tasks' accuracies; chance likewise
+    S1: [synth:S1]
+    S2: [synth:S2_multikey, synth:S2_multivalue]
+    S3: [synth:S3_h2, synth:S3_h3, synth:S3_h4]
+    S4: [synth:S4_count, synth:S4_freq]
+    BABILong: [babilong:qa1, babilong:qa2, babilong:qa3, babilong:qa4, babilong:qa5]
+    BABILong-ext: [babilong:qa6, babilong:qa7, babilong:qa8, babilong:qa9, babilong:qa10]

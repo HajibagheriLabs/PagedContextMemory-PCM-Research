@@ -147,10 +147,11 @@ babilong:
 infbench:
   tasks: [passkey, number_string, kv_retrieval, longbook_choice_eng]
   meta_dir: data/meta/infbench
-  # Official chat-model prompt: create_msgs of third_party/InfiniteBench/src/eval_utils.py with this
-  # template set (its key in MODEL_TO_PROMPT_TEMPLATE: the chat templates of src/prompt.py) and its system
-  # message; max_new_tokens from DATA_NAME_TO_MAX_NEW_TOKENS.
-  template_set: gpt4
+  # Official chat-model prompt: create_msgs of third_party/InfiniteBench/src/eval_utils.py with the
+  # official template set for chat models (recognised by content: the passkey prompt ends with the question,
+  # no answer prefix; see pcm/tasks/official.py) and its system message; max_new_tokens from
+  # DATA_NAME_TO_MAX_NEW_TOKENS.
+  template_set: chat
   chance:
     passkey: 0.0
     number_string: 0.0

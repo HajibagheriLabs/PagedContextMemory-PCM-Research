@@ -25,6 +25,25 @@ BABILONG_DIR = THIRD_PARTY / "babilong" / "babilong"
 INFBENCH_DIR = THIRD_PARTY / "InfiniteBench" / "src"
 
 
+# How each template set of InfiniteBench's MODEL_TO_PROMPT_TEMPLATE is recognised by content.
+# "chat": the prompts for chat models, which end the passkey prompt with the question itself
+# (no answer prefix such as "The pass key is"). Exactly one key of the official map has them.
+TEMPLATE_FINGERPRINTS = {
+    "chat": lambda t: t["passkey"].endswith("{context}\n\n{input}"),
+}
+
+
+def _template_keys(model_to_template: dict) -> dict:
+    """Template-set name ("chat") -> the official key that selects it in create_msgs."""
+    out = {}
+    for name, test in TEMPLATE_FINGERPRINTS.items():
+        keys = [k for k, t in model_to_template.items() if test(t)]
+        if len(keys) != 1:
+            raise LookupError(f"template set {name!r}: expected one matching key, found {len(keys)}")
+        out[name] = keys[0]
+    return out
+
+
 def _load_module(name: str, path: Path):
     if not path.is_file():
         raise FileNotFoundError(f"reference file missing: {path} (third_party/ is cloned by prompt A0)")
@@ -95,6 +114,7 @@ def infbench() -> SimpleNamespace:
         max_new_tokens=ns["DATA_NAME_TO_MAX_NEW_TOKENS"],
         scorers={task: ns[fn] for task, fn in INFBENCH_SCORERS.items()},
         create_msgs=ns["create_msgs"],  # called with tokenizer=None: no truncation, returns (messages, prompt)
+        template_keys=_template_keys(ns["MODEL_TO_PROMPT_TEMPLATE"]),
         source={"eval_utils": str(INFBENCH_DIR / "eval_utils.py"), "compute_scores": str(INFBENCH_DIR / "compute_scores.py")},
     )
 

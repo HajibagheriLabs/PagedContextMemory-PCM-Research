@@ -102,3 +102,19 @@ def test_accuracy_by_decile():
     by = M.accuracy_by_decile(rows)
     assert sorted(by) == [0, 1, 2] and all(by[d]["n"] == 10 for d in by)
     assert by[0]["mean"] == pytest.approx(0.5)
+
+
+def test_error_kind():
+    s1 = {"benchmark": "synth", "task": "synth:S1", "answers": ["1234567"], "score": 0.0}
+    assert M.error_kind("7654321", s1) == "wrong"
+    assert M.error_kind("I cannot find it.", s1) == "format"
+    assert M.error_kind("1234567", {**s1, "score": 1.0}) == "correct"
+    fr = {"benchmark": "synth", "task": "synth:S4_freq", "answers": ["obelisk"], "exclude": ["zither"], "score": 0.0}
+    assert M.error_kind("zither", fr) == "wrong" and M.error_kind("bell", fr) == "format"
+    cnt = {"benchmark": "synth", "task": "synth:S4_count", "answers": ["8"], "score": 0.0}
+    assert M.error_kind("7", cnt) == "wrong" and M.error_kind("several", cnt) == "format"
+    b = {"benchmark": "babilong", "task": "babilong:qa1", "question": "Where is Mary?", "answers": ["bathroom"], "score": 0.0}
+    assert M.error_kind("The most recent location of Mary is kitchen.", b) == "wrong"
+    assert M.error_kind("Mary is somewhere.", b) == "format"
+    ib = {"benchmark": "infbench", "task": "infbench:longbook_choice_eng", "label": ["x", "A"], "answers": ["x"], "score": 0.0}
+    assert M.error_kind("B", ib) == "wrong" and M.error_kind("I do not know", ib) == "format"

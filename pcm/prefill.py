@@ -175,3 +175,68 @@ def nll_in_blocks(model, input_ids, block: int = 2048) -> torch.Tensor:
         del hidden, logits
         _trim_allocator(ids.device)
     return torch.cat(losses)
+
+
+def sample_token(logits: torch.Tensor, temperature: float, top_k: int, top_p: float, min_p: float, generator: torch.Generator) -> int:
+    """One token drawn from `logits` with temperature, top-k, top-p and min-p, applied in that order
+    (the order of the library's logits processors)."""
+    x = logits.float() / temperature
+    if top_k and top_k > 0:
+        kth = torch.topk(x, min(int(top_k), x.shape[-1])).values[-1]
+        x = x.masked_fill(x < kth, float("-inf"))
+    if top_p is not None and top_p < 1.0:
+        sorted_x, order = torch.sort(x, descending=False)
+        cum = torch.softmax(sorted_x, dim=-1).cumsum(dim=-1)
+        drop = cum <= (1 - top_p)
+        drop[-1] = False  # keep at least the most probable token
+        x = x.masked_fill(drop.scatter(0, order, drop), float("-inf"))
+    probs = torch.softmax(x, dim=-1)
+    if min_p and min_p > 0:
+        probs = probs.masked_fill(probs < min_p * probs.max(), 0.0)
+        probs = probs / probs.sum()
+    return int(torch.multinomial(probs, 1, generator=generator))
+
+
+@torch.no_grad()
+def generate_sampled(
+    model,
+    cache: KVCache | None,
+    prompt_ids,
+    max_new_tokens: int,
+    stop_ids: Sequence[int] = (),
+    block: int = 2048,
+    temperature: float = 0.7,
+    top_k: int = 20,
+    top_p: float = 0.8,
+    min_p: float = 0.0,
+    seed: int = 0,
+    timings: dict | None = None,
+) -> list[int]:
+    """Like generate_greedy, but each token is sampled with a generator seeded by `seed` (reproducible)."""
+    if timings is not None:
+        _sync(model.device)
+        t0 = time.perf_counter()
+    gen = torch.Generator(device=model.device).manual_seed(int(seed) % (2**63))
+    ids = _as_row(prompt_ids, model.device)
+    lib = _library_cache(model, cache, ids.shape[1] + max_new_tokens)
+    logits = _forward_blocks(model, ids, lib, block, 0, True)
+    stops = set(int(s) for s in stop_ids)
+    out: list[int] = []
+    t1 = None
+    for step_i in range(max_new_tokens):
+        token = sample_token(logits, temperature, top_k, top_p, min_p, gen)
+        if timings is not None and step_i == 0:
+            t1 = time.perf_counter()
+        if token in stops:
+            break
+        out.append(token)
+        if len(out) == max_new_tokens:
+            break
+        step = torch.tensor([[token]], dtype=torch.long, device=ids.device)
+        logits = _forward_blocks(model, step, lib, 1, 0, True)
+    if timings is not None:
+        _sync(model.device)
+        t2 = time.perf_counter()
+        t1 = t1 if t1 is not None else t2
+        timings.update({"prefill_s": t1 - t0, "decode_s": t2 - t1, "new_tokens": len(out)})
+    return out

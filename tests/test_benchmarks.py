@@ -88,7 +88,7 @@ def first_rows():
 def test_infbench_prompt_is_the_official_one(first_rows, cfg):
     for task, row in first_rows.items():
         system, before, after = I.prompt_parts(row, task, cfg)
-        msgs, prompt = off_i().create_msgs(None, json.loads(json.dumps(row)), task, ".", model_name=cfg["infbench"]["template_set"])
+        msgs, prompt = off_i().create_msgs(None, json.loads(json.dumps(row)), task, ".", model_name=off_i().template_keys[cfg["infbench"]["template_set"]])
         assert before + row["context"] + after == msgs[1]["content"] == prompt, task
         assert system == msgs[0]["content"]
 

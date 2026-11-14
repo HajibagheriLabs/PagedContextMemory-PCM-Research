@@ -5,8 +5,8 @@ input, answer, options). Contexts reach 1.1M characters, so files are read one
 line at a time.
 
 Prompt: the official chat-model path of third_party/InfiniteBench/src/eval_utils.py,
-`create_msgs` with the chat template set named in configs/a2_tasks.yaml
-(infbench.template_set) and no tokenizer (the official script would otherwise cut
+`create_msgs` with the template set named in configs/a2_tasks.yaml
+(infbench.template_set: "chat", resolved by content in pcm/tasks/official.py) and no tokenizer (the official script would otherwise cut
 the input to 128K tokens in the middle; truncation is a method here, not part of
 the data). Its system message and template are used as they are.
 Label: the official `get_answer`. Scorer: the official `get_score_one_<task>` of
@@ -64,10 +64,11 @@ def iter_rows(task: str) -> Iterator[dict]:
 
 def prompt_parts(row: dict, task: str, cfg: dict | None = None) -> tuple[str, str, str]:
     """(system, user text before the context, user text after it), official chat path."""
-    template_set = (cfg or load_task_config())["infbench"]["template_set"]
+    off = official()
+    key = off.template_keys[(cfg or load_task_config())["infbench"]["template_set"]]
     eg = {k: (list(v) if isinstance(v, list) else v) for k, v in row.items()}
     eg["context"] = CONTEXT_SENTINEL
-    msgs, _ = official().create_msgs(None, eg, task, ".", model_name=template_set)
+    msgs, _ = off.create_msgs(None, eg, task, ".", model_name=key)
     if len(msgs) != 2 or msgs[0]["role"] != "system" or msgs[1]["role"] != "user":
         raise ValueError(f"unexpected official message layout for {task}")
     user = msgs[1]["content"]
@@ -141,15 +142,19 @@ def ensure_meta(task: str, tokenizer, cfg: dict | None = None, log=None, limit: 
     return have
 
 
-def load(task: str, tokenizer, cfg: dict | None = None, n: int | None = None) -> list[dict]:
-    """Examples of one task in the harness's common form (the first n rows in file order)."""
+def load(task: str, tokenizer, cfg: dict | None = None, n: int | None = None, select: list[int] | None = None) -> list[dict]:
+    """Examples of one task in the harness's common form: the rows at positions `select`,
+    or the first n rows in file order, or all rows."""
     cfg = cfg or load_task_config()
-    meta = ensure_meta(task, tokenizer, cfg, limit=n)
+    wanted = set(select) if select is not None else None
+    meta = ensure_meta(task, tokenizer, cfg, limit=None if wanted is not None else n)
     off = official()
     out = []
     for k, row in enumerate(iter_rows(task)):
-        if n is not None and k >= n:
+        if wanted is None and n is not None and k >= n:
             break
+        if wanted is not None and k not in wanted:
+            continue
         m = meta[row["id"]]
         out.append({
             "id": f"infbench-{task}-{row['id']}",
