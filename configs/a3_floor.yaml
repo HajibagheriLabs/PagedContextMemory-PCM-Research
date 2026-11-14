@@ -57,7 +57,9 @@ gate:
   pass_accuracy: 0.5          # a family passes with accuracy >= 50% ...
   pass_chance_multiple: 2.0   # ... or >= 2 x its chance level
   min_families: 3
-  families:                   # family accuracy = unweighted mean of its tasks' accuracies; chance likewise
+  # A task's threshold: 0.5 if its chance is 0, else min(0.5, 2 x chance). A family passes when the unweighted
+  # mean of its tasks' accuracies reaches the mean of their thresholds (D-024, corrected by D-027).
+  families:
     S1: [synth:S1]
     S2: [synth:S2_multikey, synth:S2_multivalue]
     S3: [synth:S3_h2, synth:S3_h3, synth:S3_h4]
