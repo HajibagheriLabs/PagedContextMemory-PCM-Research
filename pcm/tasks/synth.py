@@ -426,7 +426,15 @@ def generate_example(
     length_name = length_name or str(target_tokens)
     tol = scfg["length_tolerance"]
     lo_len = math.ceil((1 - tol) * target_tokens)
+    hi_len = target_tokens
     aim = target_tokens - max(2, int(0.002 * target_tokens))
+    window, reserve = scfg["native_window"], scfg["prompt_reserve"]
+    if target_tokens <= window < target_tokens + reserve:
+        # The cell is meant to fit the native window with its prompt: leave room for wrapper and answer.
+        hi_len = window - reserve
+        aim = min(aim, hi_len - max(2, int(0.002 * target_tokens)))
+        if hi_len < lo_len:
+            raise ValueError(f"prompt_reserve {reserve} leaves no room inside the {tol:.0%} tolerance of {target_tokens}")
     decile = None if task.startswith("S4") else index % 10
 
     base = (split, task, target_tokens, seed, index)
@@ -454,8 +462,8 @@ def generate_example(
         context, spans = insert_items(hay, content.items)
         ids, starts, ends = tokenize_with_offsets(tokenizer, context)
         n = len(ids)
-        if not lo_len <= n <= target_tokens:
-            last_problem = f"length {n} outside [{lo_len}, {target_tokens}]"
+        if not lo_len <= n <= hi_len:
+            last_problem = f"length {n} outside [{lo_len}, {hi_len}]"
             hay_tokens = max(16, hay_tokens + (aim - n))
             continue
         records = []

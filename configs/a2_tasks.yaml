@@ -24,6 +24,8 @@ synth:
   materialise_seeds: [0]         # what scripts/make_data.py writes by default
   seed_limit: 1000               # test seeds are < seed_limit, train seeds >= seed_limit
   length_tolerance: 0.01         # measured context tokens in [(1 - tol) * target, target]
+  native_window: 32768           # a cell whose target equals the native window keeps the context at or below
+  prompt_reserve: 160            # native_window - prompt_reserve, so prompt wrapper (<= 90 tokens) and answer (<= 48) fit too
   depth_margin: 0.01             # stratified evidence is placed at least this far inside its decile
   haystack_splits: [validation, test]   # PG-19 splits used as haystack (train never)
   book_separator: "\n\n"

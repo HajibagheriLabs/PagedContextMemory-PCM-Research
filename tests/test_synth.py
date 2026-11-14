@@ -79,6 +79,12 @@ def test_lengths_within_tolerance(tok, cfg, examples):
         assert math.ceil((1 - tol) * TARGET) <= n <= TARGET, (task, i, n)
 
 
+def test_native_window_cell_leaves_room_for_the_prompt(tok, pool, cfg):
+    s = cfg["synth"]
+    ex = generate_example("S1", s["native_window"], 0, 5, tok, pool, length_name="32k", cfg=cfg)
+    assert math.ceil((1 - s["length_tolerance"]) * s["native_window"]) <= ex["length_tokens"] <= s["native_window"] - s["prompt_reserve"]
+
+
 def test_depth_deciles(examples):
     for (task, i), ex in examples.items():
         if task.startswith("S4"):
