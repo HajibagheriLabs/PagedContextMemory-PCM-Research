@@ -49,3 +49,4 @@ throughput:
   dtype: bfloat16
   warmup_tokens: 2048
   repeats: 3               # timed runs per model and length
+  min_free_vram_gib: 14.0  # preflight: the 64K run on the larger reader peaks near 12 GiB

@@ -19,7 +19,9 @@ def main() -> None:
     tests = {m: json.loads((OUT / f"tests_{m}.json").read_text(encoding="utf-8")) for m in MODELS}
     t = {m: tests[m]["tests"] for m in MODELS}
     print("text:", {m: tests[m]["text"]["book"] for m in MODELS})
-    print("commit at test time:", {m: tests[m]["env"]["git_commit"][:10] for m in MODELS})
+    for m in MODELS:
+        stamps = {(v.get("run", {}).get("git_commit", "unstamped") or "none")[:10] + ("+dirty" if v.get("run", {}).get("git_dirty", True) else "") for v in t[m].values()}
+        print(f"{m}: {len(t[m])} test records, code stamps {sorted(stamps)}")
 
     def row(label, fn):
         print(f"| {label} | " + " | ".join(fn(t[m]) for m in MODELS) + " |")
@@ -81,7 +83,12 @@ def main() -> None:
     row("generate_greedy", lambda x: f"{x['generate_greedy']['answer']!r} matches={x['generate_greedy']['matches_library_generate']}")
 
     print("\n## Throughput")
-    rows = [json.loads(line) for line in (OUT / "throughput.jsonl").read_text(encoding="utf-8").splitlines() if line.strip()]
+    all_rows = [json.loads(line) for line in (OUT / "throughput.jsonl").read_text(encoding="utf-8").splitlines() if line.strip()]
+    # The file is append-only and may hold rows from several commits: report the most recent clean one.
+    clean = [r for r in all_rows if r.get("git_dirty") is False]
+    commit = clean[-1]["git_commit"] if clean else None
+    rows = [r for r in clean if r["git_commit"] == commit] if clean else all_rows
+    print(f"rows in file: {len(all_rows)}; reported: {len(rows)} from commit {str(commit)[:10]}")
     print("| model | tokens | runs | median tok/s | min..max tok/s | median s | peak GiB | reserved GiB |")
     for model in sorted({r["model"] for r in rows}):
         for n in sorted({r["tokens"] for r in rows}):
@@ -92,8 +99,6 @@ def main() -> None:
                 f"{statistics.median(r['seconds'] for r in sel):.2f} | {max(r['peak_vram_gib'] for r in sel):.2f} | "
                 f"{max(r['peak_reserved_gib'] for r in sel):.2f} |"
             )
-    env = json.loads((OUT / "env.json").read_text(encoding="utf-8"))
-    print("bench commit:", env["git_commit"], "dirty:", env["git_dirty"])
 
 
 if __name__ == "__main__":

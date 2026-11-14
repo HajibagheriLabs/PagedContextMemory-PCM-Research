@@ -21,6 +21,7 @@ def per_layer_max_abs(a, b) -> list[float]:
     return [float((x.double() - y.double()).abs().max()) for x, y in zip(a, b)]
 
 
+@pytest.mark.records("T1_f32")
 def test_t1_chunked_prefill_equals_one_shot_f32(model, doc_ids, cfg, record):
     from pcm.prefill import prefill_in_blocks
 
@@ -85,6 +86,7 @@ def t2(model, doc_ids, cfg):
     return rebase_experiment(model, doc_ids[: cfg["t2"]["page_tokens"]], cfg["t2"]["delta"], cfg["block"])
 
 
+@pytest.mark.records("T2")
 def test_t2_rebasing_is_exact_without_prefix(t2, cfg, record):
     """T2 exactly as specified: float32, all layers, max abs diff < 1e-3."""
     tol = cfg["t2"]["max_abs_diff"]
@@ -111,6 +113,7 @@ def test_t2_rebasing_is_exact_without_prefix(t2, cfg, record):
     assert max(t2["key_diff"]) < tol
 
 
+@pytest.mark.records("T2_relative")
 def test_t2_relative_and_functional(model, t2, doc_ids, cfg, record):
     """Diagnostic for T2: deviation relative to the tensors' scale, and its effect on logits."""
     from pcm.prefill import prefill_in_blocks
@@ -160,6 +163,7 @@ def test_t2_relative_and_functional(model, t2, doc_ids, cfg, record):
     assert logit_diff < d["max_abs_logit_diff"]
 
 
+@pytest.mark.records("T3")
 def test_t3_stitching_sanity(model, tokenizer, doc_ids, cfg, record):
     from pcm.models import build_chat, encode_text
     from pcm.prefill import prefill_in_blocks
@@ -256,6 +260,7 @@ def test_t3_stitching_sanity(model, tokenizer, doc_ids, cfg, record):
     assert first_page_rel < tol
 
 
+@pytest.mark.records("T2_float64")
 def test_t2_exact_in_float64(model, doc_ids, cfg, record):
     """Diagnostic for T2: with float64 arithmetic and float64 rotary angles the re-based
     keys equal the directly encoded ones to rounding error, at every layer.

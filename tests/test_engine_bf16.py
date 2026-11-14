@@ -21,6 +21,7 @@ def model(reader_repo, cuda):
     free_cuda()
 
 
+@pytest.mark.records("T1_bf16")
 def test_t1_chunked_prefill_equals_one_shot_bf16(model, tokenizer, doc_ids, cfg, record):
     from pcm.prefill import prefill_in_blocks
 
@@ -43,6 +44,7 @@ def test_t1_chunked_prefill_equals_one_shot_bf16(model, tokenizer, doc_ids, cfg,
     assert top_one == top_blk
 
 
+@pytest.mark.records("generate_greedy")
 def test_generate_greedy_matches_library(model, tokenizer, record):
     from pcm.models import build_chat, encode_text, stop_ids
     from pcm.prefill import generate_greedy, prefill_in_blocks
@@ -71,6 +73,7 @@ def test_generate_greedy_matches_library(model, tokenizer, record):
     assert cache.n_tokens == cut  # the caller's cache is not modified
 
 
+@pytest.mark.records("T5")
 def test_t5_memory_guard(model, doc_ids, cfg, record):
     from pcm.prefill import prefill_in_blocks
 

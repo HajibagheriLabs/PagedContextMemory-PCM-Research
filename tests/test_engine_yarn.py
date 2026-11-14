@@ -33,6 +33,7 @@ def run_condition(model, window, n, tail, block):
     }
 
 
+@pytest.mark.records("T4")
 def test_t4_yarn_accepts_long_positions(reader_repo, cuda, doc_ids, cfg, record):
     from pcm.models import load_reader, rope_summary
 
