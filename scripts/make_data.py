@@ -5,10 +5,12 @@
     python scripts/make_data.py --synth --split train --seeds 1000 --n 500
     python scripts/make_data.py --benchmarks            # Qwen token lengths (and located facts) of BABILong and InfiniteBench
     python scripts/make_data.py --sizes                 # bytes on disk of every dataset
+    python scripts/make_data.py --verify                # regenerate a sample of every stored synthetic file and compare
 
 Data go to data/ (git-ignored). Small summaries that reports quote go to
 results/A2_tasks/: synth_manifest.jsonl (one line per synthetic example, no text),
-lengths_babilong.jsonl, lengths_infbench.jsonl, sizes.json, make_data_env_<mode>.json.
+lengths_babilong.jsonl, lengths_infbench.jsonl, sizes.json, verify_synth.json,
+make_data_env_<mode>.json (latest run) and make_data_env_history.jsonl (every run).
 """
 from __future__ import annotations
 
@@ -108,6 +110,33 @@ def _write_jsonl(path: Path, rows: list[dict], tok) -> None:
     atomic_write_text(path, text)
 
 
+def verify(cfg: dict, indices: list[int]) -> None:
+    """Regenerate examples `indices` of every stored synthetic file with the current code; they must be identical."""
+    import json
+
+    from pcm.env import collect_env
+    from pcm.tasks.synth import BookPool, ensure_book_cache, generate_example
+
+    tok = get_tokenizer(cfg["tokenizer"])
+    pool = BookPool(ensure_book_cache(tok, cfg, log=log))
+    root = repo_path(cfg["synth"]["data_dir"])
+    checked, mismatched = 0, []
+    for path in sorted(root.glob("*/*_s*.jsonl")):
+        task, (length, seed) = path.parent.name, path.stem.rsplit("_s", 1)
+        target = cfg["lengths"].get(length) or cfg["phase_b_lengths"][length]
+        stored = {i: r for i, r in enumerate(iter_jsonl(path)) if i in indices}
+        for i, row in stored.items():
+            again = generate_example(task, target, int(seed), i, tok, pool, length_name=length, cfg=cfg)
+            checked += 1
+            if json.dumps(again, sort_keys=True) != json.dumps(row, sort_keys=True):
+                mismatched.append(row["id"])
+        log(f"verify {path.relative_to(REPO_ROOT)}: {len(stored)} regenerated")
+    env = collect_env()
+    atomic_write_json(OUT / "verify_synth.json", {"code": {"git_commit": env["git_commit"], "git_dirty": env["git_dirty"]},
+                                                  "indices": indices, "checked": checked, "identical": checked - len(mismatched), "mismatched": mismatched})
+    log(f"verify: {checked - len(mismatched)} of {checked} regenerated examples identical to the stored ones")
+
+
 def _tree_bytes(p: Path) -> tuple[int, int]:
     if p.is_file():
         return 1, p.stat().st_size
@@ -148,6 +177,8 @@ def main() -> int:
     ap.add_argument("--synth", action="store_true")
     ap.add_argument("--benchmarks", action="store_true")
     ap.add_argument("--sizes", action="store_true")
+    ap.add_argument("--verify", action="store_true")
+    ap.add_argument("--verify-indices", nargs="*", type=int, default=[0, 9, 50, 99])
     ap.add_argument("--tasks", nargs="*", default=list(SYNTH_TASKS))
     ap.add_argument("--lengths", nargs="*", default=None)
     ap.add_argument("--seeds", nargs="*", type=int, default=None)
@@ -156,9 +187,11 @@ def main() -> int:
     args = ap.parse_args()
     cfg = load_task_config()
     env = collect_env()
-    modes = [m for m in ("synth", "benchmarks", "sizes") if getattr(args, m)]
-    # One file per mode, so two modes can run at the same time in separate processes.
-    atomic_write_json(OUT / f"make_data_env_{'_'.join(modes) or 'none'}.json", {**env, "argv": sys.argv[1:]})
+    modes = [m for m in ("synth", "benchmarks", "sizes", "verify") if getattr(args, m)]
+    # One file per mode, so two modes can run at the same time in separate processes; plus a history of every run.
+    record = {**env, "argv": sys.argv[1:]}
+    atomic_write_json(OUT / f"make_data_env_{'_'.join(modes) or 'none'}.json", record)
+    JsonlLog(OUT / "make_data_env_history.jsonl", id_field="timestamp_utc").append(record)
     if env["git_dirty"]:
         log("warning: uncommitted code; the data will not be traceable to a commit")
     if args.synth:
@@ -168,6 +201,8 @@ def main() -> int:
         benchmarks(cfg)
     if args.sizes:
         sizes(cfg)
+    if args.verify:
+        verify(cfg, args.verify_indices)
     return 0
 
 
