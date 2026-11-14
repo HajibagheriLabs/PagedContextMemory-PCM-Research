@@ -29,6 +29,14 @@ ORIGINAL_POSITIONS = 40960
 EXCERPT = 160
 
 
+def yarn_factor(max_tokens: int):
+    """Smallest YaRN factor in (2, 4, 8, 16) covering max_tokens; None if no extension is needed; "over 16" if none suffices."""
+    try:
+        return yarn_factor_for(max_tokens, ORIGINAL_POSITIONS)
+    except ValueError:
+        return "over 16"
+
+
 def q(xs: list[int]) -> dict:
     xs = sorted(xs)
     return {"n": len(xs), "min": xs[0], "median": statistics.median(xs), "mean": round(statistics.fmean(xs), 1), "max": xs[-1]}
@@ -80,7 +88,7 @@ def babilong_summary() -> tuple[dict, dict, list[dict]]:
             "nominal": nom, "context_tokens": q(toks), "prompt_tokens": q(prompts),
             "ratio_median_to_nominal": round(statistics.median(toks) / nom, 4) if nom else None,
             "prompts_within_32768": sum(p <= WINDOW for p in prompts),
-            "yarn_factor_for_max_prompt": yarn_factor_for(max(prompts), ORIGINAL_POSITIONS),
+            "yarn_factor_for_max_prompt": yarn_factor(max(prompts)),
         }
     loc: dict = defaultdict(lambda: Counter())
     for r in rows:
@@ -114,8 +122,9 @@ def infbench_summary() -> tuple[dict, list[dict]]:
         out[t] = {
             "context_tokens": q(toks), "prompt_tokens": q(prompts), "chars": q([r["chars"] for r in rs]),
             "over_262144": sum(p > 262144 for p in prompts), "over_131072": sum(p > 131072 for p in prompts),
+            "over_655360": sum(p > 16 * ORIGINAL_POSITIONS for p in prompts),
             "within_32768": sum(p <= WINDOW for p in prompts),
-            "yarn_factor_for_max_prompt": yarn_factor_for(max(prompts), ORIGINAL_POSITIONS),
+            "yarn_factor_for_max_prompt": yarn_factor(max(prompts)),
             "rows_with_evidence": sum(r["n_evidence"] > 0 for r in rs),
             "evidence_deciles": dict(sorted(Counter(r["evidence_decile"] for r in rs if r["evidence_decile"] is not None).items())),
         }
@@ -163,7 +172,11 @@ def figures(bab_rows: list[dict], inf_rows: list[dict], cfg: dict) -> list[str]:
     fig, axes = plt.subplots(1, len(tasks), figsize=(4 * len(tasks), 3.3))
     for ax, t in zip(axes, tasks):
         toks = [r["length_tokens"] for r in inf_rows if r["task"] == t]
-        ax.hist(toks, bins=30, color="#55A868")
+        lo, hi = min(toks), max(toks)
+        pad = max(1000, 0.02 * hi)  # constant-length tasks get a visible bar
+        ax.hist(toks, bins=[lo - pad + i * (hi - lo + 2 * pad) / 30 for i in range(31)], color="#55A868")
+        if lo == hi:
+            ax.text(lo, ax.get_ylim()[1] * 0.5, f" all rows: {lo:,}", fontsize=7)
         for x, lab in ((131072, "128K"), (262144, "256K")):
             ax.axvline(x, color="#C44E52", linestyle="--", linewidth=1)
             ax.text(x, ax.get_ylim()[1] * 0.9, lab, fontsize=7, color="#C44E52")
@@ -225,7 +238,10 @@ def main() -> int:
     sizes = json.loads((OUT / "sizes.json").read_text(encoding="utf-8"))
     figs = figures(bab_rows, inf_rows, cfg)
     ex = examples(cfg)
-    atomic_write_json(OUT / "summary.json", {"synth": synth, "babilong_lengths": bab_len, "babilong_locator": locator,
+    from pcm.env import collect_env
+
+    env = collect_env()
+    atomic_write_json(OUT / "summary.json", {"code": {"git_commit": env["git_commit"], "git_dirty": env["git_dirty"]}, "synth": synth, "babilong_lengths": bab_len, "babilong_locator": locator,
                                              "infbench": inf, "sizes": sizes, "figures": figs})
     atomic_write_json(OUT / "examples.json", ex)
 

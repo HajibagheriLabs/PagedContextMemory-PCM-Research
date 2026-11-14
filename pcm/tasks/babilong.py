@@ -1,9 +1,11 @@
 """BABILong: official test set, official prompt, official scorer (specification, section 5.1).
 
 Data: `RMT-team/babilong` in the local hub cache, file data/<task>/<length>.json,
-100 rows per file with fields input, question, target. Row i of every length is
-the same bAbI sample (same question and target) hidden in a different amount of
-PG-19 text, so row i of the 0k split holds exactly the facts of row i at any length.
+100 rows per file with fields input, question, target. Row i of a length is
+usually the same bAbI sample as row i of the 0k split (same question and target),
+hidden in a different amount of PG-19 text; then row i at 0k holds exactly its
+facts. Not always: some rows of qa2, qa3 and qa5 (most of them at 1k) hold another
+sample. The locator check below is made only where question and target match.
 
 Prompt: `get_formatted_input` and `DEFAULT_PROMPTS` from third_party/babilong
 (instruction, few-shot examples and post prompt), inside the chat template with
@@ -15,8 +17,8 @@ third_party/babilong/babilong/metrics.py, the one the official result tables use
 
 Fact locator (section 5.1): a sentence of the context is a fact if every word in it
 belongs to the vocabulary of the 0k split of the same task. Located facts carry
-character and token offsets. Because rows align across lengths, the located facts
-of row i can be checked against the sentences of row i at 0k (`locator_check`).
+character and token offsets. Where row i matches row i at 0k, the located facts
+are checked against the sentences of that 0k row (the "locator" record of the cache).
 
 Measured lengths and located facts are cached per (task, length) under
 data/meta/babilong/<tokenizer tag>/, one JSON line per sample, so a run never
