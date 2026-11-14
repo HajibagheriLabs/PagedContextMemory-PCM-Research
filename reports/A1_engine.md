@@ -11,7 +11,8 @@ that can be sliced, concatenated and moved to a new position ("re-based"). Five 
 Every number below is read from a file under `results/A1_engine/`:
 `tests_Qwen3-0.6B.json`, `tests_Qwen3-1.7B.json` (written by the tests) and
 `throughput.jsonl` (written by `scripts/bench_prefill.py`). `scripts/a1_summary.py`
-prints the tables. Test text is one PG-19 validation book, *The Atlantic Monthly Vol. 7
+prints the tables. Every test record and every throughput row used here was measured on
+commit `9274708`, with no uncommitted code changes. Test text is one PG-19 validation book, *The Atlantic Monthly Vol. 7
 No. 42, April 1861*, the first book of that split with more than 100,000 tokens.
 
 ## 1. Outcome
@@ -36,8 +37,9 @@ were completed.
 
 Two things outside the tests need attention:
 
-- The GPU became unavailable after the measurements (section 8). The results below were
-  taken before that. A rerun on the committed code is still owed.
+- The GPU dropped off the system once during this step (section 8). Nothing was lost:
+  after it came back, both test suites and the benchmark were rerun on committed code and
+  reproduced the earlier numbers. Runs are now built to continue after such a loss.
 - T3 shows, on one prompt, how far a separately encoded page drifts from the same page
   encoded in sequence (section 4). It is a first look at the problem Gate G2 is about.
 
@@ -261,45 +263,69 @@ runs per cell after one warm-up. Median of three; the spread is the minimum and 
 
 | Model | Tokens | Tokens/s (median) | Spread | Seconds | Peak VRAM allocated | Reserved |
 |---|---|---|---|---|---|---|
-| Qwen3-0.6B | 8,192 | 13,887 | 13,585 – 14,894 | 0.59 | 2.13 GiB | 2.29 GiB |
-| Qwen3-0.6B | 32,768 | 5,810 | 5,807 – 5,836 | 5.64 | 5.08 GiB | 5.80 GiB |
-| Qwen3-0.6B | 65,536 | 3,249 | 3,240 – 3,253 | 20.17 | 9.02 GiB | 9.73 GiB |
-| Qwen3-1.7B | 8,192 | 9,599 | 9,339 – 9,619 | 0.85 | 4.24 GiB | 4.61 GiB |
-| Qwen3-1.7B | 32,768 | 4,843 | 4,836 – 4,844 | 6.77 | 7.19 GiB | 7.90 GiB |
-| Qwen3-1.7B | 65,536 | 2,921 | 2,914 – 2,923 | 22.43 | 11.13 GiB | 11.83 GiB |
+| Qwen3-0.6B | 8,192 | 14,337 | 13,849 – 14,352 | 0.57 | 2.13 GiB | 2.29 GiB |
+| Qwen3-0.6B | 32,768 | 5,945 | 5,916 – 5,956 | 5.51 | 5.08 GiB | 5.80 GiB |
+| Qwen3-0.6B | 65,536 | 3,309 | 3,309 – 3,316 | 19.81 | 9.02 GiB | 9.73 GiB |
+| Qwen3-1.7B | 8,192 | 9,776 | 9,719 – 9,874 | 0.84 | 4.24 GiB | 4.61 GiB |
+| Qwen3-1.7B | 32,768 | 4,947 | 4,941 – 4,953 | 6.62 | 7.19 GiB | 7.90 GiB |
+| Qwen3-1.7B | 65,536 | 2,979 | 2,977 – 2,981 | 22.00 | 11.13 GiB | 11.83 GiB |
 
 Reading:
 
 - Throughput falls with length because each block attends to everything before it.
   Doubling from 32,768 to 65,536 tokens takes 3.6 times as long on Qwen3-0.6B and 3.3
   times on Qwen3-1.7B.
-- Qwen3-1.7B takes 1.45 times as long as Qwen3-0.6B at 8,192 tokens, 1.20 times at
+- The file also holds 18 earlier rows measured before the code was committed. They are
+  not used in the table; their medians are within 4% of the ones shown.
+- Qwen3-1.7B takes 1.47 times as long as Qwen3-0.6B at 8,192 tokens, 1.20 times at
   32,768 and 1.11 times at 65,536. The specification's arithmetic expected about 1.5
   for a window-sized input and about 1.1 for a long dense pass.
-- A full window costs about 6.8 seconds to prefill on Qwen3-1.7B. That is roughly the
+- A full window costs about 6.6 seconds to prefill on Qwen3-1.7B. That is roughly the
   per-question cost of text expansion with a full page budget, before generation.
 - Peak memory is weights plus cache plus about 0.9 GiB of working memory.
 
-## 8. Incident: GPU unavailable after the runs
+## 8. GPU loss, and how runs now survive it
 
-At 10:38:43 Windows logged that the NVIDIA display driver stopped responding. Since then
-the RTX 3090 is not visible to `nvidia-smi` or to PyTorch. All tests and the benchmark
-had finished (last result file written at 10:37:32) and nothing from this project was
-running on the GPU at that moment. The cause is unknown.
+**What happened.** At 10:38:43 Windows logged that the NVIDIA display driver stopped
+responding. From then until the device was restored, the RTX 3090 was invisible to
+`nvidia-smi` and to PyTorch. All tests and the benchmark had finished about a minute
+earlier and nothing from this project was running on the GPU at that moment. The cause
+is unknown. The owner reports the same kind of loss in other work on this machine.
 
-Consequences:
+**What it cost here.** The first set of measurements had been taken just before the code
+was committed. The rerun meant to stamp them with the committed code found no GPU,
+skipped all nine GPU tests without failing, and overwrote the saved console logs of the
+real runs. No measurement was lost, but the skipped run looked like a success.
 
-- The measurements in this report were taken on the working tree **before** the engine
-  code was committed; their env records show the previous commit with uncommitted
-  changes. The engine code was then committed unchanged. The planned rerun on the
-  committed code could not run: all nine GPU tests were skipped for lack of a device.
-- The saved console logs of the real test runs were overwritten by that skipped run and
-  then removed. The per-test status and all numbers are in `tests_*.json`.
-- Restoring the GPU needs the driver or the machine restarted, which was left to the
-  owner. After that, `python -m pytest --reader reader_dev` and `--reader reader`
-  regenerate the test files on committed code in about six minutes.
+**After the GPU came back** both suites and the benchmark were rerun on commit
+`9274708`. Every test number in this report is identical to the first run at the
+precision shown. Throughput is 2% to 3% higher than in the first run. This report uses the rerun only.
 
-Recorded as D-014 and D-015 in `DEVIATIONS.md`.
+**What changed so that a loss costs minutes and nothing has to be redone:**
+
+| Risk | Now |
+|---|---|
+| A crash in the middle of writing a results file | Result rows are appended one per unit of work and forced to disk before the run moves on (`pcm/runlog.py`). A line cut short by a crash is ignored on reading and never extended. Other files are written under a temporary name and renamed into place |
+| Losing finished work | A rerun of the same command reads the ids already present and skips them. Test records and benchmark rows carry the commit they were measured on; only work done on the current, clean commit counts as done |
+| A lost GPU recorded as a wrong answer or a failed test | An exception is classified as lost GPU, out of memory, or ordinary error (`pcm/health.py`). A lost GPU stops the run at once, writes `interrupted_*.json` naming the last finished unit, and exits with status 75. Results are left untouched |
+| A missing GPU passing silently | The test session stops with status 75 if the GPU is absent. Skipping GPU tests now requires asking for it (`--no-gpu`) |
+| Starting a run that cannot finish | A preflight check of the GPU, free VRAM, RAM and disk runs first |
+| Not knowing what the card was doing before a crash | Temperature, power, load, memory and fan speed are sampled every 10 seconds to `logs/<experiment>/gpu_telemetry.csv` and flushed as written |
+
+Resuming: `python -m pytest --reader <reader> --resume` continues a test session;
+`python scripts/bench_prefill.py` continues the benchmark. The rule for later steps is
+that the work between two durable writes takes minutes at most: one example in an
+evaluation, one document in ingest, a fixed number of steps in training.
+
+What this does not cover: a loss in the middle of one long unit repeats that unit (the
+longest here is T4, a few minutes). The resume path was exercised by unit tests on
+the log and by the benchmark skipping finished rows; it has not been exercised by a real
+GPU loss in mid-run.
+
+During the rerun the card peaked at 64 °C and 273 W. Those two figures come from the
+telemetry log, which is not tracked in the repository.
+
+Recorded as D-014 to D-016 in `DEVIATIONS.md`.
 
 ## 9. What was built
 
@@ -309,7 +335,9 @@ Recorded as D-014 and D-015 in `DEVIATIONS.md`.
 | `pcm/prefill.py` | `prefill_in_blocks`, `generate_greedy`, `nll_in_blocks` |
 | `pcm/store/kv.py` | `KVCache` (per-layer access, slice, concatenate, move, convert to and from the library cache), `rebase_keys`, `encode_page`, `stitch`; the only module that touches library cache objects |
 | `pcm/env.py` | Environment record for result files |
-| `tests/` | 33 tests: 24 on CPU (adapter, re-basing algebra, memory arithmetic, assets) and 9 on GPU (T1–T5 and diagnostics) |
+| `pcm/runlog.py` | Durable append-only result log; atomic file writes |
+| `pcm/health.py` | GPU preflight, lost-GPU classification, telemetry sampler |
+| `tests/` | 46 tests: 37 on CPU (adapter, re-basing algebra, result log, failure classification, memory arithmetic, assets) and 9 on GPU (T1–T5 and diagnostics). Final run on each reader: 45 passed, 1 failed (T2 as specified) |
 | `configs/a1_engine.yaml` | Every parameter and threshold of the tests and the benchmark |
 | `scripts/bench_prefill.py`, `scripts/a1_summary.py` | Throughput benchmark; tables of this report |
 
@@ -327,7 +355,7 @@ Departures from the listed function signatures and the added functions are in
 
 - **T2**, pending the owner's decision (section 3.3).
 - The step in float64 agreement at upper layers (section 3.2) is unexplained.
-- All results predate the code commit and the rerun is owed (section 8).
+- The cause of the GPU loss is unknown, so it may recur at any time (section 8).
 - T4 uses one book and one window. Its direction may not carry over to tasks.
 - T3's deviation figures are from one prompt with two pages.
 - Whether the model accepts a custom 4D attention mask unchanged was read in the library
@@ -336,3 +364,4 @@ Departures from the listed function signatures and the added functions are in
   after a full stitched window therefore holds two copies of that window for a moment
   (about 7 GiB at 32K). This fits the card but should be removed before KV mode is timed.
 - Throughput was measured on prose with a quiet machine. No other length was measured.
+- The saved console logs of the test runs are in `logs/`, which is not tracked.

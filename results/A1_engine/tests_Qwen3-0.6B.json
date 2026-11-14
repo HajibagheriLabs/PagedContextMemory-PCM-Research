@@ -6,9 +6,9 @@
     "book": "The Atlantic Monthly Vol. 7 No. 42 April 1861 by Various"
   },
   "env": {
-    "timestamp_utc": "2026-11-14T07:02:08+00:00",
-    "git_commit": "60977088589a88842110fbcdb15359f15daae3e5",
-    "git_dirty": true,
+    "timestamp_utc": "2026-11-14T08:12:43+00:00",
+    "git_commit": "9274708442d1f0c0dbdf766af61856182ce522c3",
+    "git_dirty": false,
     "python": "3.11.15",
     "platform": "Windows-10-10.0.19044-SP0",
     "packages": {
@@ -47,7 +47,12 @@
       "cache_value_max_abs_diff": 0.0019817352294921875,
       "logit_abs_max": 19.817302703857422,
       "same_top1": true,
-      "passed": true
+      "passed": true,
+      "run": {
+        "git_commit": "9274708442d1f0c0dbdf766af61856182ce522c3",
+        "git_dirty": false,
+        "timestamp_utc": "2026-11-14T08:13:25+00:00"
+      }
     },
     "T2": {
       "page_tokens": 512,
@@ -176,7 +181,12 @@
         60.62741470336914
       ],
       "key_max_abs_diff_without_rebasing": 65.37875175476074,
-      "passed": false
+      "passed": false,
+      "run": {
+        "git_commit": "9274708442d1f0c0dbdf766af61856182ce522c3",
+        "git_dirty": false,
+        "timestamp_utc": "2026-11-14T08:13:25+00:00"
+      }
     },
     "T2_relative": {
       "key_rel_diff_per_layer": [
@@ -247,7 +257,12 @@
       "last_logit_max_abs_diff_without_rebasing": 2.427150249481201,
       "threshold_logit": 0.01,
       "same_top1": true,
-      "passed": true
+      "passed": true,
+      "run": {
+        "git_commit": "9274708442d1f0c0dbdf766af61856182ce522c3",
+        "git_dirty": false,
+        "timestamp_utc": "2026-11-14T08:13:26+00:00"
+      }
     },
     "T3": {
       "prefix_tokens": 24,
@@ -338,7 +353,12 @@
       "top1_kv": "The",
       "top1_text": "The",
       "threshold_rel": 0.001,
-      "passed": true
+      "passed": true,
+      "run": {
+        "git_commit": "9274708442d1f0c0dbdf766af61856182ce522c3",
+        "git_dirty": false,
+        "timestamp_utc": "2026-11-14T08:13:26+00:00"
+      }
     },
     "T2_float64": {
       "threshold_rel": 1e-06,
@@ -410,7 +430,12 @@
       "float64_model_float32_angles_value_max_abs_diff": 0.00801766511483315,
       "float64_model_float32_angles_key_max_rel_diff": 0.00028244733469839743,
       "key_max_abs_diff_without_rebasing": 65.37950411310008,
-      "passed": true
+      "passed": true,
+      "run": {
+        "git_commit": "9274708442d1f0c0dbdf766af61856182ce522c3",
+        "git_dirty": false,
+        "timestamp_utc": "2026-11-14T08:13:31+00:00"
+      }
     },
     "T1_bf16": {
       "tokens": 6000,
@@ -418,12 +443,22 @@
       "top1_one_shot": " from",
       "top1_chunked": " from",
       "last_logit_max_abs_diff": 0.1875,
-      "passed": true
+      "passed": true,
+      "run": {
+        "git_commit": "9274708442d1f0c0dbdf766af61856182ce522c3",
+        "git_dirty": false,
+        "timestamp_utc": "2026-11-14T08:12:58+00:00"
+      }
     },
     "generate_greedy": {
       "answer": "The capital of France is **Paris**.",
       "matches_library_generate": true,
-      "passed": true
+      "passed": true,
+      "run": {
+        "git_commit": "9274708442d1f0c0dbdf766af61856182ce522c3",
+        "git_dirty": false,
+        "timestamp_utc": "2026-11-14T08:13:00+00:00"
+      }
     },
     "T5": {
       "tokens": 65536,
@@ -433,9 +468,14 @@
       "peak_vram_gib": 9.02215576171875,
       "peak_reserved_gib": 9.73828125,
       "limit_gib": 12.0,
-      "seconds": 19.92386149999993,
-      "tokens_per_second": 3289.3222029273907,
-      "passed": true
+      "seconds": 19.889065800000026,
+      "tokens_per_second": 3295.076835634981,
+      "passed": true,
+      "run": {
+        "git_commit": "9274708442d1f0c0dbdf766af61856182ce522c3",
+        "git_dirty": false,
+        "timestamp_utc": "2026-11-14T08:13:20+00:00"
+      }
     },
     "T4": {
       "yarn_factor": 4,
@@ -497,7 +537,12 @@
         "inv_freq_min": 3.102344408034696e-07,
         "inv_freq_max": 1.0
       },
-      "passed": true
+      "passed": true,
+      "run": {
+        "git_commit": "9274708442d1f0c0dbdf766af61856182ce522c3",
+        "git_dirty": false,
+        "timestamp_utc": "2026-11-14T08:14:52+00:00"
+      }
     }
   }
 }
