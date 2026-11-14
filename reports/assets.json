@@ -1,0 +1,284 @@
+{
+  "hub_cache": "C:\\Users\\Hadi\\hf\\hub",
+  "models": [
+    {
+      "key": "reader",
+      "repo": "Qwen/Qwen3-1.7B",
+      "type": "model",
+      "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "source": "cache",
+      "files": 12,
+      "bytes": 4079450110,
+      "weights": [
+        "model-00001-of-00002.safetensors",
+        "model-00002-of-00002.safetensors"
+      ],
+      "missing": []
+    },
+    {
+      "key": "reader_base",
+      "repo": "Qwen/Qwen3-1.7B-Base",
+      "type": "model",
+      "revision": "ea980cb0a6c2ae4b936e82123acc929f1cec04c1",
+      "source": "cache",
+      "files": 10,
+      "bytes": 3452692285,
+      "weights": [
+        "model.safetensors"
+      ],
+      "missing": []
+    },
+    {
+      "key": "reader_dev",
+      "repo": "Qwen/Qwen3-0.6B",
+      "type": "model",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "source": "cache",
+      "files": 10,
+      "bytes": 1519209243,
+      "weights": [
+        "model.safetensors"
+      ],
+      "missing": []
+    },
+    {
+      "key": "embedder",
+      "repo": "Qwen/Qwen3-Embedding-0.6B",
+      "type": "model",
+      "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "source": "cache",
+      "files": 12,
+      "bytes": 1207489041,
+      "weights": [
+        "model.safetensors"
+      ],
+      "missing": []
+    },
+    {
+      "key": "reranker",
+      "repo": "Qwen/Qwen3-Reranker-0.6B",
+      "type": "model",
+      "revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "source": "cache",
+      "files": 14,
+      "bytes": 1207488344,
+      "weights": [
+        "model.safetensors"
+      ],
+      "missing": []
+    }
+  ],
+  "datasets": [
+    {
+      "key": "babilong",
+      "repo": "RMT-team/babilong",
+      "type": "dataset",
+      "revision": "ee0d588794c7ac098062ee0d247c733d62e94fe2",
+      "source": "cache",
+      "layout": "lengths are configs, tasks are splits (dataset card); files data/<task>/<length>.json",
+      "files": 137,
+      "bytes": 28228626365,
+      "bytes_required_lengths": 2054581443,
+      "bytes_per_length": {
+        "0k": 466661,
+        "1k": 2894639,
+        "2k": 6900282,
+        "4k": 14857730,
+        "8k": 30996768,
+        "16k": 62991617,
+        "32k": 127936143,
+        "64k": 257464182,
+        "128k": 517618122,
+        "256k": 1032455299
+      },
+      "other_lengths_present": [
+        "10M",
+        "1M",
+        "512k"
+      ],
+      "sample_shape": {
+        "rows": 100,
+        "fields": [
+          "input",
+          "question",
+          "target"
+        ]
+      },
+      "missing": []
+    },
+    {
+      "key": "babilong_train",
+      "repo": "RMT-team/babilong-train-5k-samples",
+      "type": "dataset",
+      "revision": "b3513ef7c25c54ce706054530d47668c532019d6",
+      "source": "cache",
+      "files": 81,
+      "bytes": 25263063476,
+      "tasks_present": [
+        "qa1",
+        "qa2",
+        "qa3",
+        "qa4",
+        "qa5",
+        "qa6",
+        "qa7",
+        "qa8",
+        "qa9",
+        "qa10"
+      ],
+      "lengths_present": [
+        "0k",
+        "128k",
+        "16k",
+        "1k",
+        "2k",
+        "32k",
+        "4k",
+        "64k",
+        "8k"
+      ],
+      "missing": []
+    },
+    {
+      "key": "infbench",
+      "repo": "xinrongzhang2022/InfiniteBench",
+      "type": "dataset",
+      "revision": "90f0394333616266d9fe85824ceaf505093cbaa5",
+      "source": "cache",
+      "files": 14,
+      "bytes": 2499845074,
+      "bytes_required_files": 845585751,
+      "per_file": {
+        "passkey.jsonl": {
+          "bytes": 277273340,
+          "rows": 590,
+          "first_row": {
+            "id": 0,
+            "context_chars": 469858,
+            "input": "What is the pass key?",
+            "answer": [
+              "71432"
+            ],
+            "n_options": 0
+          }
+        },
+        "number_string.jsonl": {
+          "bytes": 277299890,
+          "rows": 590,
+          "first_row": {
+            "id": 0,
+            "context_chars": 469888,
+            "input": "What is the sequence of digits?",
+            "answer": [
+              "3000077442"
+            ],
+            "n_options": 0
+          }
+        },
+        "kv_retrieval.jsonl": {
+          "bytes": 105107890,
+          "rows": 500,
+          "first_row": {
+            "id": 0,
+            "context_chars": 200011,
+            "input": "\nKey: \"798c2306-5ad1-42a9-a8de-f2a118b33744\"\nThe value associated with the specified key is: ",
+            "answer": [
+              "5e6b7b90-710d-4953-9b18-3e96b2cadbf2"
+            ],
+            "n_options": 0
+          }
+        },
+        "longbook_choice_eng.jsonl": {
+          "bytes": 185904631,
+          "rows": 229,
+          "first_row": {
+            "id": 0,
+            "context_chars": 1116721,
+            "input": "Which of the following is NOT one of Alain's chores at Hall Farm?",
+            "answer": [
+              "Walking Georgie"
+            ],
+            "n_options": 4
+          }
+        }
+      },
+      "missing": []
+    },
+    {
+      "key": "pg19",
+      "repo": "emozilla/pg19",
+      "type": "dataset",
+      "revision": "c021754c8e01c5b1cc83a1f549c1f97fbbb756b8",
+      "source": "cache",
+      "files": 3,
+      "bytes": 35679173,
+      "splits": {
+        "validation": {
+          "split": "validation",
+          "books": 50,
+          "columns": [
+            "short_book_title",
+            "publication_date",
+            "url",
+            "text"
+          ],
+          "bytes": 10803864,
+          "first_book": {
+            "short_book_title": "Walking by Henry David Thoreau",
+            "publication_date": 1862,
+            "url": "http://www.gutenberg.org/ebooks/1022",
+            "text": "<67807 chars>"
+          }
+        },
+        "test": {
+          "split": "test",
+          "books": 100,
+          "columns": [
+            "short_book_title",
+            "publication_date",
+            "url",
+            "text"
+          ],
+          "bytes": 24874679,
+          "first_book": {
+            "short_book_title": "Reminiscences of Pioneer Days in St. Paul by Frank Moore",
+            "publication_date": 1908,
+            "url": "http://www.gutenberg.org/ebooks/10146",
+            "text": "<249431 chars>"
+          }
+        }
+      },
+      "train_split_on_disk": false,
+      "missing": []
+    }
+  ],
+  "reference_repos": [
+    {
+      "name": "babilong",
+      "url": "https://github.com/booydar/babilong",
+      "origin": "https://github.com/booydar/babilong.git",
+      "commit": "7a6efee29f5cac03c3c410e6799c80fd2ffe3610",
+      "commit_date": "2026-06-01",
+      "source": "present",
+      "missing": false
+    },
+    {
+      "name": "RULER",
+      "url": "https://github.com/NVIDIA/RULER",
+      "origin": "https://github.com/NVIDIA/RULER.git",
+      "commit": "db43f92ff634bbce1c33d1fb15858aec4bba509a",
+      "commit_date": "2026-11-03",
+      "source": "present",
+      "missing": false
+    },
+    {
+      "name": "InfiniteBench",
+      "url": "https://github.com/OpenBMB/InfiniteBench",
+      "origin": "https://github.com/OpenBMB/InfiniteBench.git",
+      "commit": "51d9b37b0f1790ead936df2243abbf7f0420e439",
+      "commit_date": "2024-09-26",
+      "source": "present",
+      "missing": false
+    }
+  ]
+}

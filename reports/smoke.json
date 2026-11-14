@@ -1,0 +1,38 @@
+{
+  "torch": "2.14.1+cu126",
+  "transformers": "5.19.0",
+  "gpu": "NVIDIA GeForce RTX 3090",
+  "vram_total_gib": 23.9993896484375,
+  "vram_free_before_gib": 22.7880859375,
+  "reader": {
+    "repo": "Qwen/Qwen3-1.7B",
+    "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+    "dtype": "torch.bfloat16",
+    "device": "cuda:0",
+    "attn_implementation": "sdpa",
+    "parameters": 1720574976,
+    "weights_gib_on_gpu": 3.2048206329345703,
+    "load_seconds": 11.58,
+    "prompt": "<|im_start|>user\nWhat is the capital of France?<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "prompt_tokens": 19,
+    "thinking_enabled": false,
+    "decoding": "greedy",
+    "max_new_tokens": 16,
+    "new_tokens": 8,
+    "answer": "The capital of France is Paris.",
+    "generate_seconds": 1.25,
+    "peak_vram_gib_reader_only": 3.2174558639526367
+  },
+  "embedder": {
+    "repo": "Qwen/Qwen3-Embedding-0.6B",
+    "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+    "sentences": [
+      "The capital of France is Paris.",
+      "Paris is the largest city in France and its capital."
+    ],
+    "dimension": 1024,
+    "cosine_similarity": 0.9118670225143433
+  },
+  "peak_vram_gib_allocated": 4.326159954071045,
+  "peak_vram_gib_reserved": 4.349609375
+}

@@ -1,0 +1,54 @@
+# Environments and secrets
+.venv/
+.env
+.env.*
+*.token
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Models, weights, adapters
+models/
+checkpoints/
+adapters/
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.gguf
+
+# Datasets and generated data
+datasets/
+data/*
+!data/.gitkeep
+*.parquet
+*.arrow
+
+# Caches, KV stores, ingest caches
+cache/
+caches/
+.cache/
+hf-cache/
+kv_store/
+kv_stores/
+stores/
+ingest_cache/
+*.npy
+*.npz
+*.memmap
+*.kv
+
+# Reference clones
+third_party/
+
+# Logs and OS noise
+logs/
+*.log
+wandb/
+Thumbs.db
+desktop.ini
+.DS_Store

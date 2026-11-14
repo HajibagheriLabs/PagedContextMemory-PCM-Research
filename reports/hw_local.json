@@ -1,0 +1,71 @@
+{
+  "timestamp_utc": "2026-11-14T06:31:55+00:00",
+  "os": {
+    "system": "Windows",
+    "release": "10",
+    "version": "10.0.19044",
+    "machine": "AMD64"
+  },
+  "python": "3.11.15",
+  "cpu": {
+    "name": "Intel(R) Core(TM) i7-4790K CPU @ 4.00GHz",
+    "physical_cores": 4,
+    "logical_cores": 8
+  },
+  "ram": {
+    "total_gib": 15.85,
+    "free_gib": 8.74,
+    "swap_total_gib": 13.0,
+    "swap_free_gib": 13.0
+  },
+  "torch": {
+    "version": "2.14.1+cu126",
+    "cuda_build": "12.6",
+    "cudnn": 91002,
+    "cuda_available": true
+  },
+  "transformers": "5.19.0",
+  "gpus": [
+    {
+      "index": 0,
+      "name": "NVIDIA GeForce RTX 3090",
+      "vram_total_gib": 24.0,
+      "vram_free_gib": 22.79,
+      "capability": "8.6",
+      "bf16_supported": true
+    }
+  ],
+  "nvidia_smi": [
+    {
+      "index": "0",
+      "name": "NVIDIA GeForce RTX 3090",
+      "driver_version": "610.88",
+      "memory.total": "24576",
+      "memory.used": "579",
+      "memory.free": "23747",
+      "temperature.gpu": "42"
+    }
+  ],
+  "disk": {
+    "project": {
+      "path": "C:\\Users\\Hadi\\Desktop\\Transformer-Evaluation",
+      "anchor": "C:\\",
+      "total_gib": 465.11,
+      "free_gib": 144.65
+    },
+    "hf_cache": {
+      "path": "C:\\Users\\Hadi\\hf\\hub",
+      "anchor": "C:\\",
+      "total_gib": 465.11,
+      "free_gib": 144.65
+    }
+  },
+  "env": {
+    "HF_HOME": "C:\\Users\\Hadi\\hf",
+    "HF_HUB_CACHE": "C:\\Users\\Hadi\\hf\\hub",
+    "HF_HUB_OFFLINE": null,
+    "HF_TOKEN_set": false,
+    "PYTORCH_CUDA_ALLOC_CONF": null
+  },
+  "nvidia_driver": "610.88"
+}

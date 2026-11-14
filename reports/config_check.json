@@ -1,0 +1,111 @@
+{
+  "transformers": "5.19.0",
+  "expected": {
+    "num_hidden_layers": 28,
+    "num_attention_heads": 16,
+    "num_key_value_heads": 8,
+    "head_dim": 128,
+    "kv_bytes_per_token_bf16": 114688,
+    "max_position_embeddings": 40960
+  },
+  "models": [
+    {
+      "repo": "Qwen/Qwen3-1.7B",
+      "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "geometry": {
+        "num_hidden_layers": 28,
+        "num_attention_heads": 16,
+        "num_key_value_heads": 8,
+        "head_dim": 128
+      },
+      "hidden_size": 2048,
+      "intermediate_size": 6144,
+      "vocab_size": 151936,
+      "max_position_embeddings": 40960,
+      "max_position_embeddings_expected": 40960,
+      "max_position_embeddings_matches": true,
+      "rope": {
+        "api": "rope_parameters",
+        "rope_theta": 1000000,
+        "rope_type": "default",
+        "raw": {
+          "rope_theta": 1000000,
+          "rope_type": "default"
+        }
+      },
+      "shipped_config_rope_keys": {
+        "rope_scaling": null,
+        "rope_theta": 1000000
+      },
+      "shipped_transformers_version": "4.51.0",
+      "tie_word_embeddings": true,
+      "attention_bias": false,
+      "use_sliding_window": false,
+      "kv_bytes_per_token_bf16": 114688.0,
+      "kv_kib_per_token_bf16": 112.0,
+      "params": {
+        "total_unique": 1720574976,
+        "non_embedding": 1409410048,
+        "embedding": 311164928,
+        "rebuilt_from_config_total": 1720574976,
+        "stored_in_weight_files": 2031739904,
+        "lm_head_stored_separately": true,
+        "weight_dtypes": [
+          "BF16"
+        ]
+      },
+      "bf16_weight_bytes": 3441149952,
+      "bf16_weight_gib": 3.2048206329345703,
+      "failures": []
+    },
+    {
+      "repo": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "geometry": {
+        "num_hidden_layers": 28,
+        "num_attention_heads": 16,
+        "num_key_value_heads": 8,
+        "head_dim": 128
+      },
+      "hidden_size": 1024,
+      "intermediate_size": 3072,
+      "vocab_size": 151936,
+      "max_position_embeddings": 40960,
+      "max_position_embeddings_expected": 40960,
+      "max_position_embeddings_matches": true,
+      "rope": {
+        "api": "rope_parameters",
+        "rope_theta": 1000000,
+        "rope_type": "default",
+        "raw": {
+          "rope_theta": 1000000,
+          "rope_type": "default"
+        }
+      },
+      "shipped_config_rope_keys": {
+        "rope_scaling": null,
+        "rope_theta": 1000000
+      },
+      "shipped_transformers_version": "4.51.0",
+      "tie_word_embeddings": true,
+      "attention_bias": false,
+      "use_sliding_window": false,
+      "kv_bytes_per_token_bf16": 114688.0,
+      "kv_kib_per_token_bf16": 112.0,
+      "params": {
+        "total_unique": 596049920,
+        "non_embedding": 440467456,
+        "embedding": 155582464,
+        "rebuilt_from_config_total": 596049920,
+        "stored_in_weight_files": 751632384,
+        "lm_head_stored_separately": true,
+        "weight_dtypes": [
+          "BF16"
+        ]
+      },
+      "bf16_weight_bytes": 1192099840,
+      "bf16_weight_gib": 1.1102294921875,
+      "failures": []
+    }
+  ]
+}

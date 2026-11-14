@@ -1,0 +1,59 @@
+# Models, datasets and reference repositories used by the project.
+# Read by scripts/fetch_assets.py, scripts/check_config.py and scripts/smoke.py.
+
+models:
+  reader: Qwen/Qwen3-1.7B            # primary reader (chat model, thinking off)
+  reader_base: Qwen/Qwen3-1.7B-Base  # language-model loss checks
+  reader_dev: Qwen/Qwen3-0.6B        # development reader and smaller scale point (H6)
+  embedder: Qwen/Qwen3-Embedding-0.6B
+  reranker: Qwen/Qwen3-Reranker-0.6B # optional, stronger retrieval baseline
+  # Phase B only (not fetched on the local machine): Qwen/Qwen3-4B
+
+# Files a model snapshot must contain to count as complete.
+model_required_files:
+  - config.json
+  - tokenizer.json
+  - tokenizer_config.json
+
+# Expected geometry (specification, section 1.5). check_config.py stops if it differs.
+expected_geometry:
+  num_hidden_layers: 28
+  num_attention_heads: 16
+  num_key_value_heads: 8
+  head_dim: 128
+  kv_bytes_per_token_bf16: 114688
+  max_position_embeddings: 40960   # recorded, not asserted: original length for YaRN
+check_config_models: [reader, reader_dev]
+
+datasets:
+  babilong:
+    repo: RMT-team/babilong
+    # On the hub, lengths are configs and tasks (qa1..qa20) are splits;
+    # files live at data/<task>/<length>.json.
+    lengths: ["0k", "1k", "2k", "4k", "8k", "16k", "32k", "64k", "128k", "256k"]
+    tasks: [qa1, qa2, qa3, qa4, qa5, qa6, qa7, qa8, qa9, qa10]
+    phase_b_lengths: ["512k", "1M"]
+  babilong_train:
+    repo: RMT-team/babilong-train-5k-samples   # adapters only, never evaluation
+  infbench:
+    repo: xinrongzhang2022/InfiniteBench
+    files:
+      - passkey.jsonl
+      - number_string.jsonl
+      - kv_retrieval.jsonl
+      - longbook_choice_eng.jsonl
+  pg19:
+    repo: emozilla/pg19
+    splits: [validation, test]   # the train split is never used in evaluation haystacks
+
+reference_repos:
+  babilong: https://github.com/booydar/babilong
+  RULER: https://github.com/NVIDIA/RULER
+  InfiniteBench: https://github.com/OpenBMB/InfiniteBench
+
+smoke:
+  question: "What is the capital of France?"
+  max_new_tokens: 16
+  embed_sentences:
+    - "The capital of France is Paris."
+    - "Paris is the largest city in France and its capital."
