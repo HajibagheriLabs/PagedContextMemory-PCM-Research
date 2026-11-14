@@ -80,10 +80,12 @@ def main() -> int:
     ap.add_argument("--reference-exp", default=None)
     ap.add_argument("--reference-method", default=None)
     ap.add_argument("--no-figures", action="store_true")
+    ap.add_argument("--results-root", default=str(REPO_ROOT / "results"), help="directory holding <exp>/ (default: results/)")
     args = ap.parse_args()
+    root = Path(args.results_root)
     cfg = load_task_config()
     mcfg = cfg["metrics"]
-    exp_dir = REPO_ROOT / "results" / args.exp
+    exp_dir = root / args.exp
     rows, bad = latest_rows(exp_dir)
     if not rows:
         print(f"no rows in {exp_dir / 'runs.jsonl'}")
@@ -108,7 +110,7 @@ def main() -> int:
 
     ecl_out = {}
     if args.reference_method:
-        ref_rows, _ = latest_rows(REPO_ROOT / "results" / (args.reference_exp or args.exp))
+        ref_rows, _ = latest_rows(root / (args.reference_exp or args.exp))
         ref_len = mcfg["reference_length"]
         grid = list(cfg["lengths"])
         lines += ["", f"## ECL90 (reference: {args.reference_method} at {ref_len})", "", "| method | task | reference | threshold | floor | ECL90 | stopped at |", "|---|---|---|---|---|---|---|"]
