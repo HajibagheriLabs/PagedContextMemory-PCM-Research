@@ -83,6 +83,7 @@ def babilong() -> SimpleNamespace:
         DEFAULT_TEMPLATE=prompts.DEFAULT_TEMPLATE,
         get_formatted_input=prompts.get_formatted_input,
         compare_answers=metrics.compare_answers,
+        preprocess_output=metrics.preprocess_output,
         TASK_LABELS=metrics.TASK_LABELS,
         source={"prompts": str(BABILONG_DIR / "prompts.py"), "metrics": str(BABILONG_DIR / "metrics.py")},
     )

@@ -118,3 +118,17 @@ def test_error_kind():
     assert M.error_kind("Mary is somewhere.", b) == "format"
     ib = {"benchmark": "infbench", "task": "infbench:longbook_choice_eng", "label": ["x", "A"], "answers": ["x"], "score": 0.0}
     assert M.error_kind("B", ib) == "wrong" and M.error_kind("I do not know", ib) == "format"
+
+
+def test_babilong_whole_word_score_fixes_none_in_qa7():
+    from pcm.tasks import babilong as B
+
+    row = {"task": "babilong:qa7", "question": "How many objects is Mary carrying?", "answers": ["none"]}
+    assert B.score("none", {"task": "qa7", "target": "none", "question": row["question"]}) == 0.0  # official: 'one' is inside 'none'
+    assert M.babilong_whole_word_score("none", row) == 1.0
+    assert M.babilong_whole_word_score("one", row) == 0.0
+    assert M.babilong_whole_word_score("one", {**row, "answers": ["one"]}) == 1.0
+    q1 = {"task": "babilong:qa1", "question": "Where is Mary?", "answers": ["bathroom"]}
+    assert M.babilong_whole_word_score("The most recent location of Mary is bathroom.", q1) == 1.0
+    q8 = {"task": "babilong:qa8", "question": "What is Daniel carrying?", "answers": ["apple,milk"]}
+    assert M.babilong_whole_word_score("apple,milk", q8) == 1.0 and M.babilong_whole_word_score("apple", q8) == 0.0

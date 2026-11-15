@@ -218,6 +218,33 @@ def accuracy_by_decile(rows: Iterable[Mapping], n_resamples: int = 10_000, seed:
     return {d: bootstrap_ci(v, n_resamples, seed) for d, v in sorted(groups.items())}
 
 
+# ---------------------------------------------------------------- BABILong, whole-word labels (supplementary)
+def babilong_whole_word_score(prediction: str, row: Mapping) -> float:
+    """The official BABILong rule with one change: labels are matched as whole words.
+
+    The official compare_answers finds labels by substring, so in qa7 the label "one"
+    is found inside "none" and a correct "none" always counts as two labels, which
+    is scored wrong. Reported beside the official score, never instead of it (D-028).
+    """
+    from pcm.tasks.official import babilong as off
+
+    o = off()
+    task = str(row["task"]).split(":")[-1]
+    out = o.preprocess_output(prediction or "")
+    labels = {lab.lower() for lab in o.TASK_LABELS[task]}
+
+    def has(label: str, text: str) -> bool:
+        return re.search(rf"(?<![a-z]){re.escape(label)}(?![a-z])", text) is not None
+
+    question = str(row.get("question", "")).lower()
+    found = {lab for lab in labels if has(lab, out)} - {lab for lab in labels if has(lab, question)}
+    target = str(row.get("target") or row["answers"][0]).lower()
+    if "," in target and len(target) > 3:
+        parts = target.split(",")
+        return float(all(t in found for t in parts) and len(found) == len(parts))
+    return float(target in found and len(found) == 1)
+
+
 # ---------------------------------------------------------------- error kinds
 _SEVEN_DIGITS = re.compile(r"(?<!\d)\d{7}(?!\d)")
 _UUID = re.compile(r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
@@ -247,7 +274,7 @@ def error_kind(prediction: str, row: Mapping) -> str:
         from pcm.tasks.official import babilong as off
 
         o = off()
-        out = o.compare_answers.__globals__["preprocess_output"](p) if "preprocess_output" in o.compare_answers.__globals__ else p.lower()
+        out = o.preprocess_output(p)
         labels = {lab.lower() for lab in o.TASK_LABELS[task]}
         in_question = {lab for lab in labels if lab in str(row.get("question", "")).lower()}
         return "wrong" if {lab for lab in labels if lab in out} - in_question else "format"

@@ -73,6 +73,8 @@ def main() -> int:
             "seconds_per_example": round(sum(r["timings"]["total_s"] for r in ok) / len(ok), 3) if ok else None,
             "peak_vram_gib": round(max(r.get("peak_vram_gib") or 0 for r in rs), 3),
         }
+        if t.startswith("babilong:"):  # supplementary, beside the official score (D-028)
+            table[f"{m}|{t}|{L}"]["accuracy_whole_word"] = ci([M.babilong_whole_word_score(r["prediction"], r) for r in ok], mcfg)
 
     def acc(m, t, L):
         c = table.get(f"{m}|{t}|{L}")
@@ -236,6 +238,11 @@ def main() -> int:
     for k in sorted(table, key=lambda k: (k.split("|")[0], k.split("|")[1], ORDER.index(k.split("|")[2]))):
         c = table[k]
         print(f"| {c['method']} | {c['task']} | {c['length']} | {c['status']} | {pct(c['accuracy'])} | {c['error_kinds']} | tok {c['tokens_mean']} | rec {c['evidence_recall']} | {c['seconds_per_example']} s | {c['peak_vram_gib']} GiB |")
+    print("\n## BABILong, official vs whole-word labels (D-028)")
+    for k in sorted(table):
+        c = table[k]
+        if "accuracy_whole_word" in c and c["accuracy"]["mean"] != c["accuracy_whole_word"]["mean"]:
+            print(f"| {c['method']} | {c['task']} | {c['length']} | official {pct(c['accuracy'])} | whole-word {pct(c['accuracy_whole_word'])} |")
     print("\n## Readers (1.7B - 0.6B, paired)")
     for k, v in readers.items():
         if k.startswith("family:") and v["n"]:
