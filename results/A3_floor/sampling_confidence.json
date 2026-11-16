@@ -1,0 +1,368 @@
+{
+  "code": {
+    "git_commit": "f00c41403e00f75a0501752299c4688cdea7a401",
+    "git_dirty": false
+  },
+  "sampling": {
+    "temperature": 0.7,
+    "top_p": 0.8,
+    "top_k": 20,
+    "min_p": 0.0,
+    "seed": 0
+  },
+  "examples": 50,
+  "examples_with_every_step_at_or_above_top_p": 48,
+  "min_top_prob_over_all": 0.5156429409980774,
+  "rows": [
+    {
+      "task": "synth:S1",
+      "example_id": "S1-8k-s0-0000",
+      "steps": 8,
+      "min_top_prob": 1.0,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "synth:S1",
+      "example_id": "S1-8k-s0-0002",
+      "steps": 8,
+      "min_top_prob": 1.0,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "synth:S1",
+      "example_id": "S1-8k-s0-0004",
+      "steps": 8,
+      "min_top_prob": 1.0,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "synth:S1",
+      "example_id": "S1-8k-s0-0006",
+      "steps": 8,
+      "min_top_prob": 1.0,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "synth:S1",
+      "example_id": "S1-8k-s0-0008",
+      "steps": 8,
+      "min_top_prob": 1.0,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "synth:S2_multikey",
+      "example_id": "S2_multikey-8k-s0-0000",
+      "steps": 8,
+      "min_top_prob": 1.0,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "synth:S2_multikey",
+      "example_id": "S2_multikey-8k-s0-0002",
+      "steps": 8,
+      "min_top_prob": 1.0,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "synth:S2_multikey",
+      "example_id": "S2_multikey-8k-s0-0004",
+      "steps": 8,
+      "min_top_prob": 1.0,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "synth:S2_multikey",
+      "example_id": "S2_multikey-8k-s0-0006",
+      "steps": 8,
+      "min_top_prob": 1.0,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "synth:S2_multikey",
+      "example_id": "S2_multikey-8k-s0-0008",
+      "steps": 8,
+      "min_top_prob": 1.0,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "synth:S2_multivalue",
+      "example_id": "S2_multivalue-8k-s0-0000",
+      "steps": 32,
+      "min_top_prob": 0.8066790103912354,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "synth:S2_multivalue",
+      "example_id": "S2_multivalue-8k-s0-0002",
+      "steps": 48,
+      "min_top_prob": 0.9442044496536255,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "synth:S2_multivalue",
+      "example_id": "S2_multivalue-8k-s0-0004",
+      "steps": 32,
+      "min_top_prob": 0.9999998807907104,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "synth:S2_multivalue",
+      "example_id": "S2_multivalue-8k-s0-0006",
+      "steps": 32,
+      "min_top_prob": 1.0,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "synth:S2_multivalue",
+      "example_id": "S2_multivalue-8k-s0-0008",
+      "steps": 32,
+      "min_top_prob": 0.9999991655349731,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "synth:S3_h2",
+      "example_id": "S3_h2-8k-s0-0000",
+      "steps": 8,
+      "min_top_prob": 0.9072638750076294,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "synth:S3_h2",
+      "example_id": "S3_h2-8k-s0-0002",
+      "steps": 8,
+      "min_top_prob": 0.9959347248077393,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "synth:S3_h2",
+      "example_id": "S3_h2-8k-s0-0004",
+      "steps": 8,
+      "min_top_prob": 0.5379640460014343,
+      "steps_below_top_p": 1
+    },
+    {
+      "task": "synth:S3_h2",
+      "example_id": "S3_h2-8k-s0-0006",
+      "steps": 8,
+      "min_top_prob": 0.9999946355819702,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "synth:S3_h2",
+      "example_id": "S3_h2-8k-s0-0008",
+      "steps": 8,
+      "min_top_prob": 1.0,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "synth:S4_freq",
+      "example_id": "S4_freq-8k-s0-0000",
+      "steps": 8,
+      "min_top_prob": 0.998319685459137,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "synth:S4_freq",
+      "example_id": "S4_freq-8k-s0-0002",
+      "steps": 3,
+      "min_top_prob": 0.9983878135681152,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "synth:S4_freq",
+      "example_id": "S4_freq-8k-s0-0004",
+      "steps": 3,
+      "min_top_prob": 0.9980825185775757,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "synth:S4_freq",
+      "example_id": "S4_freq-8k-s0-0006",
+      "steps": 4,
+      "min_top_prob": 0.9996073842048645,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "synth:S4_freq",
+      "example_id": "S4_freq-8k-s0-0008",
+      "steps": 4,
+      "min_top_prob": 0.9740741848945618,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "babilong:qa1",
+      "example_id": "babilong-qa1-8k-000",
+      "steps": 10,
+      "min_top_prob": 1.0,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "babilong:qa1",
+      "example_id": "babilong-qa1-8k-002",
+      "steps": 10,
+      "min_top_prob": 1.0,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "babilong:qa1",
+      "example_id": "babilong-qa1-8k-004",
+      "steps": 10,
+      "min_top_prob": 1.0,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "babilong:qa1",
+      "example_id": "babilong-qa1-8k-006",
+      "steps": 11,
+      "min_top_prob": 0.9184228777885437,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "babilong:qa1",
+      "example_id": "babilong-qa1-8k-008",
+      "steps": 10,
+      "min_top_prob": 1.0,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "babilong:qa2",
+      "example_id": "babilong-qa2-8k-000",
+      "steps": 8,
+      "min_top_prob": 0.9999072551727295,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "babilong:qa2",
+      "example_id": "babilong-qa2-8k-002",
+      "steps": 8,
+      "min_top_prob": 0.9953077435493469,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "babilong:qa2",
+      "example_id": "babilong-qa2-8k-004",
+      "steps": 8,
+      "min_top_prob": 1.0,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "babilong:qa2",
+      "example_id": "babilong-qa2-8k-006",
+      "steps": 8,
+      "min_top_prob": 0.9999963045120239,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "babilong:qa2",
+      "example_id": "babilong-qa2-8k-008",
+      "steps": 8,
+      "min_top_prob": 0.9999996423721313,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "babilong:qa3",
+      "example_id": "babilong-qa3-8k-000",
+      "steps": 11,
+      "min_top_prob": 0.8066354990005493,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "babilong:qa3",
+      "example_id": "babilong-qa3-8k-002",
+      "steps": 11,
+      "min_top_prob": 0.8940950632095337,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "babilong:qa3",
+      "example_id": "babilong-qa3-8k-004",
+      "steps": 11,
+      "min_top_prob": 0.9999982118606567,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "babilong:qa3",
+      "example_id": "babilong-qa3-8k-006",
+      "steps": 11,
+      "min_top_prob": 0.999988317489624,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "babilong:qa3",
+      "example_id": "babilong-qa3-8k-008",
+      "steps": 11,
+      "min_top_prob": 0.9900566935539246,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "babilong:qa4",
+      "example_id": "babilong-qa4-8k-000",
+      "steps": 3,
+      "min_top_prob": 0.999981164932251,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "babilong:qa4",
+      "example_id": "babilong-qa4-8k-002",
+      "steps": 3,
+      "min_top_prob": 0.9999998807907104,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "babilong:qa4",
+      "example_id": "babilong-qa4-8k-004",
+      "steps": 3,
+      "min_top_prob": 0.5156429409980774,
+      "steps_below_top_p": 1
+    },
+    {
+      "task": "babilong:qa4",
+      "example_id": "babilong-qa4-8k-006",
+      "steps": 3,
+      "min_top_prob": 0.9988707900047302,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "babilong:qa4",
+      "example_id": "babilong-qa4-8k-008",
+      "steps": 3,
+      "min_top_prob": 0.9999351501464844,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "babilong:qa5",
+      "example_id": "babilong-qa5-8k-000",
+      "steps": 2,
+      "min_top_prob": 0.9999998807907104,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "babilong:qa5",
+      "example_id": "babilong-qa5-8k-002",
+      "steps": 2,
+      "min_top_prob": 1.0,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "babilong:qa5",
+      "example_id": "babilong-qa5-8k-004",
+      "steps": 2,
+      "min_top_prob": 0.9999996423721313,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "babilong:qa5",
+      "example_id": "babilong-qa5-8k-006",
+      "steps": 2,
+      "min_top_prob": 1.0,
+      "steps_below_top_p": 0
+    },
+    {
+      "task": "babilong:qa5",
+      "example_id": "babilong-qa5-8k-008",
+      "steps": 2,
+      "min_top_prob": 0.9999297857284546,
+      "steps_below_top_p": 0
+    }
+  ]
+}

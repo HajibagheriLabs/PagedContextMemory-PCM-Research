@@ -1,0 +1,16 @@
+{
+  "dtype": "bfloat16",
+  "block": 2048,
+  "window": 32768,
+  "min_free_vram_gib": 12.0,
+  "min_free_ram_gib": 2.0,
+  "method": "truncate",
+  "mode": "tail",
+  "name": "m0-tail-1.7B-budget",
+  "reader": "reader",
+  "max_new_tokens": {
+    "infbench:passkey": 64,
+    "infbench:number_string": 64,
+    "infbench:kv_retrieval": 128
+  }
+}
