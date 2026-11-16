@@ -56,6 +56,21 @@ def main() -> int:
     rows = rows_of("E0_floor") + rows_of("E1_truncation")
     commits = Counter(((r.get("git_commit") or "")[:10], bool(r.get("git_dirty"))) for r in rows)
 
+    from pcm.tasks.official import infbench as off_infbench
+
+    def answer_budget(method: str, task: str) -> int:
+        """max_new_tokens the method used on the task: the method's override, else the task's own."""
+        mc = acfg["methods"][method]
+        override = (mc.get("max_new_tokens") or {}).get(task)
+        if override:
+            return int(override)
+        bench, name = task.split(":")
+        if bench == "synth":
+            return int(tcfg["synth"]["tasks"][name]["max_new_tokens"])
+        if bench == "babilong":
+            return int(tcfg["babilong"]["max_new_tokens"])
+        return int(off_infbench().max_new_tokens[name])
+
     cells: dict = defaultdict(list)
     for r in rows:
         cells[(r["method"], r["task"], r["length"])].append(r)
@@ -77,6 +92,15 @@ def main() -> int:
         }
         if t.startswith("babilong:"):  # supplementary, beside the official score (D-028)
             table[f"{m}|{t}|{L}"]["accuracy_whole_word"] = ci([M.babilong_whole_word_score(r["prediction"], r) for r in ok], mcfg)
+        # Answers that used the whole answer budget (possibly cut off), and wrong answers that give a
+        # distractor's value (S2 multi-key, S3: the value of another key or chain).
+        budget = answer_budget(m, t)
+        table[f"{m}|{t}|{L}"]["answer_budget"] = budget
+        table[f"{m}|{t}|{L}"]["answers_at_budget"] = sum(1 for r in ok if (r.get("timings") or {}).get("new_tokens") == budget)
+        if ok and ok[0].get("exclude") and t.split(":")[1] in ("S2_multikey", "S3_h2", "S3_h3", "S3_h4"):
+            wrong = [r for r in ok if M.error_kind(r["prediction"], r) == "wrong"]
+            table[f"{m}|{t}|{L}"]["wrong_with_distractor_value"] = {
+                "wrong": len(wrong), "distractor": sum(1 for r in wrong if any(M._present(r["prediction"], x) for x in r["exclude"]))}
 
     def acc(m, t, L):
         c = table.get(f"{m}|{t}|{L}")
@@ -142,6 +166,8 @@ def main() -> int:
     sampling = {"n": len(pairs), "greedy": ci([p[0] for p in pairs], mcfg), "sampled": ci([p[1] for p in pairs], mcfg),
                 "paired_sampled_minus_greedy": M.paired_bootstrap([p[1] for p in pairs], [p[0] for p in pairs], mcfg["bootstrap_resamples"], mcfg["bootstrap_seed"], mcfg["ci"]),
                 "changed_answers": sum(1 for r in samp if (r["task"], r["example_id"]) in greedy and r["score"] != greedy[(r["task"], r["example_id"])])}
+    greedy_text = {(r["task"], r["example_id"]): r["prediction"] for r in rows if r["method"] == "native-1.7B" and r["status"] == "ok"}
+    sampling["identical_text"] = sum(1 for r in samp if greedy_text.get((r["task"], r["example_id"])) == r["prediction"])
 
     # ---- depth deciles at 32K (synthetic tasks with a decile)
     deciles = {}
