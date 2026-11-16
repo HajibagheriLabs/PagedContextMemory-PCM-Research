@@ -183,3 +183,11 @@ def test_sampling_reproducible_and_truncation_on_gpu(request, tmp_path, cfg, tin
     assert s["ok"] == 2
     for r in _rows(tmp_path, "t"):
         assert r["prompt_tokens"] + 16 <= 600 and len(r["selected_spans"]) == 2
+
+
+def test_answer_budget_override(cfg, tiny_examples):
+    ex = {**tiny_examples[0], "benchmark": "infbench", "task": "passkey", "max_new_tokens": 6}
+    m = R.Native({"method": "native", "reader": "reader", "max_new_tokens": {"infbench:passkey": 64}})
+    assert m.max_new(ex) == 64
+    assert m.max_new({**ex, "task": "number_string"}) == 6
+    assert R.Native({"method": "native", "reader": "reader"}).max_new(ex) == 6

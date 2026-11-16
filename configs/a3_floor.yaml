@@ -24,11 +24,20 @@ methods:
     sampling: {temperature: 0.7, top_p: 0.8, top_k: 20, min_p: 0.0, seed: 0}
   m0-tail-1.7B: {<<: *common, method: truncate, mode: tail, name: m0-tail-1.7B, reader: reader}
   m0-headtail-1.7B: {<<: *common, method: truncate, mode: head_tail, name: m0-headtail-1.7B, reader: reader}
+  # D-030: the official InfiniteBench answer budgets (6, 12, 50 tokens) cut Qwen3's answers before the value.
+  # Budgets set from the answer format (the value inside a short sentence), not from scores.
+  m0-tail-1.7B-budget:
+    {<<: *common, method: truncate, mode: tail, name: m0-tail-1.7B-budget, reader: reader,
+     max_new_tokens: {"infbench:passkey": 64, "infbench:number_string": 64, "infbench:kv_retrieval": 128}}
+  m0-headtail-1.7B-budget:
+    {<<: *common, method: truncate, mode: head_tail, name: m0-headtail-1.7B-budget, reader: reader,
+     max_new_tokens: {"infbench:passkey": 64, "infbench:number_string": 64, "infbench:kv_retrieval": 128}}
 
 task_sets:
   synth: [synth:S1, synth:S2_multikey, synth:S2_multivalue, synth:S3_h2, synth:S3_h3, synth:S3_h4, synth:S4_count, synth:S4_freq]
   babilong: [babilong:qa1, babilong:qa2, babilong:qa3, babilong:qa4, babilong:qa5, babilong:qa6, babilong:qa7, babilong:qa8, babilong:qa9, babilong:qa10]
   infbench: [infbench:passkey, infbench:number_string, infbench:kv_retrieval, infbench:longbook_choice_eng]
+  infbench_retrieval: [infbench:passkey, infbench:number_string, infbench:kv_retrieval]
   sampling_subset: [synth:S1, synth:S2_multikey, synth:S2_multivalue, synth:S3_h2, synth:S4_freq, babilong:qa1, babilong:qa2, babilong:qa3, babilong:qa4, babilong:qa5]
 
 # Cells run in this order. The cells that decide Gate G0 (8K and below) come first.
@@ -49,6 +58,8 @@ experiments:
     - {method: m0-headtail-1.7B, tasks: synth, lengths: [64k, 128k, 256k]}
     - {method: m0-headtail-1.7B, tasks: babilong, lengths: [64k, 128k, 256k]}
     - {method: m0-headtail-1.7B, tasks: infbench, lengths: [full]}
+    - {method: m0-tail-1.7B-budget, tasks: infbench_retrieval, lengths: [full]}       # D-030
+    - {method: m0-headtail-1.7B-budget, tasks: infbench_retrieval, lengths: [full]}   # D-030
 
 # Gate G0 (section 5.5), as interpreted in D-024.
 gate:

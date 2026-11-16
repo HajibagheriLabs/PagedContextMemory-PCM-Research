@@ -178,6 +178,7 @@ class Native(Method):
 
     config: reader (assets key), dtype (bfloat16), block (2048), window (32768: prompt
     plus max_new_tokens must fit, else the example is skipped, never truncated),
+    max_new_tokens (optional {"bench:task": n}: answer budget replacing the task's own),
     sampling (absent: greedy; else temperature, top_k, top_p, min_p and seed; the
     generator of each example is seeded by (seed, example id)), min_free_vram_gib.
     """
@@ -216,6 +217,12 @@ class Native(Method):
             raise RuntimeError(f"context tokenizes to {len(ctx_ids)} tokens, the data says {example['length_tokens']}")
         return encode_text(tok, chat.prefix), ctx_ids, encode_text(tok, chat.suffix)
 
+    def max_new(self, example: dict) -> int:
+        """The answer budget: the task's own, unless config max_new_tokens names this task ("bench:task": n)."""
+        override = self.config.get("max_new_tokens") or {}
+        key = f"{example.get('benchmark', 'synth')}:{example['task']}"
+        return int(override.get(key, example["max_new_tokens"]))
+
     def window_room(self, prefix_ids, suffix_ids, max_new: int) -> int:
         """Context tokens that fit in the window beside the prompt wrapper and the answer."""
         return int(self.config.get("window", 32768)) - len(prefix_ids) - len(suffix_ids) - max_new
@@ -224,7 +231,7 @@ class Native(Method):
         import torch
 
         prefix, ctx, suffix = self._segments(example, prompt)
-        max_new = int(example["max_new_tokens"])
+        max_new = self.max_new(example)
         if len(ctx) > self.window_room(prefix, suffix, max_new):
             total = len(prefix) + len(ctx) + len(suffix)
             return {"example": example, "skip": f"prompt {total} + answer {max_new} tokens exceed the window {self.config.get('window', 32768)}"}
@@ -236,7 +243,7 @@ class Native(Method):
         if "skip" in prepared:
             raise DoesNotFit(prepared["skip"])
         example, ids = prepared["example"], prepared["ids"]
-        max_new = int(example["max_new_tokens"])
+        max_new = self.max_new(example)
         block = int(self.config.get("block", 2048))
         timings: dict = {}
         sp = self.config.get("sampling")
@@ -284,7 +291,7 @@ class Truncate(Native):
         import torch
 
         prefix, ctx, suffix = self._segments(example, prompt)
-        room = self.window_room(prefix, suffix, int(example["max_new_tokens"]))
+        room = self.window_room(prefix, suffix, self.max_new(example))
         spans = truncation_spans(len(ctx), room, self.config["mode"])
         kept = torch.cat([ctx[a:b] for a, b in spans])
         return {"example": example, "ids": torch.cat([prefix, kept, suffix]), "spans": spans}
