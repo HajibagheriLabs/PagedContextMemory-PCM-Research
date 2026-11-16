@@ -276,8 +276,9 @@ def error_kind(prediction: str, row: Mapping) -> str:
         o = off()
         out = o.preprocess_output(p)
         labels = {lab.lower() for lab in o.TASK_LABELS[task]}
-        in_question = {lab for lab in labels if lab in str(row.get("question", "")).lower()}
-        return "wrong" if {lab for lab in labels if lab in out} - in_question else "format"
+        # Any label counts as an answer of the expected form, also one the question names (the official
+        # scorer never accepts those, so such an answer is wrong, not formless).
+        return "wrong" if any(lab in out for lab in labels) else "format"
     if bench == "infbench":
         if task in ("passkey", "number_string"):
             ok = re.search(r"\d", p) is not None

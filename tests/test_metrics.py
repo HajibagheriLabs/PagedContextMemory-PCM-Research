@@ -116,6 +116,8 @@ def test_error_kind():
     b = {"benchmark": "babilong", "task": "babilong:qa1", "question": "Where is Mary?", "answers": ["bathroom"], "score": 0.0}
     assert M.error_kind("The most recent location of Mary is kitchen.", b) == "wrong"
     assert M.error_kind("Mary is somewhere.", b) == "format"
+    b4 = {"benchmark": "babilong", "task": "babilong:qa4", "question": "What is the bathroom east of?", "answers": ["bedroom"], "score": 0.0}
+    assert M.error_kind("bathroom", b4) == "wrong"  # names the question's location: a wrong answer, not a format error
     ib = {"benchmark": "infbench", "task": "infbench:longbook_choice_eng", "label": ["x", "A"], "answers": ["x"], "score": 0.0}
     assert M.error_kind("B", ib) == "wrong" and M.error_kind("I do not know", ib) == "format"
 

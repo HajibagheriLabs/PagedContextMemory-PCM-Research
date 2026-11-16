@@ -64,12 +64,14 @@ def main() -> int:
         ok = [r for r in rs if r["status"] == "ok"]
         kinds = Counter(M.error_kind(r["prediction"], r) for r in ok)
         rec = [r["evidence_recall"] for r in ok if r.get("evidence_recall") is not None]
+        kept = [r["score"] for r in ok if r.get("evidence_recall") == 1.0]  # every evidence item inside the window
         table[f"{m}|{t}|{L}"] = {
             "method": m, "task": t, "length": L, "accuracy": ci([r["score"] for r in ok], mcfg),
             "status": dict(Counter(r["status"] for r in rs)), "error_kinds": dict(kinds),
             "tokens_mean": round(sum(r["length_tokens"] for r in ok) / len(ok), 1) if ok else None,
             "prompt_tokens_mean": round(sum(r["prompt_tokens"] for r in ok) / len(ok), 1) if ok else None,
             "evidence_recall": round(sum(rec) / len(rec), 4) if rec else None,
+            "evidence_kept": {"n": len(kept), "accuracy": ci(kept, mcfg)} if rec else None,
             "seconds_per_example": round(sum(r["timings"]["total_s"] for r in ok) / len(ok), 3) if ok else None,
             "peak_vram_gib": round(max(r.get("peak_vram_gib") or 0 for r in rs), 3),
         }
