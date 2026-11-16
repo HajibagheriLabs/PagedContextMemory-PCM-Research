@@ -92,6 +92,28 @@ def main() -> int:
         }
         if t.startswith("babilong:"):  # supplementary, beside the official score (D-028)
             table[f"{m}|{t}|{L}"]["accuracy_whole_word"] = ci([M.babilong_whole_word_score(r["prediction"], r) for r in ok], mcfg)
+            # Answers whose only labels are ones the question names (never accepted by the official scorer).
+            from pcm.tasks.official import babilong as off_babilong
+
+            ob = off_babilong()
+            labs = [lab.lower() for lab in ob.TASK_LABELS[t.split(":")[1]]]
+
+            def found(text: str) -> set:
+                return {lab for lab in labs if lab in text}
+
+            table[f"{m}|{t}|{L}"]["answers_naming_only_question_labels"] = sum(
+                1 for r in ok if found(ob.preprocess_output(r["prediction"])) and found(ob.preprocess_output(r["prediction"])) <= found(str(r.get("question", "")).lower()))
+        if t == "synth:S4_count":  # direction of the miscounts
+            import re as _re
+
+            pairs = []
+            for r in ok:
+                if r["score"] != 1.0:
+                    mm = _re.search(r"-?\d+", r["prediction"].replace(",", ""))
+                    pairs.append((int(mm.group(0)) if mm else None, int(r["answers"][0])))
+            table[f"{m}|{t}|{L}"]["miscounts"] = {"too_low": sum(1 for a, b in pairs if a is not None and a < b),
+                                                  "too_high": sum(1 for a, b in pairs if a is not None and a > b),
+                                                  "no_number": sum(1 for a, _ in pairs if a is None)}
         # Answers that used the whole answer budget (possibly cut off), and wrong answers that give a
         # distractor's value (S2 multi-key, S3: the value of another key or chain).
         budget = answer_budget(m, t)
