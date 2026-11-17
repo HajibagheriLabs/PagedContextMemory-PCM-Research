@@ -221,19 +221,26 @@ class Session:
 
     def __init__(self):
         self.reader_key = None
+        self.current = None
 
     def method_for(self, mcfg: dict):
         inst = R.make_method(mcfg)
         key = inst.reader_key() if hasattr(inst, "reader_key") else None
         if self.reader_key is not None and key != self.reader_key:
+            self.current = None  # the previous method holds the previous reader
             R.release_readers(keep_index_models=True)
         inst.setup()
         self.reader_key = key
+        self.current = inst
         return inst
 
 
 def run_cells(todo: list[dict], args, cfg: dict, tcfg: dict, stats: dict, session: Session, pilot: bool) -> list[dict]:
     from pcm.health import preflight
+
+    import gc
+
+    import torch
 
     summaries = []
     for c in todo:
@@ -245,12 +252,19 @@ def run_cells(todo: list[dict], args, cfg: dict, tcfg: dict, stats: dict, sessio
         examples = cell_examples(c, cfg["pilot_n"] if c["n_run"] is None else c["n_run"], cfg, tcfg)
         inst = session.method_for(c["mcfg"])
         if "need_vram_gib" in c:
+            # Memory the previous cell's cache left reserved in this process is free for this one: return it to the
+            # driver first, so that the check measures what the cell can really use.
+            gc.collect()
+            torch.cuda.empty_cache()
             pf = preflight(min_free_vram_gib=c["need_vram_gib"])
             log(f"dense cell: longest prompt {c['max_tokens']} tokens, YaRN factor {c['mcfg']['yarn_factor']}, "
                 f"needs {c['need_vram_gib']:.1f} GiB free VRAM, has {pf['free_vram_gib']:.1f}")
         summaries.append(R.run(c["mcfg"], c["task"], c["length"], None, seed=cfg["seed"], exp=args.exp, pilot=pilot,
                                pilot_n=max(0, cfg["pilot_n"] - done) if pilot else cfg["pilot_n"], retry_failed=args.retry_failed,
                                examples=examples, method=inst, cfg=tcfg, log=log))
+        # Drop this cell's method: holding it would keep its reader in memory while the next cell loads another one.
+        inst = examples = None
+        session.current = None
     return summaries
 
 
