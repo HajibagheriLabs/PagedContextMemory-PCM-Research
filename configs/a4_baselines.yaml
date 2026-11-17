@@ -1,0 +1,125 @@
+# A4: baselines. E2 dense YaRN (M1), E3 plain retrieval (M2), E3o oracle pages (M3).
+# Specification sections 4.3, 4.7, 5.3, 5.4. Run with scripts/run_a4.py; tasks and data from configs/a2_tasks.yaml.
+# Reader and task families as decided at Gate G0: Qwen3-1.7B zero-shot; S1, S2, BABILong, BABILong-ext (S3, S4 out: D-034).
+n: 100          # examples per cell (section 5.2). InfiniteBench: 100 rows spread evenly over each task (D-022)
+seed: 0         # data seed (screening)
+pilot_n: 5      # examples per cell in the pilot
+ask_above_hours: 12   # a full run projected above this stops and asks to be started with --max-hours
+
+common: &common
+  reader: reader
+  dtype: bfloat16
+  block: 2048            # prefill block (section 4.7 rule 1)
+  min_free_ram_gib: 2.0
+  # InfiniteBench retrieval answer budgets for every method from A4 on (D-033).
+  max_new_tokens: {"infbench:passkey": 64, "infbench:number_string": 64, "infbench:kv_retrieval": 128}
+
+# Index units, budget and text expansion shared by M2 and M3 (sections 4.1, 4.5; D-035).
+units: &units
+  window: 32768          # prompt + answer must fit the stated context length
+  unit: 128              # index unit, tokens
+  snap: 32               # boundaries move to a sentence end within this many tokens
+  budget: 28672          # tokens of kept units (section 4.1)
+  gap_marker: "\n[...]\n" # between kept spans that are not adjacent; not counted against the budget
+  min_free_vram_gib: 10.0
+
+retrieval: &retrieval
+  <<: [*common, *units]
+  method: retrieve
+  embedder: embedder
+  reranker: reranker
+  embed_batch: 128
+  rerank_batch: 32
+  rrf_k: 60              # reciprocal-rank fusion constant
+  bm25: {k1: 1.5, b: 0.75, epsilon: 0.25}
+  rerank_top: 64         # units of the fused ranking the reranker re-orders
+  index_cache: data/cache/index
+
+methods:
+  # M1. yarn_factor and min_free_vram_gib are set per cell by scripts/run_a4.py from the longest prompt of the split.
+  m1-yarn-1.7B: {<<: *common, method: dense_yarn, name: m1-yarn-1.7B}
+  m2-bm25-1.7B: {<<: *retrieval, name: m2-bm25-1.7B, ranker: bm25}
+  m2-embed-1.7B: {<<: *retrieval, name: m2-embed-1.7B, ranker: embed}
+  m2-hybrid-1.7B: {<<: *retrieval, name: m2-hybrid-1.7B, ranker: hybrid}
+  m2-hybrid-rerank-1.7B: {<<: *retrieval, name: m2-hybrid-rerank-1.7B, ranker: hybrid_rerank}
+  m3-oracle-1.7B: {<<: [*common, *units], method: oracle, name: m3-oracle-1.7B}
+  # Supplementary (D-037): gold units and one neighbour on each side only.
+  m3-oracle-tight-1.7B: {<<: [*common, *units], method: oracle, name: m3-oracle-tight-1.7B, pad_units: 1}
+
+task_sets:
+  h1: [synth:S1, synth:S2_multikey, synth:S2_multivalue, babilong:qa1, babilong:qa2, babilong:qa3, babilong:qa4, babilong:qa5]
+  ext: [babilong:qa6, babilong:qa7, babilong:qa8, babilong:qa9, babilong:qa10]
+  infbench: [infbench:passkey, infbench:number_string, infbench:kv_retrieval, infbench:longbook_choice_eng]
+  infbench_evidence: [infbench:passkey, infbench:number_string, infbench:kv_retrieval]   # tasks with an evidence span
+  infbench_dense: [infbench:passkey, infbench:number_string]                              # what a dense run fits on 24 GB (D-038)
+
+# Cells run in this order: the families H1 is read on first, BABILong-ext last.
+experiments:
+  E2_dense:
+    - {method: m1-yarn-1.7B, tasks: h1, lengths: [64k, 128k], n: plan}
+    - {method: m1-yarn-1.7B, tasks: infbench_dense, lengths: [full], n: fixed}
+    - {method: m1-yarn-1.7B, tasks: ext, lengths: [64k, 128k], n: fixed}
+  E3_retrieval:
+    - {method: m2-hybrid-1.7B, tasks: h1, lengths: [256k, 128k, 64k, 32k]}
+    - {method: m2-hybrid-rerank-1.7B, tasks: h1, lengths: [256k, 128k, 64k, 32k]}
+    - {method: m2-hybrid-1.7B, tasks: infbench, lengths: [full]}
+    - {method: m2-hybrid-rerank-1.7B, tasks: infbench, lengths: [full]}
+    - {method: m2-hybrid-1.7B, tasks: ext, lengths: [256k, 128k, 64k, 32k]}
+    - {method: m2-hybrid-rerank-1.7B, tasks: ext, lengths: [256k, 128k, 64k, 32k]}
+    - {method: m2-bm25-1.7B, tasks: h1, lengths: [256k, 128k, 64k, 32k]}
+    - {method: m2-embed-1.7B, tasks: h1, lengths: [256k, 128k, 64k, 32k]}
+    - {method: m2-bm25-1.7B, tasks: infbench, lengths: [full]}
+    - {method: m2-embed-1.7B, tasks: infbench, lengths: [full]}
+    - {method: m2-bm25-1.7B, tasks: ext, lengths: [256k, 128k, 64k, 32k]}
+    - {method: m2-embed-1.7B, tasks: ext, lengths: [256k, 128k, 64k, 32k]}
+  # The tight oracle also runs at 8K and 16K: there every other method is the native run (the document fits),
+  # so these cells are the only measure of what selecting inside the window could give (D-037).
+  E3o_oracle:
+    - {method: m3-oracle-tight-1.7B, tasks: h1, lengths: [256k, 128k, 64k, 32k, 16k, 8k]}
+    - {method: m3-oracle-1.7B, tasks: h1, lengths: [256k, 128k, 64k, 32k]}
+    - {method: m3-oracle-tight-1.7B, tasks: infbench_evidence, lengths: [full]}
+    - {method: m3-oracle-1.7B, tasks: infbench_evidence, lengths: [full]}
+    - {method: m3-oracle-tight-1.7B, tasks: ext, lengths: [256k, 128k, 64k, 32k, 16k, 8k]}
+    - {method: m3-oracle-1.7B, tasks: ext, lengths: [256k, 128k, 64k, 32k]}
+
+# E2 (section 4.7 rule 5 and prompt A4; D-038).
+e2:
+  yarn_factors: [2, 4, 8, 16]   # the smallest whose range covers the longest prompt + answer of the split
+  cap_hours: 16                 # total GPU time of E2
+  n_fixed: 30                   # cells marked `n: fixed` (BABILong-ext, InfiniteBench): the minimum the prompt allows
+  n_candidates: [100, 80, 60, 50, 40, 30]   # cells marked `n: plan`: the largest that keeps the projected total within the cap
+  working_reserve_gib: 2.5      # free VRAM asked for beyond the KV cache of the longest prompt
+
+# Families for the tables (as in configs/a3_floor.yaml, without S3 and S4) and the curves' sources.
+families:
+  S1: [synth:S1]
+  S2: [synth:S2_multikey, synth:S2_multivalue]
+  BABILong: [babilong:qa1, babilong:qa2, babilong:qa3, babilong:qa4, babilong:qa5]
+  BABILong-ext: [babilong:qa6, babilong:qa7, babilong:qa8, babilong:qa9, babilong:qa10]
+h1_families: [S1, S2, BABILong]   # BABILong-ext has no ECL90 (D-032)
+
+summary:
+  native: {exp: E0_floor, method: native-1.7B}   # reference at 8K, and every curve below the length its method starts at
+  # Curves. `from`: the first grid length the method itself ran at; below it the curve is the native run, because
+  # the method changes nothing there (M0 and M1: the prompt fits the model's own range; M2 and M3: the document
+  # fits the budget and is kept whole). `infbench`: the method whose rows are used for InfiniteBench (D-033).
+  series:
+    m0-tail: {label: "M0 last 32K", exp: E1_truncation, method: m0-tail-1.7B, from: 64k, infbench: m0-tail-1.7B-budget}
+    m0-headtail: {label: "M0 first + last 16K", exp: E1_truncation, method: m0-headtail-1.7B, from: 64k, infbench: m0-headtail-1.7B-budget}
+    m1: {label: "M1 dense YaRN", exp: E2_dense, method: m1-yarn-1.7B, from: 64k}
+    m2-bm25: {label: "M2 BM25", exp: E3_retrieval, method: m2-bm25-1.7B, from: 32k}
+    m2-embed: {label: "M2 embeddings", exp: E3_retrieval, method: m2-embed-1.7B, from: 32k}
+    m2-hybrid: {label: "M2 hybrid", exp: E3_retrieval, method: m2-hybrid-1.7B, from: 32k}
+    m2-hybrid-rerank: {label: "M2 hybrid + reranker", exp: E3_retrieval, method: m2-hybrid-rerank-1.7B, from: 32k}
+    m3: {label: "M3 oracle", exp: E3o_oracle, method: m3-oracle-1.7B, from: 32k}
+    m3-tight: {label: "M3 oracle, tight (supplementary)", exp: E3o_oracle, method: m3-oracle-tight-1.7B, from: 8k}
+  # Paired differences reported per family and length (first minus second, on the examples both have).
+  pairs:
+    - [m3, m2-hybrid]         # the selector's share of the loss
+    - [m3-tight, m3]          # what 28K tokens of padding cost the reader
+    - [m2-hybrid, m0-tail]
+    - [m2-hybrid, m1]
+    - [m1, m0-tail]
+    - [m2-hybrid, m2-bm25]
+    - [m2-hybrid, m2-embed]
+  recall_at_units: [8, 16, 32, 64, 128, 224]   # evidence recall had only the top k units of the ranking been kept
