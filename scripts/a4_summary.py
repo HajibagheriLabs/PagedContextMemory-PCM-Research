@@ -23,7 +23,21 @@ sys.path.insert(0, str(REPO_ROOT))
 
 from pcm.eval import metrics as M  # noqa: E402
 from pcm.runlog import JsonlLog, atomic_write_json, atomic_write_text  # noqa: E402
-from pcm.tasks.common import load_task_config  # noqa: E402
+from pcm.tasks.common import config_hash, load_task_config  # noqa: E402
+
+A4_EXPERIMENTS = ("E0_a4budget", "E2_dense", "E3_retrieval", "E3o_oracle")
+
+
+def current_hashes(cfg: dict) -> dict[str, set]:
+    """Method hashes of the configuration as it stands: rows of an A4 method under any other hash were run with
+    settings since replaced (D-040) and are left out. M1 has one hash per YaRN factor."""
+    out = {}
+    for name, m in cfg["methods"].items():
+        if m["method"] == "dense_yarn":
+            out[name] = {config_hash({**m, "yarn_factor": f}) for f in cfg["e2"]["yarn_factors"]}
+        else:
+            out[name] = {config_hash(m)}
+    return out
 
 OUT = REPO_ROOT / "results" / "A4_baselines"
 FIG = OUT / "figures"
@@ -82,8 +96,18 @@ def main() -> int:
     grid = list(tcfg["lengths"])
     native = scfg["native"]
 
-    exps = sorted({native["exp"]} | {s["exp"] for s in series.values()})
-    rows = {e: rows_of(e) for e in exps}
+    rerun = native.get("budget_rerun") or {}
+    exps = sorted({native["exp"]} | {s["exp"] for s in series.values()} | ({rerun["exp"]} if rerun else set()))
+    current = current_hashes(cfg)
+    rows, superseded = {}, Counter()
+    for e in exps:
+        keep = []
+        for r in rows_of(e):
+            if e in A4_EXPERIMENTS and r["method_hash"] not in current.get(r["method"], set()):
+                superseded[f"{e}|{r['method']}"] += 1
+                continue
+            keep.append(r)
+        rows[e] = keep
     commits = {e: dict(Counter(f"{(r.get('git_commit') or '')[:10]}{'+dirty' if r.get('git_dirty') else ''}" for r in rows[e])) for e in exps}
     cells: dict = defaultdict(list)  # (exp, method, task, length) -> rows
     for e in exps:
@@ -139,14 +163,25 @@ def main() -> int:
             budget = (mc.get("max_new_tokens") or {}).get(task)
             if mc.get("yarn_factor") is not None:
                 out["yarn_factor"] = mc["yarn_factor"]
-        out["answers_at_budget"] = sum(1 for r in ok if budget and (r.get("timings") or {}).get("new_tokens") == budget) if budget else None
+        if budget is None and task.startswith("babilong:"):
+            budget = int(tcfg["babilong"]["max_new_tokens"])
+        at_budget = [r for r in ok if budget and (r.get("timings") or {}).get("new_tokens") == budget]
+        out["answer_budget"] = budget
+        out["answers_at_budget"] = len(at_budget) if budget else None
+        out["format_at_budget"] = sum(1 for r in at_budget if M.error_kind(r["prediction"], r) == "format") if budget else None  # cut before any answer
+        out["past_32768"] = sum(1 for r in ok if (r.get("prompt_tokens") or 0) + ((r.get("timings") or {}).get("new_tokens") or 0) > 32768) if exp == "E0_a4budget" else None
         out["error_kinds"] = dict(Counter(M.error_kind(r["prediction"], r) for r in ok))
         return out
 
     table = {}
     for (e, m, t, L) in sorted(cells, key=lambda k: (k[0], k[1], k[2], ORDER.index(k[3]) if k[3] in ORDER else 99)):
-        if e != native["exp"] and e != "E1_truncation":
+        if e in A4_EXPERIMENTS:
             table[f"{m}|{t}|{L}"] = cell_record(e, m, t, L)
+
+    def native_source(task: str) -> tuple[str, str]:
+        if rerun and task in rerun["tasks"]:
+            return rerun["exp"], rerun["method"]
+        return native["exp"], native["method"]
 
     # ---- curves: task scores per series and length (native below the series' first own length)
     def source(skey: str, task: str, length: str) -> tuple[str, str]:
@@ -154,7 +189,7 @@ def main() -> int:
         if task.startswith("infbench:"):
             return s["exp"], s.get("infbench", s["method"])
         if grid.index(length) < grid.index(s["from"]):
-            return native["exp"], native["method"]
+            return native_source(task)
         return s["exp"], s["method"]
 
     def scores_by_id(skey, task, length) -> dict:
@@ -163,9 +198,12 @@ def main() -> int:
 
     curves, ecl, ratio_only = {}, {}, {}
     reference = {}
+    reference_a3 = {}
     for fam, tasks in families.items():
-        ref_scores = [list({r["example_id"]: r["score"] for r in ok_rows(native["exp"], native["method"], t, mcfg["reference_length"])}.values()) for t in tasks]
+        ref_scores = [list({r["example_id"]: r["score"] for r in ok_rows(*native_source(t), t, mcfg["reference_length"])}.values()) for t in tasks]
         reference[fam] = family_ci(ref_scores, mcfg)
+        a3_scores = [list({r["example_id"]: r["score"] for r in ok_rows(native["exp"], native["method"], t, mcfg["reference_length"])}.values()) for t in tasks]
+        reference_a3[fam] = family_ci(a3_scores, mcfg)  # as fixed in A3, for comparison
         ch = sum(chance(t, tcfg) for t in tasks) / len(tasks)
         for skey in series:
             curve = {}
@@ -375,13 +413,16 @@ def main() -> int:
         figs.append("figures/recall.png")
     plt.close(fig)
 
-    summary = {"commits": commits, "reference": reference, "cells": table, "curves": curves, "ecl90": ecl, "ratio_only": ratio_only,
+    summary = {"commits": commits, "superseded_rows": dict(superseded), "reference": reference, "reference_a3": reference_a3, "cells": table, "curves": curves, "ecl90": ecl, "ratio_only": ratio_only,
                "pairs": pairs, "retrieval": recall, "cost": cost, "e2": e2, "checks": checks, "deciles": deciles, "infbench": infbench, "figures": figs}
     atomic_write_json(OUT / "summary.json", summary)
 
     # ---- tables
     lab = {k: v["label"] for k, v in series.items()}
-    out = ["# A4 tables (written by scripts/a4_summary.py from the results files)", "", f"Code commits of the rows: {json.dumps(commits)}", ""]
+    out = ["# A4 tables (written by scripts/a4_summary.py from the results files)", "", f"Code commits of the rows: {json.dumps(commits)}", "",
+           f"Rows left out, run with settings since replaced (D-040): {json.dumps(dict(superseded))}", "",
+           "References (native 8K, mean of the family's tasks): " + "; ".join(
+               f"{fam} {pct(reference[fam])} (A3: {pct(reference_a3[fam])})" for fam in families), ""]
     for fam in families:
         ref = reference[fam]
         out += [f"## {fam}: accuracy (%, 95% CI), n per task in brackets. Reference (native 8K): {pct(ref)}; 90% of it: {100 * mcfg['ecl_ratio'] * ref['mean']:.2f}" if ref["mean"] is not None else f"## {fam}", "",

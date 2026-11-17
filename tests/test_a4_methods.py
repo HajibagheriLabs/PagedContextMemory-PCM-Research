@@ -223,6 +223,10 @@ def test_run_script_cells_and_plan():
     assert len(mod.cells(c, "E3_retrieval", methods=["m2-bm25-1.7B"], tasks=["synth:S1"], lengths=["256k"])) == 1
     for name, m in c["methods"].items():
         assert m["name"] == name and m["reader"] == "reader" and m["max_new_tokens"]["infbench:kv_retrieval"] == 128
+        assert m["max_new_tokens"]["synth:S1"] == 64 and m["max_new_tokens"]["synth:S2_multivalue"] == 128   # D-040
+    ex = {"benchmark": "synth", "task": "S1", "max_new_tokens": 16}
+    assert R.Native(c["methods"]["m2-hybrid-1.7B"]).max_new(ex) == 64 and R.Native({"reader": "reader"}).max_new(ex) == 16
+    assert len(mod.cells(c, "E0_a4budget")) == 3
     assert c["methods"]["m2-hybrid-1.7B"]["budget"] == 28672 and c["methods"]["m3-oracle-tight-1.7B"]["pad_units"] == 1
     # Plan: 2 `plan` cells at 20 s and 80 s, 1 fixed cell at 80 s, cap 1 hour.
     cfg = {"e2": {"cap_hours": 1.0, "n_fixed": 30, "n_candidates": [100, 80, 60, 50, 40, 30]}}

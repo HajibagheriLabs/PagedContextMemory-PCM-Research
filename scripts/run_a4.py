@@ -35,7 +35,7 @@ from pcm.runlog import JsonlLog, atomic_write_json  # noqa: E402
 from pcm.tasks.common import config_hash, get_tokenizer, load_task_config  # noqa: E402
 
 CONFIG = REPO_ROOT / "configs" / "a4_baselines.yaml"
-EXPERIMENTS = ("E2_dense", "E3_retrieval", "E3o_oracle")
+EXPERIMENTS = ("E0_a4budget", "E2_dense", "E3_retrieval", "E3o_oracle")
 GIB = 1024**3
 _LOG_FILE = None
 

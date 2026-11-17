@@ -11,8 +11,10 @@ common: &common
   dtype: bfloat16
   block: 2048            # prefill block (section 4.7 rule 1)
   min_free_ram_gib: 2.0
-  # InfiniteBench retrieval answer budgets for every method from A4 on (D-033).
-  max_new_tokens: {"infbench:passkey": 64, "infbench:number_string": 64, "infbench:kv_retrieval": 128}
+  # Answer budgets that replace the task's own, for every A4 method. InfiniteBench retrieval: D-033. Synthetic tasks:
+  # D-040 (a sentence restating the question, then the value or values). BABILong keeps its official 20 tokens.
+  max_new_tokens: {"infbench:passkey": 64, "infbench:number_string": 64, "infbench:kv_retrieval": 128,
+                   "synth:S1": 64, "synth:S2_multikey": 64, "synth:S2_multivalue": 128}
 
 # Index units, budget and text expansion shared by M2 and M3 (sections 4.1, 4.5; D-035).
 units: &units
@@ -36,6 +38,10 @@ retrieval: &retrieval
   index_cache: data/cache/index
 
 methods:
+  # Native reader at the A4 answer budgets (D-040): S2 multi-value only, the one synthetic task whose native answers
+  # reached the A3 budget. The window admits prompt + the 128-token budget; rows say whether an answer actually
+  # went past position 32,768.
+  native-1.7B-a4budget: {<<: *common, method: native, name: native-1.7B-a4budget, window: 32896, min_free_vram_gib: 10.0}
   # M1. yarn_factor and min_free_vram_gib are set per cell by scripts/run_a4.py from the longest prompt of the split.
   m1-yarn-1.7B: {<<: *common, method: dense_yarn, name: m1-yarn-1.7B}
   m2-bm25-1.7B: {<<: *retrieval, name: m2-bm25-1.7B, ranker: bm25}
@@ -55,6 +61,8 @@ task_sets:
 
 # Cells run in this order: the families H1 is read on first, BABILong-ext last.
 experiments:
+  E0_a4budget:
+    - {method: native-1.7B-a4budget, tasks: [synth:S2_multivalue], lengths: [8k, 16k, 32k]}
   E2_dense:
     - {method: m1-yarn-1.7B, tasks: h1, lengths: [64k, 128k], n: plan}
     - {method: m1-yarn-1.7B, tasks: infbench_dense, lengths: [full], n: fixed}
@@ -99,7 +107,9 @@ families:
 h1_families: [S1, S2, BABILong]   # BABILong-ext has no ECL90 (D-032)
 
 summary:
-  native: {exp: E0_floor, method: native-1.7B}   # reference at 8K, and every curve below the length its method starts at
+  # Reference at 8K, and every curve below the length its method starts at. Tasks named in `budget_rerun` take the
+  # native rows measured at the A4 answer budgets (D-040); the others take A3's rows, which never reached their budget.
+  native: {exp: E0_floor, method: native-1.7B, budget_rerun: {exp: E0_a4budget, method: native-1.7B-a4budget, tasks: [synth:S2_multivalue]}}
   # Curves. `from`: the first grid length the method itself ran at; below it the curve is the native run, because
   # the method changes nothing there (M0 and M1: the prompt fits the model's own range; M2 and M3: the document
   # fits the budget and is kept whole). `infbench`: the method whose rows are used for InfiniteBench (D-033).
