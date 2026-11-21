@@ -1,4 +1,4 @@
-"""Index units: the smallest retrievable spans of a document (specification, section 4.1).
+"""Index units and pages (specification, section 4.1).
 
 A document of n tokens is cut into consecutive, non-overlapping units of about
 `unit` tokens. Every nominal boundary (a multiple of `unit`) moves to the nearest
@@ -6,6 +6,11 @@ sentence end within `snap` tokens, the earlier one on a tie; with no sentence en
 in reach it stays where it is. A last piece shorter than `snap` tokens joins the
 unit before it. Units are described by their boundaries: an integer array
 [0, b1, ..., n], unit i covering tokens [b[i], b[i + 1]).
+
+A page is a run of consecutive units: with page size P tokens, page p holds units
+[p k, (p + 1) k) where k = P / unit, counted from the first unit; the last page may
+hold fewer. Pages therefore inherit the units' sentence snapping, and a page of
+P tokens is P tokens give or take the snapping of its two edges.
 
 Token indices refer to the context tokenized on its own with the reader's
 tokenizer, the convention of every offset in this project.
@@ -86,3 +91,26 @@ def cut_document(tokenizer, context: str, unit: int = 128, snap: int = 32) -> Un
     ids, starts, ends = tokenize_with_offsets(tokenizer, context)
     bounds = unit_bounds(len(ids), sentence_end_tokens(context, starts), unit, snap)
     return Units(np.asarray(ids, dtype=np.int32), np.asarray(starts, dtype=np.int64), np.asarray(ends, dtype=np.int64), bounds)
+
+
+def units_per_page(page_tokens: int, unit: int = 128) -> int:
+    """How many index units make a page of `page_tokens` tokens (a whole multiple of the unit)."""
+    if page_tokens < unit or page_tokens % unit:
+        raise ValueError(f"a page of {page_tokens} tokens is not a whole number of {unit}-token units")
+    return page_tokens // unit
+
+
+def page_of_unit(n_units: int, per_page: int) -> np.ndarray:
+    """Page index of every unit."""
+    if per_page < 1:
+        raise ValueError("per_page must be at least 1")
+    return np.arange(n_units, dtype=np.int64) // per_page
+
+
+def page_bounds(bounds: np.ndarray, per_page: int) -> np.ndarray:
+    """Token boundaries of the pages made of `per_page` consecutive units (unit boundaries `bounds`)."""
+    n_units = len(bounds) - 1
+    if per_page < 1:
+        raise ValueError("per_page must be at least 1")
+    idx = list(range(0, n_units, per_page)) + [n_units]
+    return np.asarray(bounds, dtype=np.int64)[idx]

@@ -12,6 +12,8 @@ arithmetic on arrays, so selection can be tested without a model.
 - oracle_order: gold units first, then their neighbours by distance.
 - spans_of / token_windows: kept units or evidence windows as merged token ranges
   in document order.
+- page_order / fill_pages / units_of_pages: units mapped to pages (a page ranks at
+  its best unit), the nominal number of pages the budget holds, and their units.
 """
 from __future__ import annotations
 
@@ -138,6 +140,35 @@ def token_windows(evidence: Sequence[Mapping], n_tokens: int, budget: int) -> tu
         else:
             hi = mid - 1
     return windows(lo), lo
+
+
+# ---------------------------------------------------------------- pages (specification, section 4.3, query step 3)
+def page_order(unit_order: np.ndarray, per_page: int) -> np.ndarray:
+    """Pages ranked by their best unit: the order in which pages first appear in the unit ranking
+    (page of unit u = u // per_page)."""
+    pages = np.asarray(unit_order, dtype=np.int64) // int(per_page)
+    _, first = np.unique(pages, return_index=True)
+    return pages[np.sort(first)]
+
+
+def fill_pages(order: np.ndarray, page_tokens: int, budget: int) -> np.ndarray:
+    """The first budget // page_tokens pages of a page ranking (the nominal page count, D-041)."""
+    if budget < 0 or page_tokens < 1:
+        raise ValueError("need budget >= 0 and page_tokens >= 1")
+    return np.asarray(order[: budget // page_tokens], dtype=np.int64)
+
+
+def units_of_pages(pages: Sequence[int], per_page: int, n_units: int) -> np.ndarray:
+    """Sorted unit indices of the given pages."""
+    out = [np.arange(int(p) * per_page, min((int(p) + 1) * per_page, n_units)) for p in sorted(set(int(x) for x in pages))]
+    return np.concatenate(out).astype(np.int64) if out else np.zeros(0, dtype=np.int64)
+
+
+def item_page_ranks(order: np.ndarray, items: Sequence[Sequence[int]], per_page: int) -> list[int]:
+    """For every evidence item, how many pages from the top of the page ranking are needed to hold
+    all of its units (0 for an item that covers no unit)."""
+    pos = {int(p): i + 1 for i, p in enumerate(np.asarray(order, dtype=np.int64))}
+    return [int(max(pos[int(u) // per_page] for u in units)) if len(units) else 0 for units in items]
 
 
 def pack_units(units: Sequence[int], n_units: int) -> str:

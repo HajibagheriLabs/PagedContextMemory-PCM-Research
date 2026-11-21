@@ -1,0 +1,125 @@
+# A5: Pillars 1 and 2. E4 pages x budget (PCM text mode, hybrid scores, no graph), E5 graph ablation.
+# Specification sections 4.3, 4.4, 4.7; decisions D-041 to D-044. Run with scripts/run_a5.py.
+# Reader and task families as decided at Gate G0: Qwen3-1.7B zero-shot; S1, S2, BABILong, BABILong-ext (S3, S4 out: D-034).
+n: 100          # examples per cell in the final runs (section 5.2); InfiniteBench: its 100 evenly spaced rows (D-022)
+seed: 0
+pilot_n: 5
+ask_above_hours: 12
+
+common: &common
+  reader: reader
+  dtype: bfloat16
+  block: 2048
+  min_free_ram_gib: 2.0
+  # Answer budgets of A4 (D-033, D-040), unchanged.
+  max_new_tokens: {"infbench:passkey": 64, "infbench:number_string": 64, "infbench:kv_retrieval": 128,
+                   "synth:S1": 64, "synth:S2_multikey": 64, "synth:S2_multivalue": 128}
+
+# PCM text mode (sections 4.3 and 4.5). Units, scoring and expansion exactly as M2 hybrid in A4 (D-035), so that the
+# document cache (embeddings) of A4 serves A5 unchanged. page and budget are set per setting; graph absent = none.
+pcm: &pcm
+  <<: *common
+  method: pcm
+  window: 32768
+  unit: 128
+  snap: 32
+  gap_marker: "\n[...]\n"
+  min_free_vram_gib: 10.0
+  ranker: hybrid
+  embedder: embedder
+  embed_batch: 128
+  rrf_k: 60
+  bm25: {k1: 1.5, b: 0.75, epsilon: 0.25}
+  index_cache: data/cache/index
+
+# Graph settings shared by every E5 variant (section 4.4; D-043).
+graph: &graph
+  seeds: 16          # PPR seeds and the starting set of entity hops: the top units of the hybrid ranking
+  restart: 0.5
+  iterations: 10
+  sem_k: 5
+  sem_min_cos: 0.5
+  ent_cap: 20
+  hop_k: 16          # units added per entity hop
+
+task_sets:
+  h1: [synth:S1, synth:S2_multikey, synth:S2_multivalue, babilong:qa1, babilong:qa2, babilong:qa3, babilong:qa4, babilong:qa5]
+  ext: [babilong:qa6, babilong:qa7, babilong:qa8, babilong:qa9, babilong:qa10]
+  infbench: [infbench:passkey, infbench:number_string, infbench:kv_retrieval, infbench:longbook_choice_eng]
+  babilong_h1: [babilong:qa1, babilong:qa2, babilong:qa3, babilong:qa4, babilong:qa5]
+  s3: [synth:S3_h2, synth:S3_h3, synth:S3_h4]
+
+# E4 (prompt A5; D-041, D-042).
+e4:
+  pages: [128, 256, 512, 1024, 2048, 4096, 8192]
+  budgets: [4096, 8192, 16384, 28672]          # settings with a page larger than the budget hold no page and are not run
+  screen:
+    tasks: [synth:S2_multikey, babilong:qa2, babilong:qa3]   # BABILong qa3 stands in for S3 chain (D-034, D-042)
+    recall_only: [synth:S3_h3]                                # S3 chain: evidence recall only, no reader (D-042)
+    lengths: [256k, 128k]
+    n: 30
+  final:
+    top: 3
+    tasks: [h1, ext, infbench]
+    lengths: [256k, 128k]
+  # How the best settings are chosen, fixed before the screen: mean accuracy over the screen's accuracy cells (task x
+  # length, equal weights); ties: higher mean evidence recall over the same cells, then the smaller budget, then the
+  # smaller page.
+  # E5's setting, fixed before the final E4 run: the final setting with the highest mean, over 128K and 256K, of the
+  # family accuracies of S1, S2 and BABILong (the H1 families); ties: the smaller budget, then the smaller page.
+
+# E5 (prompt A5; D-043, D-044). Variants at the E4 setting. `ner`: the spaCy extractor (optional variant of section 4.4).
+e5:
+  variants:
+    none: null
+    ppr-seq: {traversal: ppr, edges: [seq]}
+    ppr-sem: {traversal: ppr, edges: [sem]}
+    ppr-ent: {traversal: ppr, edges: [ent]}
+    ppr-all: {traversal: ppr, edges: [seq, sem, ent]}
+    hops1: {traversal: hops, hops: 1}
+    hops2: {traversal: hops, hops: 2}
+    ppr-ent-ner: {traversal: ppr, edges: [ent], extractor: spacy}
+    ppr-all-ner: {traversal: ppr, edges: [seq, sem, ent], extractor: spacy}
+    hops1-ner: {traversal: hops, hops: 1, extractor: spacy}
+    hops2-ner: {traversal: hops, hops: 2, extractor: spacy}
+  # Cells, in run order. The whole ablation where H2 is read (128K and 256K); the full variant of each traversal and
+  # the no-graph setting at every length and on BABILong-ext; the spaCy variants on BABILong qa1-qa5.
+  plan:
+    - {variants: [none, ppr-seq, ppr-sem, ppr-ent, ppr-all, hops1, hops2], tasks: [h1, infbench], lengths: [256k, 128k]}
+    - {variants: [ppr-ent-ner, ppr-all-ner, hops1-ner, hops2-ner], tasks: [babilong_h1], lengths: [256k, 128k]}
+    - {variants: [none, ppr-all, hops2], tasks: [ext], lengths: [256k, 128k]}
+    - {variants: [none, ppr-all, hops2], tasks: [h1, ext], lengths: [64k, 32k]}
+    - {variants: [none, ppr-all, hops2], tasks: [s3], lengths: [256k, 128k], selection_only: true}
+  answer_from: [E4_pages]    # answers already given to identical prompts in E4 are reused (exact by the prompt hash)
+
+families:
+  S1: [synth:S1]
+  S2: [synth:S2_multikey, synth:S2_multivalue]
+  BABILong: [babilong:qa1, babilong:qa2, babilong:qa3, babilong:qa4, babilong:qa5]
+  BABILong-ext: [babilong:qa6, babilong:qa7, babilong:qa8, babilong:qa9, babilong:qa10]
+h1_families: [S1, S2, BABILong]
+
+# H2 split, fixed before E5 (D-034, D-044): primary multi-fact tasks are BABILong qa2 and qa3; secondary multi-fact are S2
+# multi-value, qa7 and qa8; single-fact tasks need one fact or needle for the answer.
+h2:
+  multi_fact_primary: [babilong:qa2, babilong:qa3]
+  multi_fact_secondary: [synth:S2_multivalue, babilong:qa7, babilong:qa8]
+  single_fact: [synth:S1, synth:S2_multikey, babilong:qa1, babilong:qa4, babilong:qa5, babilong:qa6, babilong:qa9, babilong:qa10,
+                infbench:passkey, infbench:number_string, infbench:kv_retrieval]
+  lengths: [128k, 256k]
+  gain_points: 5        # H2 passes if multi-fact gains >= 5 points with the paired 95% CI excluding 0 ...
+  single_band: 2        # ... and single-fact tasks stay within +/- 2 points
+# Gate G1 (section 5.5): evidence recall at budget >= 0.9 on single-evidence tasks at 256K. BABILong evidence is every
+# fact of the story, not the one the answer needs (D-037), so qa1 is not a single-evidence task here. InfiniteBench's
+# single-evidence tasks (90K-170K tokens) are reported beside the gate.
+g1:
+  tasks: [synth:S1, synth:S2_multikey]
+  length: 256k
+  beside: [infbench:passkey, infbench:number_string, infbench:kv_retrieval]
+  threshold: 0.9
+
+summary:
+  native: {exp: E0_floor, method: native-1.7B, budget_rerun: {exp: E0_a4budget, method: native-1.7B-a4budget, tasks: [synth:S2_multivalue]}}
+  m2_hybrid: {exp: E3_retrieval, method: m2-hybrid-1.7B}
+  m3_oracle: {exp: E3o_oracle, method: m3-oracle-1.7B}
+  m3_tight: {exp: E3o_oracle, method: m3-oracle-tight-1.7B}

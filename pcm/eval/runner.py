@@ -421,8 +421,11 @@ class UnitMethod(Native):
         if len(ids) + max_new > self.window_size():
             raise DoesNotFit(f"prompt {len(ids)} + answer {max_new} tokens exceed the window {self.window_size()}")
         sha = self.prompt_sha(ex, ids)
-        hit = None if self.config.get("sampling") else self.answer_cache.get(sha)
-        if hit is not None:
+        selection_only = bool(self.config.get("selection_only"))
+        hit = None if (self.config.get("sampling") or selection_only) else self.answer_cache.get(sha)
+        if selection_only:  # the selection is what is measured: no answer is generated
+            pred = None
+        elif hit is not None:
             pred = hit["prediction"]
             timings.update({"reused": True, "new_tokens": hit.get("new_tokens")})
         else:
@@ -439,9 +442,12 @@ class UnitMethod(Native):
         if order is not None and items:
             selection["evidence_ranks"] = S.item_ranks(order, items)
         selection.update(extra or {})
-        return {"prediction": pred, "prompt_tokens": int(len(ids)), "selected_spans": spans, "store_spans": kept is None,
-                "selected_pages": None, "timings": timings, "selection": selection, "prompt_sha": sha,
-                "reused_from": hit["id"] if hit is not None else None}
+        out = {"prediction": pred, "prompt_tokens": int(len(ids)), "selected_spans": spans, "store_spans": kept is None,
+               "selected_pages": None, "timings": timings, "selection": selection, "prompt_sha": sha,
+               "reused_from": hit["id"] if hit is not None else None}
+        if selection_only:
+            out["selection_only"] = True
+        return out
 
 
 class Retrieve(UnitMethod):
@@ -564,6 +570,191 @@ class Retrieve(UnitMethod):
         return self._answer(prepared, spans, kept, order, timings, extra)
 
 
+class PCMText(Retrieve):
+    """PCM, text mode (specification, sections 4.3 to 4.5; D-041 to D-044): hybrid scores over index units,
+    optional graph expansion, units mapped to pages, the budget's nominal number of pages kept, document
+    order, text expansion with gap markers.
+
+    config as Retrieve (ranker must be "hybrid"), plus page (tokens, a multiple of unit), budget (tokens),
+    graph (absent or null: none; else {traversal: "ppr" with edges (any of seq, sem, ent), or "hops" with
+    hops (1 or 2); seeds (16), restart (0.5), iterations (10), sem_k (5), sem_min_cos (0.5), ent_cap (20),
+    hop_k (16), extractor ("default" or "spacy")}), selection_only (true: record the selection and its
+    evidence recall, generate nothing; no reader is loaded).
+    """
+
+    def setup(self):
+        self.check_config()
+        self.setup_ranker()
+        if self.config.get("selection_only"):
+            self._setup_tokenizer_only()
+        else:
+            Native.setup(self)
+        self.setup_units()
+        self.setup_index_models()
+        self.setup_pages()
+
+    def check_config(self) -> None:
+        if self.config.get("ranker", "hybrid") != "hybrid":
+            raise ValueError("PCM scores units by hybrid retrieval (section 4.3, query step 1)")
+        g = self.config.get("graph") or {}
+        self.graph_cfg = g
+        if g:
+            from pcm.index.graph import EDGE_TYPES, EXTRACTORS
+
+            if g.get("traversal") not in ("ppr", "hops"):
+                raise ValueError(f"graph traversal must be 'ppr' or 'hops', not {g.get('traversal')!r}")
+            if g["traversal"] == "ppr" and (not g.get("edges") or any(e not in EDGE_TYPES for e in g["edges"])):
+                raise ValueError(f"PPR needs edges from {EDGE_TYPES}")
+            if g["traversal"] == "hops" and int(g.get("hops", 0)) < 1:
+                raise ValueError("entity hops need hops >= 1")
+            if g.get("extractor", "default") not in EXTRACTORS:
+                raise ValueError(f"unknown entity extractor {g.get('extractor')!r}")
+
+    def setup_pages(self) -> None:
+        from pcm.chunking import units_per_page
+        from pcm.index.graph import GraphCache
+
+        self.page = int(self.config["page"])
+        self.per_page = units_per_page(self.page, self.unit)
+        if self.page > self.budget:
+            raise ValueError(f"a page of {self.page} tokens does not fit the budget of {self.budget}")
+        # Beside the document's embeddings: same tokenizer, embedder and unit cut.
+        self.graph_cache = GraphCache(self.cache.dir)
+
+    def reader_key(self) -> tuple:
+        if self.config.get("selection_only"):
+            return ("selection-only", self.config["reader"])
+        return super().reader_key()
+
+    def _setup_tokenizer_only(self) -> None:
+        from transformers import AutoTokenizer
+
+        from pcm.hub import model_path
+        from pcm.models import stop_ids
+
+        path = model_path(self.config["reader"])
+        self.model = None
+        self.tokenizer = AutoTokenizer.from_pretrained(path)
+        self.prep_tokenizer = AutoTokenizer.from_pretrained(path)
+        for t in (self.tokenizer, self.prep_tokenizer):
+            t.model_max_length = 10**12
+        self.stops = stop_ids(self.tokenizer)
+
+    def sync(self) -> None:
+        if self.model is not None:
+            return super().sync()
+        import torch
+
+        if torch.cuda.is_available():
+            torch.cuda.synchronize()
+
+    def _needs(self) -> tuple[bool, bool]:
+        """(entities, SEM edges) needed by the graph configuration."""
+        g = self.graph_cfg
+        if not g:
+            return False, False
+        if g["traversal"] == "hops":
+            return True, False
+        return "ent" in g["edges"], "sem" in g["edges"]
+
+    def prepare_more(self, example, units):
+        out = super().prepare_more(example, units)
+        need_ent, _ = self._needs()
+        if need_ent:
+            from pcm.index import graph as G
+
+            g = self.graph_cfg
+            extractor, cap = g.get("extractor", "default"), int(g.get("ent_cap", 20))
+            name = G.ent_name(extractor, cap)
+            z = self.graph_cache.load(name, out["doc"])
+            if z is None:
+                t = time.perf_counter()
+                ents = G.extract(out["texts"], extractor)
+                edges = G.ent_edges(ents, cap)
+                size = self.graph_cache.save(name, out["doc"], G.pack_entities(ents, edges))
+                out["ent_build_s"] = time.perf_counter() - t
+                out["ent_bytes"] = size
+            else:
+                ents, edges = G.unpack_entities(z)
+            out["ents"], out["ent_edges"] = ents, edges
+            t = time.perf_counter()
+            out["q_ents"] = G.question_entities(out["query"], ents, extractor)
+            out["q_ent_s"] = time.perf_counter() - t
+        return out
+
+    def execute(self, prepared):
+        import numpy as np
+
+        from pcm.index import graph as G
+        from pcm.index import select as S
+        from pcm.index.ingest import ingest_document
+
+        ex, units = prepared["example"], prepared["units"]
+        timings: dict = {}
+        extra: dict = {"ranker": "hybrid", "page": self.page, "budget": self.budget}
+        emb = prepared["emb"]
+        if emb is None:
+            t = time.perf_counter()
+            emb, _ = ingest_document(units, ex["context"], self.embedder, self.cache, {"example": ex["id"]})
+            timings["ingest_s"] = time.perf_counter() - t
+        for k in ("ent_build_s",):
+            if k in prepared:
+                timings[k] = prepared[k]
+        g = self.graph_cfg
+        need_ent, need_sem = self._needs()
+        sem = None
+        if need_sem:
+            name = G.sem_name(int(g.get("sem_k", 5)), float(g.get("sem_min_cos", 0.5)))
+            z = self.graph_cache.load(name, prepared["doc"])
+            if z is None:
+                t = time.perf_counter()
+                sem = G.sem_edges(emb, int(g.get("sem_k", 5)), float(g.get("sem_min_cos", 0.5)))
+                self.sync()
+                self.graph_cache.save(name, prepared["doc"], {"rows": sem[0], "cols": sem[1], "weights": sem[2]})
+                timings["sem_build_s"] = time.perf_counter() - t
+            else:
+                sem = (z["rows"], z["cols"], z["weights"])
+
+        t0 = time.perf_counter()
+        k_rrf = float(self.config.get("rrf_k", 60))
+        cos = emb @ self.embedder.encode_query(prepared["query"])
+        fused = S.rrf([cos, prepared["bm25"]], k_rrf)
+        base = S.order_by_score(fused)
+        order = base
+        if g:
+            seeds = int(g.get("seeds", 16))
+            t = time.perf_counter()
+            if g["traversal"] == "ppr":
+                edges = {}
+                if need_sem:
+                    edges["sem"] = sem
+                if need_ent:
+                    edges["ent"] = prepared["ent_edges"]
+                trans = G.Graph(units.n_units, edges).transition(g["edges"])
+                scores = G.ppr(trans, base[:seeds], float(g.get("restart", 0.5)), int(g.get("iterations", 10)))
+                order = S.order_by_score(S.rrf([fused, scores], k_rrf))
+                extra["graph"] = {"traversal": "ppr", "edges": list(g["edges"]), "edges_out": int(trans.nnz),
+                                  "reached": int(np.sum(scores > 0))}
+            else:
+                order, added = G.entity_hops(base, prepared["ents"], prepared["q_ents"], int(g["hops"]), seeds, int(g.get("hop_k", 16)))
+                extra["graph"] = {"traversal": "hops", "hops": int(g["hops"]), "added": added, "question_entities": len(prepared["q_ents"])}
+            self.sync()
+            timings["graph_s"] = time.perf_counter() - t
+            extra["graph"]["extractor"] = g.get("extractor", "default") if need_ent else None
+            extra["graph"]["moved_in_top_seeds"] = int(np.sum(order[:seeds] != base[:seeds]))
+        pages = S.page_order(order, self.per_page)
+        kept_pages = S.fill_pages(pages, self.page, self.budget)
+        kept = S.units_of_pages(kept_pages, self.per_page, units.n_units)
+        spans = S.spans_of(kept, units.bounds)
+        self.sync()
+        timings["select_s"] = time.perf_counter() - t0 + prepared.get("bm25_s", 0.0) + prepared.get("q_ent_s", 0.0)
+        items = S.evidence_units(ex.get("evidence") or [], units.bounds)
+        extra.update({"n_pages": int(-(-units.n_units // self.per_page)), "kept_pages": int(len(kept_pages))})
+        if items:
+            extra["evidence_page_ranks"] = S.item_page_ranks(pages, items, self.per_page)
+        return self._answer(prepared, spans, kept, order, timings, extra)
+
+
 class Oracle(UnitMethod):
     """M3: oracle pages (specification, section 5.3): the index units that hold gold evidence, padded with
     their neighbours, nearest first, while they fit the budget.
@@ -600,7 +791,7 @@ class Oracle(UnitMethod):
 
 
 METHODS = {"native": Native, "truncate": Truncate, "dense_yarn": DenseYarn, "retrieve": Retrieve, "oracle": Oracle,
-           "echo_answer": EchoAnswer}
+           "pcm": PCMText, "echo_answer": EchoAnswer}
 
 
 def make_method(config: dict) -> Method:
@@ -646,12 +837,15 @@ def run(
     method: Method | None = None,
     cfg: dict | None = None,
     log=print,
+    answer_from: list[str] | None = None,
 ) -> dict:
     """Run one method on one cell. Returns a summary (with the pilot projection in pilot mode).
 
     indices: keep only the examples with these index values (a fixed subset of the cell).
     method: an instance of the method already set up (shared across cells, so a reader
     is loaded once); otherwise one is built from method_config and set up here.
+    answer_from: other experiments whose stored answers may be reused for identical prompts
+    (the prompt hash covers reader, block size, answer budget, stop ids and every prompt token).
     """
     from concurrent.futures import ThreadPoolExecutor
 
@@ -693,11 +887,14 @@ def run(
             method.setup()
     answers: dict = {}
     if method.reuses_answers and todo:
-        # Answers already stored in this experiment, by prompt hash: an identical prompt is not answered twice.
-        for r in runs.rows():
-            if r.get("status") == "ok" and r.get("prompt_sha") and not r.get("reused_from"):
-                answers.setdefault(r["prompt_sha"], {"id": r["id"], "prediction": r["prediction"],
-                                                      "new_tokens": (r.get("timings") or {}).get("new_tokens")})
+        # Answers already stored in this experiment (and in `answer_from`), by prompt hash: an identical prompt is
+        # not answered twice. Rows that only recorded a selection hold no answer.
+        sources = [runs] + [JsonlLog(Path(results_root or REPO_ROOT / "results") / e / "runs.jsonl") for e in (answer_from or [])]
+        for src in sources:
+            for r in src.rows():
+                if r.get("status") == "ok" and r.get("prompt_sha") and not r.get("reused_from") and not r.get("selection_only")                         and r.get("prediction") is not None:
+                    answers.setdefault(r["prompt_sha"], {"id": r["id"], "prediction": r["prediction"],
+                                                          "new_tokens": (r.get("timings") or {}).get("new_tokens")})
     method.answer_cache = answers
     gpu = method.needs_gpu
     if gpu:
@@ -739,18 +936,19 @@ def run(
                     raise prep_error
                 out = method.execute(prepared)
                 total = time.perf_counter() - t0
-                sc = metrics.score(out["prediction"], ex)
+                selection_only = bool(out.get("selection_only"))
+                sc = None if selection_only else metrics.score(out["prediction"], ex)
                 row.update({
-                    "status": "ok", "prediction": out["prediction"], "score": sc, "correct": sc == 1.0,
+                    "status": "ok", "prediction": out["prediction"], "score": sc, "correct": None if sc is None else sc == 1.0,
                     "prompt_tokens": out.get("prompt_tokens"), "selected_pages": out.get("selected_pages"),
                     "selected_spans": out.get("selected_spans") if out.get("store_spans", True) else None,
                     "evidence_recall": metrics.evidence_item_recall(ex.get("evidence") or [], out.get("selected_spans") or []),
                     "timings": {**out.get("timings", {}), "total_s": total, "prepare_s": prep_s},
                 })
-                for key in ("selection", "prompt_sha", "reused_from"):
+                for key in ("selection", "prompt_sha", "reused_from", "selection_only"):
                     if key in out:
                         row[key] = out[key]
-                if out.get("prompt_sha") and not out.get("reused_from"):
+                if out.get("prompt_sha") and not out.get("reused_from") and not selection_only:
                     answers.setdefault(out["prompt_sha"], {"id": row["id"], "prediction": out["prediction"],
                                                             "new_tokens": out.get("timings", {}).get("new_tokens")})
             except Skip as e:

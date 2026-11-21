@@ -42,7 +42,7 @@ class Embedder:
     @property
     def tag(self) -> str:
         """Identifies the vectors this embedder writes: model revision and number format."""
-        return f"emb-{self.revision[:12]}-{self.dtype_name}"
+        return embedder_tag(self.revision, self.dtype_name)
 
     @torch.no_grad()
     def encode(self, texts: Sequence[str]) -> np.ndarray:
@@ -73,3 +73,8 @@ class Embedder:
     def encode_query(self, query: str) -> np.ndarray:
         """One query behind the model's query instruction: float32 [dim]."""
         return self.encode([self.query_prompt + query])[0]
+
+
+def embedder_tag(revision: str, dtype_name: str = "bfloat16") -> str:
+    """The cache tag of an embedder (Embedder.tag) without loading it: model revision and number format."""
+    return f"emb-{revision[:12]}-{dtype_name}"

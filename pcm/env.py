@@ -22,6 +22,8 @@ PACKAGES = (
     "scipy",
     "pandas",
     "pyarrow",
+    "spacy",
+    "en-core-web-sm",
 )
 
 
