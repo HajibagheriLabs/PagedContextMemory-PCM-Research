@@ -1,0 +1,17 @@
+{
+  "reader": "reader",
+  "dtype": "bfloat16",
+  "block": 2048,
+  "min_free_ram_gib": 2.0,
+  "max_new_tokens": {
+    "infbench:passkey": 64,
+    "infbench:number_string": 64,
+    "infbench:kv_retrieval": 128,
+    "synth:S1": 64,
+    "synth:S2_multikey": 64,
+    "synth:S2_multivalue": 128
+  },
+  "method": "dense_yarn",
+  "name": "m1-yarn-1.7B",
+  "yarn_factor": 2
+}

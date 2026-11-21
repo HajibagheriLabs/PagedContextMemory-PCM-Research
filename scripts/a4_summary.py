@@ -120,6 +120,11 @@ def main() -> int:
     def ci(scores):
         return M.bootstrap_ci(scores, mcfg["bootstrap_resamples"], mcfg["bootstrap_seed"], mcfg["ci"])
 
+    def device_gib(exp: str) -> float:
+        """Memory of the GPU the experiment ran on, from its env.json."""
+        env = json.loads((REPO_ROOT / "results" / exp / "env.json").read_text(encoding="utf-8"))
+        return float(env["gpus"][0]["vram_total_gib"])
+
     # ---- every cell of the A4 experiments
     def cell_record(exp, method, task, length) -> dict:
         rs = cells[(exp, method, task, length)]
@@ -143,6 +148,8 @@ def main() -> int:
             "rerank_ms": rnd(mean([1000 * r["timings"]["rerank_s"] for r in ok if (r.get("timings") or {}).get("rerank_s") is not None]), 2),
             "prepare_s": rnd(mean([x.get("prepare_s") for x in t]), 3),
             "peak_vram_gib": rnd(max([r.get("peak_vram_gib") or 0 for r in rs], default=None), 3),
+            "peak_reserved_gib": rnd(max([r.get("peak_reserved_gib") or 0 for r in rs], default=None), 3),
+            "reserved_above_device": sum(1 for r in rs if (r.get("peak_reserved_gib") or 0) > device_gib(exp)),
             "ingest": {"documents": len(ingest), "tokens_per_s": rnd(sum(a for a, _ in ingest) / sum(b for _, b in ingest), 1),
                        "seconds_per_document": rnd(mean([b for _, b in ingest]), 3)} if ingest else None,
         }
@@ -304,6 +311,19 @@ def main() -> int:
     e2 = {"gpu_hours": rnd(sum(r["timings"]["total_s"] for r in e2_rows) / 3600, 3), "rows_ok": len(e2_rows),
           "plan": json.loads(plan_path.read_text(encoding="utf-8")) if plan_path.is_file() else None,
           "n_per_cell": {f"{t}|{L}": c["status"].get("ok", 0) for k, c in table.items() for t, L in [(c["task"], c["length"])] if c["exp"] == "E2_dense"}}
+    # Rows whose allocator held more than the card has: blocks cached from shorter examples plus a new, larger one
+    # (Windows lets the driver back the excess with system memory). Their extra time, against the cell's other rows.
+    if e2_rows:
+        dev = device_gib("E2_dense")
+        over, rest = defaultdict(list), defaultdict(list)
+        for r in e2_rows:
+            (over if (r.get("peak_reserved_gib") or 0) > dev else rest)[(r["task"], r["length"])].append(r["timings"]["total_s"])
+        e2["reserved_above_device"] = {
+            "device_gib": dev, "rows": sum(len(v) for v in over.values()), "rows_ok": len(e2_rows),
+            "max_allocated_gib": rnd(max(r.get("peak_vram_gib") or 0 for r in e2_rows), 3),
+            "max_reserved_gib": rnd(max(r.get("peak_reserved_gib") or 0 for r in e2_rows), 3),
+            "by_cell": {f"{t}|{L}": {"rows": len(v), "of": len(v) + len(rest[(t, L)]), "s_mean": rnd(mean(v), 1), "s_mean_others": rnd(mean(rest[(t, L)]), 1)}
+                        for (t, L), v in sorted(over.items())}}
 
     # ---- checks: results that would be bugs until explained
     checks = {"oracle_rows_missing_evidence": sum(1 for r in rows.get("E3o_oracle", []) if r["status"] == "ok" and r.get("evidence_recall") != 1.0),
@@ -318,13 +338,19 @@ def main() -> int:
         for L, c in curve.items():
             if c["source"] == "method" and ref["mean"] is not None and c["lo"] > ref["hi"]:
                 checks["above_native_reference"].append({"series": skey, "family": fam, "length": L, "accuracy": c["mean"], "reference": ref["mean"]})
-    e3 = {r["id"]: r for r in rows.get("E3_retrieval", [])}
-    for r in e3.values():
+    # A reused answer may come from a pilot row whose method hash was since replaced (D-040) but whose prompt hash
+    # (which covers the answer budget) is the same: look the source up among all rows of the experiment.
+    e3_all = {r["id"]: r for r in rows_of("E3_retrieval")} if "E3_retrieval" in rows else {}
+    kept_ids = {r["id"] for r in rows.get("E3_retrieval", [])}
+    checks["reuse_from_superseded_rows"] = 0
+    for r in rows.get("E3_retrieval", []):
         if r.get("reused_from"):
-            src = e3.get(r["reused_from"])
+            src = e3_all.get(r["reused_from"])
             checks["reuse_sources_checked"] += 1
             if src is None or src.get("prompt_sha") != r.get("prompt_sha") or src.get("prediction") != r.get("prediction") or src.get("example_id") != r.get("example_id"):
                 checks["reuse_mismatch"] += 1
+            elif r["reused_from"] not in kept_ids:
+                checks["reuse_from_superseded_rows"] += 1
     hy = {(r["task"], r["length"], r["example_id"]): r for r in rows.get("E3_retrieval", []) if r["method"] == series["m2-hybrid"]["method"] and r["status"] == "ok"}
     rr = [r for r in rows.get("E3_retrieval", []) if r["method"] == series["m2-hybrid-rerank"]["method"] and r["status"] == "ok"]
     both = [(r, hy[(r["task"], r["length"], r["example_id"])]) for r in rr if (r["task"], r["length"], r["example_id"]) in hy]
@@ -332,6 +358,20 @@ def main() -> int:
         checks["rerank_same_units_as_hybrid"] = {"pairs": len(both), "same_units": sum(1 for a, b in both if a["selection"]["units_b64"] == b["selection"]["units_b64"]),
                                                  "same_prompt": sum(1 for a, b in both if a["prompt_sha"] == b["prompt_sha"]),
                                                  "same_score": sum(1 for a, b in both if a["score"] == b["score"])}
+
+    # The native rerun at the A4 answer budgets against A3's native rows, example by example (D-040).
+    if rerun:
+        rc = {}
+        for t in rerun["tasks"]:
+            for L in grid:
+                new = {r["example_id"]: r for r in ok_rows(rerun["exp"], rerun["method"], t, L)}
+                old = {r["example_id"]: r for r in ok_rows(native["exp"], native["method"], t, L)}
+                ids = sorted(set(new) & set(old))
+                if ids:
+                    rc[f"{t}|{L}"] = {"pairs": len(ids), "score_changed": sum(1 for i in ids if new[i]["score"] != old[i]["score"]),
+                                      "same_text": sum(1 for i in ids if new[i]["prediction"] == old[i]["prediction"]),
+                                      "new_extends_old": sum(1 for i in ids if new[i]["prediction"] != old[i]["prediction"] and new[i]["prediction"].startswith(old[i]["prediction"].rstrip()))}
+        checks["budget_rerun_vs_a3"] = rc
 
     # ---- depth deciles of the synthetic tasks at the longest length each series has
     deciles = {}

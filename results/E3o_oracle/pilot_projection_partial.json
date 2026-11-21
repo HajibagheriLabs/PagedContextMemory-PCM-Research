@@ -1,0 +1,86 @@
+{
+  "remaining_s": 2090.95450110001,
+  "remaining_h": 0.5808206947500028,
+  "cells": [
+    {
+      "method": "m3-oracle-tight-1.7B",
+      "task": "synth:S1",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.062,
+      "remaining_s": 100.9
+    },
+    {
+      "method": "m3-oracle-tight-1.7B",
+      "task": "babilong:qa1",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.024,
+      "remaining_s": 97.3
+    },
+    {
+      "method": "m3-oracle-tight-1.7B",
+      "task": "synth:S1",
+      "length": "8k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.539,
+      "remaining_s": 51.2
+    },
+    {
+      "method": "m3-oracle-tight-1.7B",
+      "task": "babilong:qa1",
+      "length": "8k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.735,
+      "remaining_s": 69.8
+    },
+    {
+      "method": "m3-oracle-1.7B",
+      "task": "synth:S1",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.711,
+      "remaining_s": 542.5
+    },
+    {
+      "method": "m3-oracle-1.7B",
+      "task": "babilong:qa1",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.952,
+      "remaining_s": 565.4
+    },
+    {
+      "method": "m3-oracle-tight-1.7B",
+      "task": "infbench:passkey",
+      "length": "full",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.935,
+      "remaining_s": 88.8
+    },
+    {
+      "method": "m3-oracle-1.7B",
+      "task": "infbench:passkey",
+      "length": "full",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 6.052,
+      "remaining_s": 574.9
+    }
+  ],
+  "unmeasured": [],
+  "exp": "E3o_oracle",
+  "filtered": true,
+  "pilot_elapsed_s": 140.6,
+  "by_method_h": {
+    "m3-oracle-tight-1.7B": 0.11,
+    "m3-oracle-1.7B": 0.47
+  }
+}

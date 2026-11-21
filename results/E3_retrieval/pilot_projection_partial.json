@@ -1,0 +1,1022 @@
+{
+  "remaining_s": 60256.42726340015,
+  "remaining_h": 16.7378964620556,
+  "cells": [
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "synth:S1",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 6.127,
+      "remaining_s": 582.1
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 6.099,
+      "remaining_s": 579.4
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "synth:S2_multivalue",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 9.873,
+      "remaining_s": 937.9
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa1",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.041,
+      "remaining_s": 98.9
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 6.084,
+      "remaining_s": 578.0
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 6.234,
+      "remaining_s": 592.2
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa4",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.724,
+      "remaining_s": 543.8
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa5",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.709,
+      "remaining_s": 542.4
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "synth:S1",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.844,
+      "remaining_s": 555.2
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.869,
+      "remaining_s": 557.5
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "synth:S2_multivalue",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 9.609,
+      "remaining_s": 912.8
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa1",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 6.15,
+      "remaining_s": 584.3
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.933,
+      "remaining_s": 563.6
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 6.073,
+      "remaining_s": 576.9
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa4",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.554,
+      "remaining_s": 527.7
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa5",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.566,
+      "remaining_s": 528.7
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "synth:S1",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.761,
+      "remaining_s": 547.3
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "synth:S2_multikey",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.751,
+      "remaining_s": 546.3
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "synth:S2_multivalue",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 7.096,
+      "remaining_s": 674.2
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa1",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.922,
+      "remaining_s": 562.6
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa2",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.8,
+      "remaining_s": 551.0
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa3",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.985,
+      "remaining_s": 568.6
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa4",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.452,
+      "remaining_s": 518.0
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa5",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.596,
+      "remaining_s": 531.6
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "synth:S1",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.672,
+      "remaining_s": 538.8
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "synth:S2_multikey",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.674,
+      "remaining_s": 539.0
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "synth:S2_multivalue",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 9.571,
+      "remaining_s": 909.2
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa1",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.131,
+      "remaining_s": 12.4
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa2",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.725,
+      "remaining_s": 543.8
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa3",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.92,
+      "remaining_s": 562.4
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa4",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.376,
+      "remaining_s": 510.7
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa5",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.326,
+      "remaining_s": 506.0
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "synth:S1",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.967,
+      "remaining_s": 566.9
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.923,
+      "remaining_s": 562.7
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "synth:S2_multivalue",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 9.683,
+      "remaining_s": 919.9
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa1",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.922,
+      "remaining_s": 87.6
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.977,
+      "remaining_s": 567.8
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 6.156,
+      "remaining_s": 584.8
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa4",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.643,
+      "remaining_s": 536.1
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa5",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.595,
+      "remaining_s": 531.6
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "synth:S1",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.853,
+      "remaining_s": 556.0
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.856,
+      "remaining_s": 556.4
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "synth:S2_multivalue",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 8.542,
+      "remaining_s": 811.4
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa1",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 6.069,
+      "remaining_s": 576.6
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.942,
+      "remaining_s": 564.5
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 6.103,
+      "remaining_s": 579.8
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa4",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.575,
+      "remaining_s": 529.6
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa5",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.568,
+      "remaining_s": 528.9
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "synth:S1",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.83,
+      "remaining_s": 553.9
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "synth:S2_multikey",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.818,
+      "remaining_s": 552.7
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "synth:S2_multivalue",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 8.277,
+      "remaining_s": 786.3
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa1",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 6.01,
+      "remaining_s": 570.9
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa2",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.89,
+      "remaining_s": 559.5
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa3",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 6.073,
+      "remaining_s": 576.9
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa4",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.531,
+      "remaining_s": 525.5
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa5",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.544,
+      "remaining_s": 526.7
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "synth:S1",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.749,
+      "remaining_s": 546.2
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "synth:S2_multikey",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.739,
+      "remaining_s": 545.2
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "synth:S2_multivalue",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 9.534,
+      "remaining_s": 905.8
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa1",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.129,
+      "remaining_s": 12.3
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa2",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.769,
+      "remaining_s": 548.1
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa3",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.961,
+      "remaining_s": 566.3
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa4",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.427,
+      "remaining_s": 515.5
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa5",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.471,
+      "remaining_s": 519.8
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "infbench:passkey",
+      "length": "full",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.453,
+      "remaining_s": 43.0
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "infbench:number_string",
+      "length": "full",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 6.639,
+      "remaining_s": 630.7
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "infbench:kv_retrieval",
+      "length": "full",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 10.202,
+      "remaining_s": 969.2
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "infbench:longbook_choice_eng",
+      "length": "full",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 6.452,
+      "remaining_s": 612.9
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "infbench:passkey",
+      "length": "full",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.433,
+      "remaining_s": 41.1
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "infbench:number_string",
+      "length": "full",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 4.193,
+      "remaining_s": 398.3
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "infbench:kv_retrieval",
+      "length": "full",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.459,
+      "remaining_s": 233.6
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "infbench:longbook_choice_eng",
+      "length": "full",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.969,
+      "remaining_s": 567.0
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa6",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.654,
+      "remaining_s": 537.1
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa7",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.686,
+      "remaining_s": 540.1
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa8",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.838,
+      "remaining_s": 554.6
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa9",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.664,
+      "remaining_s": 538.0
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa10",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.686,
+      "remaining_s": 540.1
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa6",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.537,
+      "remaining_s": 526.0
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa7",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.595,
+      "remaining_s": 531.5
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa8",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.694,
+      "remaining_s": 540.9
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa9",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.494,
+      "remaining_s": 521.9
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa10",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.516,
+      "remaining_s": 524.0
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa6",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.422,
+      "remaining_s": 515.1
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa7",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.466,
+      "remaining_s": 519.3
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa8",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.563,
+      "remaining_s": 528.5
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa9",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.399,
+      "remaining_s": 512.9
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa10",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.444,
+      "remaining_s": 517.2
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa6",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.315,
+      "remaining_s": 504.9
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa7",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.427,
+      "remaining_s": 515.5
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa8",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.566,
+      "remaining_s": 528.7
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa9",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.309,
+      "remaining_s": 504.3
+    },
+    {
+      "method": "m2-bm25-1.7B",
+      "task": "babilong:qa10",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.312,
+      "remaining_s": 504.7
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa6",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.568,
+      "remaining_s": 529.0
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa7",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.626,
+      "remaining_s": 534.5
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa8",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.752,
+      "remaining_s": 546.5
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa9",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.576,
+      "remaining_s": 529.7
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa10",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.577,
+      "remaining_s": 529.8
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa6",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.508,
+      "remaining_s": 523.3
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa7",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.556,
+      "remaining_s": 527.8
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa8",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.634,
+      "remaining_s": 535.2
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa9",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.489,
+      "remaining_s": 521.4
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa10",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.512,
+      "remaining_s": 523.7
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa6",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.455,
+      "remaining_s": 518.2
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa7",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.48,
+      "remaining_s": 520.6
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa8",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.623,
+      "remaining_s": 534.2
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa9",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.456,
+      "remaining_s": 518.3
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa10",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.462,
+      "remaining_s": 518.9
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa6",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.371,
+      "remaining_s": 510.3
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa7",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.481,
+      "remaining_s": 520.7
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa8",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.626,
+      "remaining_s": 534.5
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa9",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.392,
+      "remaining_s": 512.2
+    },
+    {
+      "method": "m2-embed-1.7B",
+      "task": "babilong:qa10",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.376,
+      "remaining_s": 510.8
+    }
+  ],
+  "unmeasured": [],
+  "exp": "E3_retrieval",
+  "filtered": true,
+  "pilot_elapsed_s": 3385.5,
+  "by_method_h": {
+    "m2-bm25-1.7B": 8.51,
+    "m2-embed-1.7B": 8.23
+  }
+}

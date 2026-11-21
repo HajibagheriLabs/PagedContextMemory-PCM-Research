@@ -1,0 +1,265 @@
+{
+  "remaining_s": 43184.633900999994,
+  "remaining_h": 11.995731639166666,
+  "cells": [
+    {
+      "method": "m1-yarn-1.7B",
+      "task": "synth:S1",
+      "length": "64k",
+      "n": 40,
+      "done": 5,
+      "seconds_per_example": 22.406,
+      "remaining_s": 784.2
+    },
+    {
+      "method": "m1-yarn-1.7B",
+      "task": "synth:S2_multikey",
+      "length": "64k",
+      "n": 40,
+      "done": 5,
+      "seconds_per_example": 22.605,
+      "remaining_s": 791.2
+    },
+    {
+      "method": "m1-yarn-1.7B",
+      "task": "synth:S2_multivalue",
+      "length": "64k",
+      "n": 40,
+      "done": 5,
+      "seconds_per_example": 27.856,
+      "remaining_s": 974.9
+    },
+    {
+      "method": "m1-yarn-1.7B",
+      "task": "babilong:qa1",
+      "length": "64k",
+      "n": 40,
+      "done": 5,
+      "seconds_per_example": 21.019,
+      "remaining_s": 735.7
+    },
+    {
+      "method": "m1-yarn-1.7B",
+      "task": "babilong:qa2",
+      "length": "64k",
+      "n": 40,
+      "done": 5,
+      "seconds_per_example": 20.916,
+      "remaining_s": 732.1
+    },
+    {
+      "method": "m1-yarn-1.7B",
+      "task": "babilong:qa3",
+      "length": "64k",
+      "n": 40,
+      "done": 5,
+      "seconds_per_example": 21.183,
+      "remaining_s": 741.4
+    },
+    {
+      "method": "m1-yarn-1.7B",
+      "task": "babilong:qa4",
+      "length": "64k",
+      "n": 40,
+      "done": 5,
+      "seconds_per_example": 19.716,
+      "remaining_s": 690.1
+    },
+    {
+      "method": "m1-yarn-1.7B",
+      "task": "babilong:qa5",
+      "length": "64k",
+      "n": 40,
+      "done": 5,
+      "seconds_per_example": 19.774,
+      "remaining_s": 692.1
+    },
+    {
+      "method": "m1-yarn-1.7B",
+      "task": "synth:S1",
+      "length": "128k",
+      "n": 40,
+      "done": 5,
+      "seconds_per_example": 81.561,
+      "remaining_s": 2854.6
+    },
+    {
+      "method": "m1-yarn-1.7B",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 40,
+      "done": 5,
+      "seconds_per_example": 81.115,
+      "remaining_s": 2839.0
+    },
+    {
+      "method": "m1-yarn-1.7B",
+      "task": "synth:S2_multivalue",
+      "length": "128k",
+      "n": 40,
+      "done": 5,
+      "seconds_per_example": 96.356,
+      "remaining_s": 3372.5
+    },
+    {
+      "method": "m1-yarn-1.7B",
+      "task": "babilong:qa1",
+      "length": "128k",
+      "n": 40,
+      "done": 5,
+      "seconds_per_example": 71.171,
+      "remaining_s": 2491.0
+    },
+    {
+      "method": "m1-yarn-1.7B",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 40,
+      "done": 5,
+      "seconds_per_example": 74.236,
+      "remaining_s": 2598.2
+    },
+    {
+      "method": "m1-yarn-1.7B",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 40,
+      "done": 5,
+      "seconds_per_example": 72.608,
+      "remaining_s": 2541.3
+    },
+    {
+      "method": "m1-yarn-1.7B",
+      "task": "babilong:qa4",
+      "length": "128k",
+      "n": 40,
+      "done": 5,
+      "seconds_per_example": 71.481,
+      "remaining_s": 2501.8
+    },
+    {
+      "method": "m1-yarn-1.7B",
+      "task": "babilong:qa5",
+      "length": "128k",
+      "n": 40,
+      "done": 5,
+      "seconds_per_example": 72.255,
+      "remaining_s": 2528.9
+    },
+    {
+      "method": "m1-yarn-1.7B",
+      "task": "infbench:passkey",
+      "length": "full",
+      "n": 30,
+      "done": 5,
+      "seconds_per_example": 76.145,
+      "remaining_s": 1903.6
+    },
+    {
+      "method": "m1-yarn-1.7B",
+      "task": "infbench:number_string",
+      "length": "full",
+      "n": 30,
+      "done": 5,
+      "seconds_per_example": 78.624,
+      "remaining_s": 1965.6
+    },
+    {
+      "method": "m1-yarn-1.7B",
+      "task": "babilong:qa6",
+      "length": "64k",
+      "n": 30,
+      "done": 5,
+      "seconds_per_example": 19.817,
+      "remaining_s": 495.4
+    },
+    {
+      "method": "m1-yarn-1.7B",
+      "task": "babilong:qa7",
+      "length": "64k",
+      "n": 30,
+      "done": 5,
+      "seconds_per_example": 19.069,
+      "remaining_s": 476.7
+    },
+    {
+      "method": "m1-yarn-1.7B",
+      "task": "babilong:qa8",
+      "length": "64k",
+      "n": 30,
+      "done": 5,
+      "seconds_per_example": 19.308,
+      "remaining_s": 482.7
+    },
+    {
+      "method": "m1-yarn-1.7B",
+      "task": "babilong:qa9",
+      "length": "64k",
+      "n": 30,
+      "done": 5,
+      "seconds_per_example": 19.614,
+      "remaining_s": 490.4
+    },
+    {
+      "method": "m1-yarn-1.7B",
+      "task": "babilong:qa10",
+      "length": "64k",
+      "n": 30,
+      "done": 5,
+      "seconds_per_example": 19.663,
+      "remaining_s": 491.6
+    },
+    {
+      "method": "m1-yarn-1.7B",
+      "task": "babilong:qa6",
+      "length": "128k",
+      "n": 30,
+      "done": 5,
+      "seconds_per_example": 71.696,
+      "remaining_s": 1792.4
+    },
+    {
+      "method": "m1-yarn-1.7B",
+      "task": "babilong:qa7",
+      "length": "128k",
+      "n": 30,
+      "done": 5,
+      "seconds_per_example": 72.549,
+      "remaining_s": 1813.7
+    },
+    {
+      "method": "m1-yarn-1.7B",
+      "task": "babilong:qa8",
+      "length": "128k",
+      "n": 30,
+      "done": 5,
+      "seconds_per_example": 74.239,
+      "remaining_s": 1856.0
+    },
+    {
+      "method": "m1-yarn-1.7B",
+      "task": "babilong:qa9",
+      "length": "128k",
+      "n": 30,
+      "done": 5,
+      "seconds_per_example": 71.642,
+      "remaining_s": 1791.0
+    },
+    {
+      "method": "m1-yarn-1.7B",
+      "task": "babilong:qa10",
+      "length": "128k",
+      "n": 30,
+      "done": 5,
+      "seconds_per_example": 70.262,
+      "remaining_s": 1756.6
+    }
+  ],
+  "unmeasured": [],
+  "exp": "E2_dense",
+  "filtered": false,
+  "pilot_elapsed_s": 7106.1,
+  "by_method_h": {
+    "m1-yarn-1.7B": 12.0
+  }
+}
