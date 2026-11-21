@@ -78,6 +78,7 @@ def main() -> int:
     ap.add_argument("--workers", type=int, default=2)
     ap.add_argument("--tasks", nargs="*", default=None)
     ap.add_argument("--lengths", nargs="*", default=None)
+    ap.add_argument("--limit", type=int, default=None, help="documents per cell (a quick check)")
     args = ap.parse_args()
     cfg = yaml.safe_load((REPO_ROOT / "configs" / "a5_pillars.yaml").read_text(encoding="utf-8"))
     tcfg = load_task_config()
@@ -109,7 +110,7 @@ def main() -> int:
     t0, done, built = time.perf_counter(), 0, 0
     with ProcessPoolExecutor(max_workers=args.workers, initializer=_init, initargs=(args.extractor, cap, unit, snap, cache_root)) as pool:
         for t, L in cells:
-            examples = cell_examples({"task": t, "length": L}, cfg["n"], cfg, tcfg)
+            examples = cell_examples({"task": t, "length": L}, cfg["n"], cfg, tcfg)[: args.limit]
             futs = [pool.submit(_one, ex) for ex in examples]
             for f in as_completed(futs):
                 r = f.result()
