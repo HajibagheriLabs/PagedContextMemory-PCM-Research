@@ -1,0 +1,87 @@
+{
+  "remaining_s": 541.1735949999274,
+  "remaining_h": 0.15032599861109094,
+  "cells": [
+    {
+      "method": "pcm-p512-b8192",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 30,
+      "done": 5,
+      "seconds_per_example": 1.697,
+      "remaining_s": 42.4
+    },
+    {
+      "method": "pcm-p512-b8192",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 30,
+      "done": 5,
+      "seconds_per_example": 1.642,
+      "remaining_s": 41.1
+    },
+    {
+      "method": "pcm-p512-b8192",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 30,
+      "done": 5,
+      "seconds_per_example": 1.819,
+      "remaining_s": 45.5
+    },
+    {
+      "method": "pcm-p512-b8192",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 30,
+      "done": 5,
+      "seconds_per_example": 1.416,
+      "remaining_s": 35.4
+    },
+    {
+      "method": "pcm-p512-b8192",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 30,
+      "done": 5,
+      "seconds_per_example": 1.481,
+      "remaining_s": 37.0
+    },
+    {
+      "method": "pcm-p512-b8192",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 30,
+      "done": 5,
+      "seconds_per_example": 1.673,
+      "remaining_s": 41.8
+    },
+    {
+      "method": "pcm-p512-b8192-sel",
+      "task": "synth:S3_h3",
+      "length": "256k",
+      "n": 30,
+      "done": 5,
+      "seconds_per_example": 7.838,
+      "remaining_s": 195.9
+    },
+    {
+      "method": "pcm-p512-b8192-sel",
+      "task": "synth:S3_h3",
+      "length": "128k",
+      "n": 30,
+      "done": 5,
+      "seconds_per_example": 4.081,
+      "remaining_s": 102.0
+    }
+  ],
+  "unmeasured": [],
+  "stage": "screen",
+  "exp": "E4_pages",
+  "filtered": true,
+  "pilot_elapsed_s": 144.4,
+  "by_method_h": {
+    "pcm-p512-b8192": 0.07,
+    "pcm-p512-b8192-sel": 0.08
+  }
+}

@@ -1,0 +1,883 @@
+{
+  "rule": "mean accuracy over the screen cells; ties: mean evidence recall, smaller budget, smaller page",
+  "settings": [
+    {
+      "page": 512,
+      "budget": 16384
+    },
+    {
+      "page": 512,
+      "budget": 8192
+    },
+    {
+      "page": 128,
+      "budget": 16384
+    }
+  ],
+  "ranking": [
+    {
+      "page": 512,
+      "budget": 16384,
+      "accuracy": 0.4611111111111112,
+      "evidence_recall": 0.5206743214799862,
+      "cells": {
+        "synth:S2_multikey|256k": {
+          "accuracy": 0.8666666666666667,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|256k": {
+          "accuracy": 0.03333333333333333,
+          "evidence_recall": 0.22992216117216122
+        },
+        "babilong:qa3|256k": {
+          "accuracy": 0.43333333333333335,
+          "evidence_recall": 0.24884720732720353
+        },
+        "synth:S2_multikey|128k": {
+          "accuracy": 0.8333333333333334,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|128k": {
+          "accuracy": 0.26666666666666666,
+          "evidence_recall": 0.32503052503052504
+        },
+        "babilong:qa3|128k": {
+          "accuracy": 0.3333333333333333,
+          "evidence_recall": 0.3202460353500268
+        }
+      }
+    },
+    {
+      "page": 512,
+      "budget": 8192,
+      "accuracy": 0.4611111111111111,
+      "evidence_recall": 0.4709796901048442,
+      "cells": {
+        "synth:S2_multikey|256k": {
+          "accuracy": 0.8666666666666667,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|256k": {
+          "accuracy": 0.03333333333333333,
+          "evidence_recall": 0.19698926073926074
+        },
+        "babilong:qa3|256k": {
+          "accuracy": 0.4,
+          "evidence_recall": 0.14955192553141475
+        },
+        "synth:S2_multikey|128k": {
+          "accuracy": 0.8666666666666667,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|128k": {
+          "accuracy": 0.16666666666666666,
+          "evidence_recall": 0.2587218337218337
+        },
+        "babilong:qa3|128k": {
+          "accuracy": 0.43333333333333335,
+          "evidence_recall": 0.22061512063655603
+        }
+      }
+    },
+    {
+      "page": 128,
+      "budget": 16384,
+      "accuracy": 0.45555555555555555,
+      "evidence_recall": 0.5536444768622973,
+      "cells": {
+        "synth:S2_multikey|256k": {
+          "accuracy": 0.9,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|256k": {
+          "accuracy": 0.16666666666666666,
+          "evidence_recall": 0.26179265179265176
+        },
+        "babilong:qa3|256k": {
+          "accuracy": 0.26666666666666666,
+          "evidence_recall": 0.32745161596851774
+        },
+        "synth:S2_multikey|128k": {
+          "accuracy": 0.8666666666666667,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|128k": {
+          "accuracy": 0.23333333333333334,
+          "evidence_recall": 0.33822843822843823
+        },
+        "babilong:qa3|128k": {
+          "accuracy": 0.3,
+          "evidence_recall": 0.3943941551841761
+        }
+      }
+    },
+    {
+      "page": 256,
+      "budget": 8192,
+      "accuracy": 0.45,
+      "evidence_recall": 0.49150218989745276,
+      "cells": {
+        "synth:S2_multikey|256k": {
+          "accuracy": 0.9,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|256k": {
+          "accuracy": 0.1,
+          "evidence_recall": 0.21256146631146633
+        },
+        "babilong:qa3|256k": {
+          "accuracy": 0.23333333333333334,
+          "evidence_recall": 0.2103909503950843
+        },
+        "synth:S2_multikey|128k": {
+          "accuracy": 0.8666666666666667,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|128k": {
+          "accuracy": 0.23333333333333334,
+          "evidence_recall": 0.2662966200466201
+        },
+        "babilong:qa3|128k": {
+          "accuracy": 0.36666666666666664,
+          "evidence_recall": 0.25976410263154603
+        }
+      }
+    },
+    {
+      "page": 128,
+      "budget": 8192,
+      "accuracy": 0.4444444444444445,
+      "evidence_recall": 0.513947900760423,
+      "cells": {
+        "synth:S2_multikey|256k": {
+          "accuracy": 0.8333333333333334,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|256k": {
+          "accuracy": 0.1,
+          "evidence_recall": 0.24428044178044178
+        },
+        "babilong:qa3|256k": {
+          "accuracy": 0.23333333333333334,
+          "evidence_recall": 0.250730515272834
+        },
+        "synth:S2_multikey|128k": {
+          "accuracy": 0.9333333333333333,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|128k": {
+          "accuracy": 0.2,
+          "evidence_recall": 0.2768648018648019
+        },
+        "babilong:qa3|128k": {
+          "accuracy": 0.36666666666666664,
+          "evidence_recall": 0.3118116456444598
+        }
+      }
+    },
+    {
+      "page": 512,
+      "budget": 4096,
+      "accuracy": 0.4444444444444444,
+      "evidence_recall": 0.4258326417374226,
+      "cells": {
+        "synth:S2_multikey|256k": {
+          "accuracy": 0.8666666666666667,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|256k": {
+          "accuracy": 0.03333333333333333,
+          "evidence_recall": 0.14420690420690424
+        },
+        "babilong:qa3|256k": {
+          "accuracy": 0.3,
+          "evidence_recall": 0.07813073313303448
+        },
+        "synth:S2_multikey|128k": {
+          "accuracy": 0.9666666666666667,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|128k": {
+          "accuracy": 0.23333333333333334,
+          "evidence_recall": 0.19422549672549677
+        },
+        "babilong:qa3|128k": {
+          "accuracy": 0.26666666666666666,
+          "evidence_recall": 0.13843271635910034
+        }
+      }
+    },
+    {
+      "page": 2048,
+      "budget": 16384,
+      "accuracy": 0.43888888888888894,
+      "evidence_recall": 0.4714698370157346,
+      "cells": {
+        "synth:S2_multikey|256k": {
+          "accuracy": 0.8666666666666667,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|256k": {
+          "accuracy": 0.06666666666666667,
+          "evidence_recall": 0.18254120879120883
+        },
+        "babilong:qa3|256k": {
+          "accuracy": 0.36666666666666664,
+          "evidence_recall": 0.1318918827245429
+        },
+        "synth:S2_multikey|128k": {
+          "accuracy": 0.9,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|128k": {
+          "accuracy": 0.23333333333333334,
+          "evidence_recall": 0.2666222666222667
+        },
+        "babilong:qa3|128k": {
+          "accuracy": 0.2,
+          "evidence_recall": 0.24776366395638874
+        }
+      }
+    },
+    {
+      "page": 1024,
+      "budget": 4096,
+      "accuracy": 0.43888888888888894,
+      "evidence_recall": 0.40142627930628555,
+      "cells": {
+        "synth:S2_multikey|256k": {
+          "accuracy": 0.9333333333333333,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|256k": {
+          "accuracy": 0.06666666666666667,
+          "evidence_recall": 0.09089882339882341
+        },
+        "babilong:qa3|256k": {
+          "accuracy": 0.3,
+          "evidence_recall": 0.051588526081821254
+        },
+        "synth:S2_multikey|128k": {
+          "accuracy": 0.9333333333333333,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|128k": {
+          "accuracy": 0.2,
+          "evidence_recall": 0.16738830613830616
+        },
+        "babilong:qa3|128k": {
+          "accuracy": 0.2,
+          "evidence_recall": 0.0986820202187629
+        }
+      }
+    },
+    {
+      "page": 256,
+      "budget": 4096,
+      "accuracy": 0.4333333333333334,
+      "evidence_recall": 0.45299313995375656,
+      "cells": {
+        "synth:S2_multikey|256k": {
+          "accuracy": 0.8333333333333334,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|256k": {
+          "accuracy": 0.06666666666666667,
+          "evidence_recall": 0.1788421300921301
+        },
+        "babilong:qa3|256k": {
+          "accuracy": 0.26666666666666666,
+          "evidence_recall": 0.1261973959206818
+        },
+        "synth:S2_multikey|128k": {
+          "accuracy": 0.9,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|128k": {
+          "accuracy": 0.1,
+          "evidence_recall": 0.23051559551559553
+        },
+        "babilong:qa3|128k": {
+          "accuracy": 0.43333333333333335,
+          "evidence_recall": 0.18240371819413195
+        }
+      }
+    },
+    {
+      "page": 512,
+      "budget": 28672,
+      "accuracy": 0.43333333333333335,
+      "evidence_recall": 0.5787548818826773,
+      "cells": {
+        "synth:S2_multikey|256k": {
+          "accuracy": 0.8666666666666667,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|256k": {
+          "accuracy": 0.1,
+          "evidence_recall": 0.2931752969252969
+        },
+        "babilong:qa3|256k": {
+          "accuracy": 0.26666666666666666,
+          "evidence_recall": 0.32214617448528915
+        },
+        "synth:S2_multikey|128k": {
+          "accuracy": 0.8666666666666667,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|128k": {
+          "accuracy": 0.23333333333333334,
+          "evidence_recall": 0.4131172993672994
+        },
+        "babilong:qa3|128k": {
+          "accuracy": 0.26666666666666666,
+          "evidence_recall": 0.44409052051817854
+        }
+      }
+    },
+    {
+      "page": 128,
+      "budget": 4096,
+      "accuracy": 0.43333333333333335,
+      "evidence_recall": 0.47838007484433714,
+      "cells": {
+        "synth:S2_multikey|256k": {
+          "accuracy": 0.9333333333333333,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|256k": {
+          "accuracy": 0.06666666666666667,
+          "evidence_recall": 0.19602647352647354
+        },
+        "babilong:qa3|256k": {
+          "accuracy": 0.3,
+          "evidence_recall": 0.18768032757987793
+        },
+        "synth:S2_multikey|128k": {
+          "accuracy": 0.9,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|128k": {
+          "accuracy": 0.1,
+          "evidence_recall": 0.2534002109002109
+        },
+        "babilong:qa3|128k": {
+          "accuracy": 0.3,
+          "evidence_recall": 0.23317343705946061
+        }
+      }
+    },
+    {
+      "page": 4096,
+      "budget": 16384,
+      "accuracy": 0.43333333333333335,
+      "evidence_recall": 0.45093747941407597,
+      "cells": {
+        "synth:S2_multikey|256k": {
+          "accuracy": 0.8333333333333334,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|256k": {
+          "accuracy": 0.03333333333333333,
+          "evidence_recall": 0.14755883005883008
+        },
+        "babilong:qa3|256k": {
+          "accuracy": 0.36666666666666664,
+          "evidence_recall": 0.09694081795474437
+        },
+        "synth:S2_multikey|128k": {
+          "accuracy": 0.8666666666666667,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|128k": {
+          "accuracy": 0.16666666666666666,
+          "evidence_recall": 0.258261322011322
+        },
+        "babilong:qa3|128k": {
+          "accuracy": 0.3333333333333333,
+          "evidence_recall": 0.20286390645955935
+        }
+      }
+    },
+    {
+      "page": 256,
+      "budget": 16384,
+      "accuracy": 0.4277777777777778,
+      "evidence_recall": 0.5413071501895806,
+      "cells": {
+        "synth:S2_multikey|256k": {
+          "accuracy": 0.9,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|256k": {
+          "accuracy": 0.06666666666666667,
+          "evidence_recall": 0.2665617715617716
+        },
+        "babilong:qa3|256k": {
+          "accuracy": 0.2,
+          "evidence_recall": 0.28639343923044874
+        },
+        "synth:S2_multikey|128k": {
+          "accuracy": 0.8333333333333334,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|128k": {
+          "accuracy": 0.2,
+          "evidence_recall": 0.3349271561771562
+        },
+        "babilong:qa3|128k": {
+          "accuracy": 0.36666666666666664,
+          "evidence_recall": 0.3599605341681074
+        }
+      }
+    },
+    {
+      "page": 256,
+      "budget": 28672,
+      "accuracy": 0.4222222222222223,
+      "evidence_recall": 0.5881400718509042,
+      "cells": {
+        "synth:S2_multikey|256k": {
+          "accuracy": 0.8333333333333334,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|256k": {
+          "accuracy": 0.06666666666666667,
+          "evidence_recall": 0.29110722610722617
+        },
+        "babilong:qa3|256k": {
+          "accuracy": 0.23333333333333334,
+          "evidence_recall": 0.35759743257240884
+        },
+        "synth:S2_multikey|128k": {
+          "accuracy": 0.8,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|128k": {
+          "accuracy": 0.26666666666666666,
+          "evidence_recall": 0.4222224997224996
+        },
+        "babilong:qa3|128k": {
+          "accuracy": 0.3333333333333333,
+          "evidence_recall": 0.457913272703291
+        }
+      }
+    },
+    {
+      "page": 2048,
+      "budget": 28672,
+      "accuracy": 0.4222222222222222,
+      "evidence_recall": 0.5404008421029894,
+      "cells": {
+        "synth:S2_multikey|256k": {
+          "accuracy": 0.7666666666666667,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|256k": {
+          "accuracy": 0.06666666666666667,
+          "evidence_recall": 0.26767621267621267
+        },
+        "babilong:qa3|256k": {
+          "accuracy": 0.26666666666666666,
+          "evidence_recall": 0.22493191509190863
+        },
+        "synth:S2_multikey|128k": {
+          "accuracy": 0.8666666666666667,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|128k": {
+          "accuracy": 0.16666666666666666,
+          "evidence_recall": 0.3703389665889666
+        },
+        "babilong:qa3|128k": {
+          "accuracy": 0.4,
+          "evidence_recall": 0.37945795826084944
+        }
+      }
+    },
+    {
+      "page": 1024,
+      "budget": 16384,
+      "accuracy": 0.4222222222222222,
+      "evidence_recall": 0.49703331675469914,
+      "cells": {
+        "synth:S2_multikey|256k": {
+          "accuracy": 0.8,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|256k": {
+          "accuracy": 0.03333333333333333,
+          "evidence_recall": 0.21105089355089354
+        },
+        "babilong:qa3|256k": {
+          "accuracy": 0.3,
+          "evidence_recall": 0.18173238912966097
+        },
+        "synth:S2_multikey|128k": {
+          "accuracy": 0.9333333333333333,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|128k": {
+          "accuracy": 0.13333333333333333,
+          "evidence_recall": 0.29602480852480845
+        },
+        "babilong:qa3|128k": {
+          "accuracy": 0.3333333333333333,
+          "evidence_recall": 0.293391809322832
+        }
+      }
+    },
+    {
+      "page": 4096,
+      "budget": 8192,
+      "accuracy": 0.41666666666666674,
+      "evidence_recall": 0.3675710739145414,
+      "cells": {
+        "synth:S2_multikey|256k": {
+          "accuracy": 0.8666666666666667,
+          "evidence_recall": 0.8666666666666667
+        },
+        "babilong:qa2|256k": {
+          "accuracy": 0.1,
+          "evidence_recall": 0.09210914085914086
+        },
+        "babilong:qa3|256k": {
+          "accuracy": 0.3,
+          "evidence_recall": 0.054118834956968995
+        },
+        "synth:S2_multikey|128k": {
+          "accuracy": 0.9333333333333333,
+          "evidence_recall": 0.9333333333333333
+        },
+        "babilong:qa2|128k": {
+          "accuracy": 0.1,
+          "evidence_recall": 0.1520568320568321
+        },
+        "babilong:qa3|128k": {
+          "accuracy": 0.2,
+          "evidence_recall": 0.10714163561430659
+        }
+      }
+    },
+    {
+      "page": 1024,
+      "budget": 28672,
+      "accuracy": 0.41111111111111104,
+      "evidence_recall": 0.5515760891379656,
+      "cells": {
+        "synth:S2_multikey|256k": {
+          "accuracy": 0.8666666666666667,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|256k": {
+          "accuracy": 0.0,
+          "evidence_recall": 0.24903568653568656
+        },
+        "babilong:qa3|256k": {
+          "accuracy": 0.3333333333333333,
+          "evidence_recall": 0.2702882116332584
+        },
+        "synth:S2_multikey|128k": {
+          "accuracy": 0.8,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|128k": {
+          "accuracy": 0.16666666666666666,
+          "evidence_recall": 0.3729729992229992
+        },
+        "babilong:qa3|128k": {
+          "accuracy": 0.3,
+          "evidence_recall": 0.4171596374358497
+        }
+      }
+    },
+    {
+      "page": 8192,
+      "budget": 16384,
+      "accuracy": 0.4055555555555556,
+      "evidence_recall": 0.4081339445518706,
+      "cells": {
+        "synth:S2_multikey|256k": {
+          "accuracy": 0.8666666666666667,
+          "evidence_recall": 0.9
+        },
+        "babilong:qa2|256k": {
+          "accuracy": 0.03333333333333333,
+          "evidence_recall": 0.1333262570762571
+        },
+        "babilong:qa3|256k": {
+          "accuracy": 0.3,
+          "evidence_recall": 0.0870460403971431
+        },
+        "synth:S2_multikey|128k": {
+          "accuracy": 0.9,
+          "evidence_recall": 0.9333333333333333
+        },
+        "babilong:qa2|128k": {
+          "accuracy": 0.13333333333333333,
+          "evidence_recall": 0.22170107670107672
+        },
+        "babilong:qa3|128k": {
+          "accuracy": 0.2,
+          "evidence_recall": 0.17339695980341316
+        }
+      }
+    },
+    {
+      "page": 128,
+      "budget": 28672,
+      "accuracy": 0.4055555555555555,
+      "evidence_recall": 0.5954730230824562,
+      "cells": {
+        "synth:S2_multikey|256k": {
+          "accuracy": 0.8333333333333334,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|256k": {
+          "accuracy": 0.1,
+          "evidence_recall": 0.2963106338106338
+        },
+        "babilong:qa3|256k": {
+          "accuracy": 0.3,
+          "evidence_recall": 0.3804117465793143
+        },
+        "synth:S2_multikey|128k": {
+          "accuracy": 0.8,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|128k": {
+          "accuracy": 0.1,
+          "evidence_recall": 0.42599997224997227
+        },
+        "babilong:qa3|128k": {
+          "accuracy": 0.3,
+          "evidence_recall": 0.4701157858548172
+        }
+      }
+    },
+    {
+      "page": 2048,
+      "budget": 4096,
+      "accuracy": 0.4055555555555555,
+      "evidence_recall": 0.34521796204280814,
+      "cells": {
+        "synth:S2_multikey|256k": {
+          "accuracy": 0.8666666666666667,
+          "evidence_recall": 0.8666666666666667
+        },
+        "babilong:qa2|256k": {
+          "accuracy": 0.13333333333333333,
+          "evidence_recall": 0.07000638250638253
+        },
+        "babilong:qa3|256k": {
+          "accuracy": 0.26666666666666666,
+          "evidence_recall": 0.038588574331916266
+        },
+        "synth:S2_multikey|128k": {
+          "accuracy": 0.9,
+          "evidence_recall": 0.9
+        },
+        "babilong:qa2|128k": {
+          "accuracy": 0.1,
+          "evidence_recall": 0.11725524475524476
+        },
+        "babilong:qa3|128k": {
+          "accuracy": 0.16666666666666666,
+          "evidence_recall": 0.07879090399663854
+        }
+      }
+    },
+    {
+      "page": 1024,
+      "budget": 8192,
+      "accuracy": 0.39999999999999997,
+      "evidence_recall": 0.44107729475963353,
+      "cells": {
+        "synth:S2_multikey|256k": {
+          "accuracy": 0.9,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|256k": {
+          "accuracy": 0.03333333333333333,
+          "evidence_recall": 0.15098720723720727
+        },
+        "babilong:qa3|256k": {
+          "accuracy": 0.23333333333333334,
+          "evidence_recall": 0.09846927598942648
+        },
+        "synth:S2_multikey|128k": {
+          "accuracy": 0.8333333333333334,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|128k": {
+          "accuracy": 0.16666666666666666,
+          "evidence_recall": 0.21612443112443114
+        },
+        "babilong:qa3|128k": {
+          "accuracy": 0.23333333333333334,
+          "evidence_recall": 0.1808828542067364
+        }
+      }
+    },
+    {
+      "page": 4096,
+      "budget": 28672,
+      "accuracy": 0.3888888888888889,
+      "evidence_recall": 0.5137518170620379,
+      "cells": {
+        "synth:S2_multikey|256k": {
+          "accuracy": 0.7333333333333333,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|256k": {
+          "accuracy": 0.06666666666666667,
+          "evidence_recall": 0.2121439671439672
+        },
+        "babilong:qa3|256k": {
+          "accuracy": 0.26666666666666666,
+          "evidence_recall": 0.17491329777895182
+        },
+        "synth:S2_multikey|128k": {
+          "accuracy": 0.7666666666666667,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|128k": {
+          "accuracy": 0.2,
+          "evidence_recall": 0.36234113109113114
+        },
+        "babilong:qa3|128k": {
+          "accuracy": 0.3,
+          "evidence_recall": 0.3331125063581773
+        }
+      }
+    },
+    {
+      "page": 8192,
+      "budget": 28672,
+      "accuracy": 0.38333333333333336,
+      "evidence_recall": 0.4736963825616116,
+      "cells": {
+        "synth:S2_multikey|256k": {
+          "accuracy": 0.8666666666666667,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|256k": {
+          "accuracy": 0.03333333333333333,
+          "evidence_recall": 0.17778429903429904
+        },
+        "babilong:qa3|256k": {
+          "accuracy": 0.2,
+          "evidence_recall": 0.1396938272695169
+        },
+        "synth:S2_multikey|128k": {
+          "accuracy": 0.8,
+          "evidence_recall": 0.9666666666666667
+        },
+        "babilong:qa2|128k": {
+          "accuracy": 0.13333333333333333,
+          "evidence_recall": 0.29318875568875574
+        },
+        "babilong:qa3|128k": {
+          "accuracy": 0.26666666666666666,
+          "evidence_recall": 0.26484474671043123
+        }
+      }
+    },
+    {
+      "page": 2048,
+      "budget": 8192,
+      "accuracy": 0.38333333333333336,
+      "evidence_recall": 0.4175914480125249,
+      "cells": {
+        "synth:S2_multikey|256k": {
+          "accuracy": 0.9,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|256k": {
+          "accuracy": 0.03333333333333333,
+          "evidence_recall": 0.11257228882228883
+        },
+        "babilong:qa3|256k": {
+          "accuracy": 0.3,
+          "evidence_recall": 0.06923584751014537
+        },
+        "synth:S2_multikey|128k": {
+          "accuracy": 0.8333333333333334,
+          "evidence_recall": 1.0
+        },
+        "babilong:qa2|128k": {
+          "accuracy": 0.13333333333333333,
+          "evidence_recall": 0.18361846486846486
+        },
+        "babilong:qa3|128k": {
+          "accuracy": 0.1,
+          "evidence_recall": 0.14012208687425048
+        }
+      }
+    },
+    {
+      "page": 8192,
+      "budget": 8192,
+      "accuracy": 0.36666666666666664,
+      "evidence_recall": 0.29904223284425263,
+      "cells": {
+        "synth:S2_multikey|256k": {
+          "accuracy": 0.7,
+          "evidence_recall": 0.7
+        },
+        "babilong:qa2|256k": {
+          "accuracy": 0.03333333333333333,
+          "evidence_recall": 0.06182414807414808
+        },
+        "babilong:qa3|256k": {
+          "accuracy": 0.3,
+          "evidence_recall": 0.05078579945452761
+        },
+        "synth:S2_multikey|128k": {
+          "accuracy": 0.7666666666666667,
+          "evidence_recall": 0.7666666666666667
+        },
+        "babilong:qa2|128k": {
+          "accuracy": 0.16666666666666666,
+          "evidence_recall": 0.12418525918525919
+        },
+        "babilong:qa3|128k": {
+          "accuracy": 0.23333333333333334,
+          "evidence_recall": 0.09079152368491421
+        }
+      }
+    },
+    {
+      "page": 4096,
+      "budget": 4096,
+      "accuracy": 0.3444444444444444,
+      "evidence_recall": 0.276462173407239,
+      "cells": {
+        "synth:S2_multikey|256k": {
+          "accuracy": 0.7,
+          "evidence_recall": 0.7
+        },
+        "babilong:qa2|256k": {
+          "accuracy": 0.06666666666666667,
+          "evidence_recall": 0.04428488178488179
+        },
+        "babilong:qa3|256k": {
+          "accuracy": 0.3,
+          "evidence_recall": 0.03005373666065295
+        },
+        "synth:S2_multikey|128k": {
+          "accuracy": 0.7333333333333333,
+          "evidence_recall": 0.7333333333333333
+        },
+        "babilong:qa2|128k": {
+          "accuracy": 0.1,
+          "evidence_recall": 0.08666583416583419
+        },
+        "babilong:qa3|128k": {
+          "accuracy": 0.16666666666666666,
+          "evidence_recall": 0.06443525449873184
+        }
+      }
+    }
+  ]
+}

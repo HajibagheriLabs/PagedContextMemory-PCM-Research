@@ -1,0 +1,40 @@
+# PCM text mode, fixed in A5 (reports/A5_pillars12.md). Every value below is the configuration E5 ran as its
+# no-graph setting, so its hash equals the A5 rows' method hash (pcm-p512-b8192, a9f9fa050cff).
+# Numbers quoted in the comments come from results/A5_pillars12/summary.json and results/A4_baselines/summary.json.
+pcm_text:
+  method: pcm
+  name: pcm-p512-b8192
+  reader: reader                 # Qwen3-1.7B, Gate G0 (D-029)
+  dtype: bfloat16
+  block: 2048                    # prefill blocks of at most 2,048 tokens (project rule)
+  window: 32768                  # the reader's native window; every A5 prompt stayed below it (max 30,665 tokens)
+  min_free_ram_gib: 2.0
+  min_free_vram_gib: 10.0
+  # Answer budgets of A4 (D-033, D-040), unchanged.
+  max_new_tokens: {"infbench:passkey": 64, "infbench:number_string": 64, "infbench:kv_retrieval": 128,
+                   "synth:S1": 64, "synth:S2_multikey": 64, "synth:S2_multivalue": 128}
+  # Index units: 128 tokens snapped to sentence ends within +-32 (D-035). Not varied in A5; the page is the unit of
+  # selection, and the unit only sets how finely a page's rank is computed.
+  unit: 128
+  snap: 32
+  # Ranking: reciprocal-rank fusion of BM25 and Qwen3-Embedding-0.6B, as M2 hybrid in A4 (D-035). Not varied in A5;
+  # A5's pages rank at their best unit under this ranking (D-041).
+  ranker: hybrid
+  embedder: embedder
+  embed_batch: 128
+  rrf_k: 60
+  bm25: {k1: 1.5, b: 0.75, epsilon: 0.25}
+  index_cache: data/cache/index
+  # Page 512, budget 8,192 (16 pages): tied first in the E4 screen (46.1%, with page 512 / budget 16,384); E5's
+  # setting by the rule fixed before the final stage. In the final stage (N = 100 per task) it had the highest
+  # accuracy of the three settings on S2, BABILong and BABILong-ext at 128K and 256K (S1: 100% for all three);
+  # against page 512 / budget 16,384 the paired gain is +3.5 to +8.2 points, CI excluding 0 in 5 of those 6
+  # family-lengths. G1 holds: S1 and S2 multi-key evidence recall 1.000 at 256K.
+  page: 512
+  budget: 8192
+  gap_marker: "\n[...]\n"        # between non-adjacent pages (D-041); not varied in A5
+  # No graph: no E5 variant (PPR over SEQ/SEM/ENT edges, entity hops, default or spaCy entities) gained on the
+  # multi-fact tasks (best: +4.0 [0.0, +8.0] at 128K, ppr-ent-ner; hops1 and hops2 lost 4.0 [-7.0, -1.0] at 256K);
+  # H2 fails as read in D-045. The graph changed the kept pages in about half the examples; pooled evidence recall
+  # moved by -1.4 to +0.5 points.
+  # The graph code stays available (configs/a5_pillars.yaml, `graph`), off by default.

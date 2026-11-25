@@ -1,0 +1,2011 @@
+{
+  "remaining_s": 0.0,
+  "remaining_h": 0.0,
+  "cells": [
+    {
+      "method": "pcm-p128-b4096",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.454,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b4096",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.444,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b4096",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.567,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b4096",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.155,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b4096",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.202,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b4096",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.364,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b4096",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.416,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b4096",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.404,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b4096",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.577,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b4096",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.158,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b4096",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.177,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b4096",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.358,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b4096",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.464,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b4096",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.457,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b4096",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.557,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b4096",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.145,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b4096",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.163,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b4096",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.354,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b4096",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.419,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b4096",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.421,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b4096",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.581,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b4096",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.152,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b4096",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.212,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b4096",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.387,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b4096",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.409,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b4096",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.44,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b4096",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.566,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b4096",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.161,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b4096",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.186,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b4096",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.356,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b4096",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.415,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b4096",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.43,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b4096",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.565,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b4096",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.153,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b4096",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.173,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b4096",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.299,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b8192",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.793,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b8192",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.864,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b8192",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 2.0,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b8192",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.553,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b8192",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.569,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b8192",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.767,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b8192",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.818,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b8192",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.797,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b8192",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.96,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b8192",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.525,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b8192",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.588,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b8192",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.762,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b8192",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.81,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b8192",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.769,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b8192",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.976,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b8192",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.522,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b8192",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.541,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b8192",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.739,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b8192",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.791,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b8192",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.824,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b8192",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.957,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b8192",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.522,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b8192",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.543,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b8192",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.734,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b8192",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.802,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b8192",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.825,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b8192",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.968,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b8192",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.534,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b8192",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.565,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b8192",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.721,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b8192",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.795,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b8192",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.826,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b8192",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.965,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b8192",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.512,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b8192",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.556,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b8192",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.731,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p8192-b8192",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.779,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p8192-b8192",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.838,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p8192-b8192",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.945,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p8192-b8192",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.466,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p8192-b8192",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.517,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p8192-b8192",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.715,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b16384",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 3.111,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b16384",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 3.083,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b16384",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 3.273,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b16384",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 2.974,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b16384",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 2.98,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b16384",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 3.154,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b16384",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 3.005,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b16384",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 3.063,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b16384",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 3.244,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b16384",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 2.892,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b16384",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 2.926,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b16384",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 3.123,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b16384",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 3.004,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b16384",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 3.036,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b16384",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 3.218,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b16384",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 2.868,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b16384",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 2.933,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b16384",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 3.099,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b16384",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 2.963,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b16384",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 2.997,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b16384",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 3.227,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b16384",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 2.877,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b16384",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 2.924,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b16384",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 3.097,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b16384",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 2.992,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b16384",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 3.039,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b16384",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 3.18,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b16384",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 2.85,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b16384",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 2.913,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b16384",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 3.086,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b16384",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 2.979,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b16384",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 2.999,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b16384",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 3.191,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b16384",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 2.845,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b16384",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 2.888,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b16384",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 3.078,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p8192-b16384",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 2.99,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p8192-b16384",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 3.055,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p8192-b16384",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 3.183,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p8192-b16384",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 2.637,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p8192-b16384",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 2.859,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p8192-b16384",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 3.117,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b28672",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 6.381,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b28672",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 6.237,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b28672",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 6.451,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b28672",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 6.138,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b28672",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 6.091,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b28672",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 6.347,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b28672",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 6.079,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b28672",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 6.141,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b28672",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 6.279,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b28672",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 5.931,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b28672",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 5.961,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b28672",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 6.224,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b28672",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 5.979,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b28672",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 6.084,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b28672",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 6.253,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b28672",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 5.875,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b28672",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 5.936,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b28672",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 6.128,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b28672",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 5.979,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b28672",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 6.013,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b28672",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 6.275,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b28672",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 5.86,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b28672",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 5.93,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b28672",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 6.126,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b28672",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 5.973,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b28672",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 6.0,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b28672",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 6.23,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b28672",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 5.87,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b28672",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 5.897,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b28672",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 6.097,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b28672",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 5.996,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b28672",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 6.063,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b28672",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 6.215,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b28672",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 5.833,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b28672",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 5.867,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b28672",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 6.075,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p8192-b28672",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 4.91,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p8192-b28672",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 4.923,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p8192-b28672",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 5.132,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p8192-b28672",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 4.757,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p8192-b28672",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 4.779,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p8192-b28672",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 4.999,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b4096-sel",
+      "task": "synth:S3_h3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 6.762,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b4096-sel",
+      "task": "synth:S3_h3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 3.524,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b4096-sel",
+      "task": "synth:S3_h3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.284,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b4096-sel",
+      "task": "synth:S3_h3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 0.69,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b4096-sel",
+      "task": "synth:S3_h3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.275,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b4096-sel",
+      "task": "synth:S3_h3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 0.665,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b4096-sel",
+      "task": "synth:S3_h3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.288,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b4096-sel",
+      "task": "synth:S3_h3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 0.675,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b4096-sel",
+      "task": "synth:S3_h3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.282,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b4096-sel",
+      "task": "synth:S3_h3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 0.669,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b4096-sel",
+      "task": "synth:S3_h3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.272,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b4096-sel",
+      "task": "synth:S3_h3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 0.679,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b8192-sel",
+      "task": "synth:S3_h3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.288,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b8192-sel",
+      "task": "synth:S3_h3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 0.667,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b8192-sel",
+      "task": "synth:S3_h3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.276,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b8192-sel",
+      "task": "synth:S3_h3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 0.682,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b8192-sel",
+      "task": "synth:S3_h3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 2.361,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b8192-sel",
+      "task": "synth:S3_h3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.247,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b8192-sel",
+      "task": "synth:S3_h3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.303,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b8192-sel",
+      "task": "synth:S3_h3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 0.667,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b8192-sel",
+      "task": "synth:S3_h3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.281,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b8192-sel",
+      "task": "synth:S3_h3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 0.67,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b8192-sel",
+      "task": "synth:S3_h3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.288,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b8192-sel",
+      "task": "synth:S3_h3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 0.669,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p8192-b8192-sel",
+      "task": "synth:S3_h3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.273,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p8192-b8192-sel",
+      "task": "synth:S3_h3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 0.674,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b16384-sel",
+      "task": "synth:S3_h3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.217,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b16384-sel",
+      "task": "synth:S3_h3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 0.618,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b16384-sel",
+      "task": "synth:S3_h3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.157,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b16384-sel",
+      "task": "synth:S3_h3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 0.608,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b16384-sel",
+      "task": "synth:S3_h3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.159,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b16384-sel",
+      "task": "synth:S3_h3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 0.598,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b16384-sel",
+      "task": "synth:S3_h3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.171,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b16384-sel",
+      "task": "synth:S3_h3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 0.606,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b16384-sel",
+      "task": "synth:S3_h3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.163,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b16384-sel",
+      "task": "synth:S3_h3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 0.598,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b16384-sel",
+      "task": "synth:S3_h3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.17,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b16384-sel",
+      "task": "synth:S3_h3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 0.61,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p8192-b16384-sel",
+      "task": "synth:S3_h3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.158,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p8192-b16384-sel",
+      "task": "synth:S3_h3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 0.606,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b28672-sel",
+      "task": "synth:S3_h3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.159,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p128-b28672-sel",
+      "task": "synth:S3_h3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 0.625,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b28672-sel",
+      "task": "synth:S3_h3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.162,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p256-b28672-sel",
+      "task": "synth:S3_h3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 0.605,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b28672-sel",
+      "task": "synth:S3_h3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.162,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p512-b28672-sel",
+      "task": "synth:S3_h3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 0.614,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b28672-sel",
+      "task": "synth:S3_h3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.161,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p1024-b28672-sel",
+      "task": "synth:S3_h3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 0.603,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b28672-sel",
+      "task": "synth:S3_h3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.171,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p2048-b28672-sel",
+      "task": "synth:S3_h3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 0.62,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b28672-sel",
+      "task": "synth:S3_h3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.155,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p4096-b28672-sel",
+      "task": "synth:S3_h3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 0.601,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p8192-b28672-sel",
+      "task": "synth:S3_h3",
+      "length": "256k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 1.165,
+      "remaining_s": 0.0
+    },
+    {
+      "method": "pcm-p8192-b28672-sel",
+      "task": "synth:S3_h3",
+      "length": "128k",
+      "n": 30,
+      "done": 30,
+      "seconds_per_example": 0.604,
+      "remaining_s": 0.0
+    }
+  ],
+  "unmeasured": [],
+  "stage": "screen",
+  "exp": "E4_pages",
+  "filtered": false,
+  "pilot_elapsed_s": 0.4,
+  "by_method_h": {
+    "pcm-p1024-b16384": 0.0,
+    "pcm-p1024-b16384-sel": 0.0,
+    "pcm-p1024-b28672": 0.0,
+    "pcm-p1024-b28672-sel": 0.0,
+    "pcm-p1024-b4096": 0.0,
+    "pcm-p1024-b4096-sel": 0.0,
+    "pcm-p1024-b8192": 0.0,
+    "pcm-p1024-b8192-sel": 0.0,
+    "pcm-p128-b16384": 0.0,
+    "pcm-p128-b16384-sel": 0.0,
+    "pcm-p128-b28672": 0.0,
+    "pcm-p128-b28672-sel": 0.0,
+    "pcm-p128-b4096": 0.0,
+    "pcm-p128-b4096-sel": 0.0,
+    "pcm-p128-b8192": 0.0,
+    "pcm-p128-b8192-sel": 0.0,
+    "pcm-p2048-b16384": 0.0,
+    "pcm-p2048-b16384-sel": 0.0,
+    "pcm-p2048-b28672": 0.0,
+    "pcm-p2048-b28672-sel": 0.0,
+    "pcm-p2048-b4096": 0.0,
+    "pcm-p2048-b4096-sel": 0.0,
+    "pcm-p2048-b8192": 0.0,
+    "pcm-p2048-b8192-sel": 0.0,
+    "pcm-p256-b16384": 0.0,
+    "pcm-p256-b16384-sel": 0.0,
+    "pcm-p256-b28672": 0.0,
+    "pcm-p256-b28672-sel": 0.0,
+    "pcm-p256-b4096": 0.0,
+    "pcm-p256-b4096-sel": 0.0,
+    "pcm-p256-b8192": 0.0,
+    "pcm-p256-b8192-sel": 0.0,
+    "pcm-p4096-b16384": 0.0,
+    "pcm-p4096-b16384-sel": 0.0,
+    "pcm-p4096-b28672": 0.0,
+    "pcm-p4096-b28672-sel": 0.0,
+    "pcm-p4096-b4096": 0.0,
+    "pcm-p4096-b4096-sel": 0.0,
+    "pcm-p4096-b8192": 0.0,
+    "pcm-p4096-b8192-sel": 0.0,
+    "pcm-p512-b16384": 0.0,
+    "pcm-p512-b16384-sel": 0.0,
+    "pcm-p512-b28672": 0.0,
+    "pcm-p512-b28672-sel": 0.0,
+    "pcm-p512-b4096": 0.0,
+    "pcm-p512-b4096-sel": 0.0,
+    "pcm-p512-b8192": 0.0,
+    "pcm-p512-b8192-sel": 0.0,
+    "pcm-p8192-b16384": 0.0,
+    "pcm-p8192-b16384-sel": 0.0,
+    "pcm-p8192-b28672": 0.0,
+    "pcm-p8192-b28672-sel": 0.0,
+    "pcm-p8192-b8192": 0.0,
+    "pcm-p8192-b8192-sel": 0.0
+  }
+}

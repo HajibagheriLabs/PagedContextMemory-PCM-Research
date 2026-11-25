@@ -1,0 +1,33 @@
+{
+  "reader": "reader",
+  "dtype": "bfloat16",
+  "block": 2048,
+  "min_free_ram_gib": 2.0,
+  "max_new_tokens": {
+    "infbench:passkey": 64,
+    "infbench:number_string": 64,
+    "infbench:kv_retrieval": 128,
+    "synth:S1": 64,
+    "synth:S2_multikey": 64,
+    "synth:S2_multivalue": 128
+  },
+  "method": "pcm",
+  "window": 32768,
+  "unit": 128,
+  "snap": 32,
+  "gap_marker": "\n[...]\n",
+  "min_free_vram_gib": 10.0,
+  "ranker": "hybrid",
+  "embedder": "embedder",
+  "embed_batch": 128,
+  "rrf_k": 60,
+  "bm25": {
+    "k1": 1.5,
+    "b": 0.75,
+    "epsilon": 0.25
+  },
+  "index_cache": "data/cache/index",
+  "page": 4096,
+  "budget": 4096,
+  "name": "pcm-p4096-b4096"
+}
