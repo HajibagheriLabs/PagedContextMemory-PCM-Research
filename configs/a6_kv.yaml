@@ -1,0 +1,58 @@
+# A6: Pillar 3, mechanics. E6: KV expansion against text expansion on the same pages (section 4.5; D-046 to D-048).
+# Run with scripts/run_a6.py. The page selection (page size, budget, graph) is configs/pcm_text.yaml, fixed in A5.
+n: 100
+seed: 0
+pilot_n: 5
+ask_above_hours: 12
+pcm_text: configs/pcm_text.yaml
+kv:
+  store_gpu_gib: 8.0        # page caches kept on the GPU before the store spills to disk (numpy memmap)
+
+# APE-style fix (section 4.5): keys of context tokens divided by T, log(S) added to the question's scores on
+# context columns. Tuned on the synthetic train split only (seeds >= 1000, disjoint names and values).
+ape:
+  temperatures: [1.0, 0.9, 0.8, 0.7]
+  scales: [1.0, 0.9, 0.8]
+  train:
+    tasks: [synth:S1, synth:S2_multikey, synth:S2_multivalue]
+    length: 128k
+    seed: 1000
+    n: 30
+  # Rule, fixed before tuning: the highest mean train accuracy over the three tasks; ties: the smaller
+  # |1 - T| + |1 - S|, then the larger T, then the larger S. Written once to results/E6_kv/ape_choice.json.
+
+task_sets:
+  h1: [synth:S1, synth:S2_multikey, synth:S2_multivalue, babilong:qa1, babilong:qa2, babilong:qa3, babilong:qa4, babilong:qa5]
+  ext: [babilong:qa6, babilong:qa7, babilong:qa8, babilong:qa9, babilong:qa10]
+  infbench: [infbench:passkey, infbench:number_string, infbench:kv_retrieval, infbench:longbook_choice_eng]
+  pages_tasks: [synth:S2_multikey, synth:S2_multivalue, babilong:qa1, babilong:qa2]
+
+e6:
+  # (a) text, (b) KV plain, (c) KV with the tuned fix, at the page selection of pcm_text.yaml.
+  main: {modes: [text, kv, kv-ape], tasks: [h1, ext, infbench], lengths: [256k, 128k, 64k, 32k]}
+  # (d) the number of stitched boundaries: text and KV (with the tuned fix) at other page sizes, same budget and graph.
+  pages: {sizes: [128, 512, 2048, 4096], modes: [text, kv-ape], tasks: [pages_tasks], lengths: [256k, 128k]}
+  answer_from: [E4_pages, E5_graph]   # text-mode answers of A5 for identical prompts (exact by the prompt hash)
+
+# KV and attention deviation of stitched against sequential caches (D-048): the first 5 examples of each task.
+deviation:
+  tasks: [synth:S2_multikey, synth:S2_multivalue, babilong:qa1, babilong:qa2]
+  per_task: 5
+  length: 128k
+
+# Whole-document page store at 256K (section 4.5: GPU while it fits, then disk): ingest time, bytes, and
+# expansion time from the store against recomputing the same pages from text.
+store:
+  tasks: [synth:S2_multikey, babilong:qa1]
+  length: 256k
+  per_task: 1
+  disk_dir: data/cache/kvstore
+
+families:
+  S1: [synth:S1]
+  S2: [synth:S2_multikey, synth:S2_multivalue]
+  BABILong: [babilong:qa1, babilong:qa2, babilong:qa3, babilong:qa4, babilong:qa5]
+  BABILong-ext: [babilong:qa6, babilong:qa7, babilong:qa8, babilong:qa9, babilong:qa10]
+g2_points: 5       # Gate G2: KV mode within 5 points of text mode with the best training-free fix
+h3_points: 3       # H3: within 3 points, with >= 10x fewer tokens prefilled at query time
+h3_prefill_ratio: 10

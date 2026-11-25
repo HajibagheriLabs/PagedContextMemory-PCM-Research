@@ -48,8 +48,28 @@ def _library_cache(model, past: KVCache | None, new_tokens: int):
     return past.to_library(model.config, capacity=past.n_tokens + new_tokens)
 
 
-def _forward_blocks(model, ids: torch.Tensor, lib, block: int, position_offset: int, want_logits: bool):
-    """Run ids through the model block by block on top of `lib`. Returns last-position logits or None."""
+def bias_mask(q_start: int, q_len: int, bias: tuple[int, int, float], dtype, device) -> torch.Tensor:
+    """Additive attention mask [1, 1, q_len, q_start + q_len] for q_len new tokens after q_start cached ones:
+    causal (a token sees itself and everything before it), plus `value` on the columns [a, b) of
+    bias = (a, b, value). Masked entries hold the dtype's lowest value, as the library's own masks do."""
+    a, b, value = bias
+    kv = q_start + q_len
+    m = torch.zeros(q_len, kv, dtype=torch.float32, device=device)
+    if b > a:
+        m[:, a:b] = float(value)
+    rows = torch.arange(q_start, kv, device=device)[:, None]
+    cols = torch.arange(kv, device=device)[None, :]
+    m = m.masked_fill(cols > rows, torch.finfo(dtype).min)
+    return m.to(dtype)[None, None]
+
+
+def _forward_blocks(model, ids: torch.Tensor, lib, block: int, position_offset: int, want_logits: bool,
+                    bias: tuple[int, int, float] | None = None):
+    """Run ids through the model block by block on top of `lib`. Returns last-position logits or None.
+
+    bias: (a, b, value) adds `value` to the attention scores of these tokens on cached columns [a, b),
+    through an explicit 4D additive mask (APE-style scaling, section 4.5); None leaves the library's own
+    causal masking alone."""
     n = ids.shape[1]
     if n == 0:
         raise ValueError("no tokens to prefill")
@@ -61,6 +81,9 @@ def _forward_blocks(model, ids: torch.Tensor, lib, block: int, position_offset: 
         e = min(s + block, n)
         positions = torch.arange(start_pos + s, start_pos + e, device=ids.device).unsqueeze(0)
         last = e == n
+        extra = {}
+        if bias is not None:
+            extra["attention_mask"] = bias_mask(library_cache_length(lib), e - s, bias, model.dtype, ids.device)
         if want_logits and last:
             out = model(
                 input_ids=ids[:, s:e],
@@ -68,11 +91,12 @@ def _forward_blocks(model, ids: torch.Tensor, lib, block: int, position_offset: 
                 past_key_values=lib,
                 use_cache=True,
                 logits_to_keep=1,
+                **extra,
             )
             logits = out.logits[0, -1]
         else:
             # The decoder alone: no LM head for positions whose logits are not needed.
-            model.model(input_ids=ids[:, s:e], position_ids=positions, past_key_values=lib, use_cache=True)
+            model.model(input_ids=ids[:, s:e], position_ids=positions, past_key_values=lib, use_cache=True, **extra)
         if e - s > 1:
             _trim_allocator(ids.device)
     return logits
@@ -111,6 +135,7 @@ def generate_greedy(
     stop_ids: Sequence[int] = (),
     block: int = 2048,
     timings: dict | None = None,
+    context_bias: tuple[int, int, float] | None = None,
 ) -> list[int]:
     """Greedy continuation of `prompt_ids` given `cache`. Returns the new token ids.
 
@@ -118,14 +143,16 @@ def generate_greedy(
     after max_new_tokens. The caller's cache is not modified. With a `timings`
     dict, the device is synchronised at three points and the dict receives
     prefill_s (start to first generated token chosen: time to first token),
-    decode_s (the remaining steps) and new_tokens.
+    decode_s (the remaining steps) and new_tokens. context_bias = (a, b, value):
+    every prompt and generated token adds `value` to its attention scores on the
+    cached columns [a, b) (see _forward_blocks).
     """
     if timings is not None:
         _sync(model.device)
         t0 = time.perf_counter()
     ids = _as_row(prompt_ids, model.device)
     lib = _library_cache(model, cache, ids.shape[1] + max_new_tokens)
-    logits = _forward_blocks(model, ids, lib, block, 0, True)
+    logits = _forward_blocks(model, ids, lib, block, 0, True, context_bias)
     stops = set(int(s) for s in stop_ids)
     out: list[int] = []
     for step_i in range(max_new_tokens):
@@ -138,7 +165,7 @@ def generate_greedy(
         if len(out) == max_new_tokens:
             break
         step = torch.tensor([[token]], dtype=torch.long, device=ids.device)
-        logits = _forward_blocks(model, step, lib, 1, 0, True)
+        logits = _forward_blocks(model, step, lib, 1, 0, True, context_bias)
     if timings is not None:
         _sync(model.device)
         t2 = time.perf_counter()

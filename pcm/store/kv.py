@@ -97,6 +97,21 @@ class KVCache:
             return KVCache(list(self.keys), list(self.values))
         return KVCache([rebase_keys(k, delta, inv_freq) for k in self.keys], list(self.values))
 
+    def scale_keys(self, start: int, stop: int, factor: float) -> "KVCache":
+        """Keys of tokens [start, stop) multiplied by `factor` (in float32, stored back in the cache's dtype);
+        everything else shared unchanged. With factor 1 / T this divides those tokens' attention scores by T
+        (APE-style temperature, section 4.5)."""
+        if not 0 <= start <= stop <= self.n_tokens:
+            raise ValueError(f"bad token range [{start}, {stop}) for a cache of {self.n_tokens} tokens")
+        if factor == 1.0 or start == stop:
+            return KVCache(list(self.keys), list(self.values))
+        keys = []
+        for k in self.keys:
+            k2 = k.clone()
+            k2[:, :, start:stop] = (k[:, :, start:stop].float() * float(factor)).to(k.dtype)
+            keys.append(k2)
+        return KVCache(keys, list(self.values))
+
     # ---- library cache conversion ----
     def to_library(self, config=None, capacity: int | None = None):
         """A library cache object holding this cache. Forward passes on it never modify this KVCache.
@@ -285,9 +300,30 @@ def stitch(
     """
     p = prefix_cache.n_tokens if prefix_cache is not None else 0
     origin = p if encoded_at is None else encoded_at
-    parts = [prefix_cache] if prefix_cache is not None else []
-    start = p
-    for page in page_caches:
-        parts.append(page.rebase(start - origin, inv_freq))
+    pages = list(page_caches)
+    if not pages:
+        return KVCache.concat([prefix_cache])
+    # One rotation per layer over all pages at once: each token gets its page's delta. The angles are the
+    # same float64 products as in rebase_keys, so the result equals re-basing page by page, bit for bit.
+    deltas, start = [], p
+    for page in pages:
+        deltas.append(torch.full((page.n_tokens,), float(start - origin), dtype=torch.float64))
         start += page.n_tokens
-    return KVCache.concat(parts)
+    first = pages[0].keys[0]
+    work = torch.float64 if first.dtype == torch.float64 else torch.float32
+    angle = torch.cat(deltas)[:, None] * inv_freq.to(torch.float64).cpu()[None, :]
+    cos = torch.cat((angle.cos(), angle.cos()), dim=-1).to(device=first.device, dtype=work)
+    sin = torch.cat((angle.sin(), angle.sin()), dim=-1).to(device=first.device, dtype=work)
+    half = first.shape[-1] // 2
+    keys, values = [], []
+    for i in range(pages[0].n_layers):
+        k = torch.cat([pg.keys[i] for pg in pages], dim=-2)
+        w = k.to(work)
+        k = (w * cos + torch.cat((-w[..., half:], w[..., :half]), dim=-1) * sin).to(k.dtype)
+        v = torch.cat([pg.values[i] for pg in pages], dim=-2)
+        if prefix_cache is not None:
+            k = torch.cat([prefix_cache.keys[i], k], dim=-2)
+            v = torch.cat([prefix_cache.values[i], v], dim=-2)
+        keys.append(k)
+        values.append(v)
+    return KVCache(keys, values)

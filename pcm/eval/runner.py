@@ -73,12 +73,13 @@ def even_subset(total: int, n: int) -> list[int]:
     return [(i * total) // n for i in range(n)]
 
 
-def load_examples(task: str, length: str, n: int | None, seed: int, cfg: dict | None = None) -> list[dict]:
+def load_examples(task: str, length: str, n: int | None, seed: int, cfg: dict | None = None, split: str = "test") -> list[dict]:
     """n examples of a cell, in the harness's common form.
 
     Synthetic and BABILong: the first n. InfiniteBench: n rows spread evenly over the
     file (`even_subset`), so that a subset covers every needle depth; the same n
-    gives the same rows to every method.
+    gives the same rows to every method. split: "train" reads the synthetic train split
+    (seeds >= the configured seed limit; used only for tuning).
     """
     cfg = cfg or load_task_config()
     bench, name = parse_task(task)
@@ -86,7 +87,9 @@ def load_examples(task: str, length: str, n: int | None, seed: int, cfg: dict | 
     if bench == "synth":
         from pcm.tasks.synth import data_file
 
-        path = data_file(name, length, seed, cfg)
+        if split == "train" and seed < int(cfg["synth"]["seed_limit"]):
+            raise ValueError(f"train seeds start at {cfg['synth']['seed_limit']}")
+        path = data_file(name, length, seed, cfg, split=split)
         if not path.is_file():
             raise FileNotFoundError(f"{path} is missing: materialise it with scripts/make_data.py")
         out = []
@@ -97,7 +100,7 @@ def load_examples(task: str, length: str, n: int | None, seed: int, cfg: dict | 
         if n is not None and len(out) < n:
             raise ValueError(f"{path} holds {len(out)} examples, {n} requested")
         return out
-    if seed != 0:
+    if seed != 0 or split != "test":
         raise ValueError(f"{bench} has one fixed test set; use seed 0")
     if bench == "babilong":
         from pcm.tasks import babilong
@@ -683,6 +686,11 @@ class PCMText(Retrieve):
         return out
 
     def execute(self, prepared):
+        s = self.select(prepared)
+        return self._answer(prepared, s["spans"], s["kept"], s["order"], s["timings"], s["extra"])
+
+    def select(self, prepared) -> dict:
+        """Hybrid scores, graph, pages, budget: {spans, kept (units), kept_pages, order, timings, extra}."""
         import numpy as np
 
         from pcm.index import graph as G
@@ -752,7 +760,142 @@ class PCMText(Retrieve):
         extra.update({"n_pages": int(-(-units.n_units // self.per_page)), "kept_pages": int(len(kept_pages))})
         if items:
             extra["evidence_page_ranks"] = S.item_page_ranks(pages, items, self.per_page)
-        return self._answer(prepared, spans, kept, order, timings, extra)
+        return {"spans": spans, "kept": kept, "kept_pages": kept_pages, "order": order, "timings": timings, "extra": extra}
+
+
+class PCMKV(PCMText):
+    """PCM, KV mode (specification, section 4.5; D-046 to D-048): the page selection of text mode, the same
+    token sequence in the window, but built from caches: the shared prefix P (system, instruction, everything
+    before the context) is encoded once per prompt template; every selected page, and the gap marker, is
+    encoded as a continuation of P (attending to P and to itself), kept in a page store (GPU while it fits,
+    then disk), and stitched after P in document order with its keys re-based; only the question is prefilled
+    at query time.
+
+    config as PCMText, plus kv: {temperature (1.0), scale (1.0): APE-style fix, keys of context tokens divided
+    by the temperature and log(scale) added to the question's attention scores on context columns;
+    store_gpu_gib (8.0): page bytes kept on the GPU before the store spills to disk}.
+    """
+
+    def setup(self):
+        if self.config.get("selection_only"):
+            raise ValueError("KV mode generates answers; selection-only rows belong to text mode")
+        super().setup()
+        from pcm.store.kv import rope_inv_freq
+
+        kv = self.config.get("kv") or {}
+        self.temperature = float(kv.get("temperature", 1.0))
+        self.scale = float(kv.get("scale", 1.0))
+        if self.temperature <= 0 or self.scale <= 0:
+            raise ValueError("temperature and scale must be positive")
+        self.store_gpu_bytes = int(float(kv.get("store_gpu_gib", 8.0)) * 1024**3)
+        self.inv_freq = rope_inv_freq(self.model)
+        self._prefix_memo: dict = {}
+
+    def _shared_caches(self, prefix_ids, timings: dict):
+        """(cache of P, cache of the gap marker encoded after P), once per distinct prefix."""
+        from pcm.prefill import prefill_in_blocks
+        from pcm.store.kv import encode_page
+
+        key = hashlib.sha256(prefix_ids.numpy().astype("<i8").tobytes()).hexdigest()
+        if key not in self._prefix_memo:
+            t = time.perf_counter()
+            block = int(self.config.get("block", 2048))
+            p = prefill_in_blocks(self.model, prefix_ids, block=block)
+            g = encode_page(self.model, p, self.gap_ids, block=block) if len(self.gap_ids) else None
+            self.sync()
+            timings["prefix_encode_s"] = time.perf_counter() - t
+            self._prefix_memo = {key: (p, g)}  # one template at a time: a cell has one
+        return self._prefix_memo[key]
+
+    def kv_sha(self, text_sha: str) -> str:
+        """The prompt hash of text mode, extended by everything that makes the KV answer differ from it."""
+        spec = {"mode": "kv", "page": self.page, "temperature": self.temperature, "scale": self.scale}
+        return hashlib.sha256((text_sha + json.dumps(spec, sort_keys=True)).encode("utf-8")).hexdigest()[:24]
+
+    def execute(self, prepared):
+        import math
+
+        import numpy as np
+        import torch
+
+        from pcm.chunking import page_bounds
+        from pcm.expand import expand_kv, expand_text, kv_layout
+        from pcm.prefill import generate_greedy
+        from pcm.store.kv import encode_page
+        from pcm.store.pages import PageStore
+
+        s = self.select(prepared)
+        ex, units = prepared["example"], prepared["units"]
+        timings = s["timings"]
+        ctx = torch.from_numpy(units.ids.astype(np.int64))
+        body, gaps = expand_text(ctx, s["spans"], self.gap_ids)
+        prefix, suffix = prepared["prefix"], prepared["suffix"]
+        max_new = self.max_new(ex)
+        n_text = len(prefix) + len(body) + len(suffix)
+        if n_text + max_new > self.window_size():
+            raise DoesNotFit(f"prompt {n_text} + answer {max_new} tokens exceed the window {self.window_size()}")
+        text_sha = self.prompt_sha(ex, torch.cat([prefix, body, suffix]))
+        sha = self.kv_sha(text_sha)
+        pb = page_bounds(units.bounds, self.per_page)
+        pages = sorted(int(p) for p in s["kept_pages"])
+        layout = kv_layout([(int(pb[p]), int(pb[p + 1])) for p in pages])
+        hit = self.answer_cache.get(sha)
+        if hit is not None:
+            pred = hit["prediction"]
+            timings.update({"reused": True, "new_tokens": hit.get("new_tokens")})
+        else:
+            P, G = self._shared_caches(prefix, timings)
+            store = PageStore(self.store_gpu_bytes, device=self.model.device)
+            try:
+                t = time.perf_counter()
+                block = int(self.config.get("block", 2048))
+                for kind, a, b in layout:  # ingest: every selected page encoded on its own after P
+                    if kind == "page":
+                        store.put(a, encode_page(self.model, P, ctx[a:b], block=block))
+                self.sync()
+                timings["kv_encode_s"] = time.perf_counter() - t
+                t = time.perf_counter()  # query time: read the pages back, re-base, stitch
+                segs = [store.get(a) if kind == "page" else G for kind, a, _ in layout]
+                cache, n_ctx = expand_kv(P, segs, self.inv_freq, self.temperature)
+                self.sync()
+                timings["expand_s"] = time.perf_counter() - t
+                if n_ctx != len(body):
+                    raise RuntimeError(f"stitched context holds {n_ctx} tokens, the text-mode context {len(body)}")
+                bias = (len(prefix), len(prefix) + n_ctx, math.log(self.scale)) if self.scale != 1.0 else None
+                gen: dict = {}
+                out = generate_greedy(self.model, cache, suffix, max_new, self.stops, block, timings=gen, context_bias=bias)
+                timings.update(gen)
+                timings.update({"store_gpu_bytes": store.bytes_gpu, "store_disk_bytes": store.bytes_disk})
+                pred = self.tokenizer.decode(out, skip_special_tokens=True).strip()
+                del cache, segs
+            finally:
+                store.clear()
+        n_pages = sum(1 for kind, _, _ in layout if kind == "page")
+        timings.update({"query_prefill_tokens": int(len(suffix)), "encoded_tokens": int(len(body) - gaps * len(self.gap_ids))})
+        result = self._answer_record(prepared, s, gaps, text_sha, sha, pred, hit)
+        result["selection"].update({"mode": "kv", "kv_pages": n_pages, "kv_segments": len(layout), "stitched_boundaries": len(layout) - 1,
+                                    "temperature": self.temperature, "scale": self.scale})
+        result["prompt_tokens"] = int(n_text)
+        return result
+
+    def _answer_record(self, prepared, s, gaps, text_sha, sha, pred, hit) -> dict:
+        """The row fields _answer writes, for an answer produced in KV mode."""
+        from pcm.index import select as S
+
+        ex, units = prepared["example"], prepared["units"]
+        items = S.evidence_units(ex.get("evidence") or [], units.bounds)
+        gold = set(u for it in items for u in it)
+        kept_units = set(int(u) for u in s["kept"])
+        rp = metrics.unit_recall_precision(gold, kept_units)
+        selection = {"n_units": units.n_units, "kept_units": len(kept_units), "kept_tokens": int(sum(b - a for a, b in s["spans"])),
+                     "gaps": gaps, "gold_units": len(gold), "unit_recall": rp["recall"], "unit_precision": rp["precision"],
+                     "units_b64": S.pack_units(kept_units, units.n_units), "text_prompt_sha": text_sha}
+        if items:
+            selection["evidence_ranks"] = S.item_ranks(s["order"], items)
+        selection.update(s["extra"])
+        return {"prediction": pred, "selected_spans": s["spans"], "store_spans": False, "selected_pages": None,
+                "timings": s["timings"], "selection": selection, "prompt_sha": sha,
+                "reused_from": hit["id"] if hit is not None else None}
 
 
 class Oracle(UnitMethod):
@@ -791,7 +934,7 @@ class Oracle(UnitMethod):
 
 
 METHODS = {"native": Native, "truncate": Truncate, "dense_yarn": DenseYarn, "retrieve": Retrieve, "oracle": Oracle,
-           "pcm": PCMText, "echo_answer": EchoAnswer}
+           "pcm": PCMText, "pcm_kv": PCMKV, "echo_answer": EchoAnswer}
 
 
 def make_method(config: dict) -> Method:
