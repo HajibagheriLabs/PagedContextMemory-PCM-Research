@@ -6,8 +6,11 @@
     python scripts/run_a7.py --stage part2     # lossless coders (CPU)
     python scripts/run_a7.py --stage part4     # a 256K document's store: sizes, VRAM fit, expansion latency
     python scripts/run_a7.py --stage all       # the five in order
+    python scripts/run_a7.py --stage part3 --pilot             # Part 3 cells: pilot rows and projection
+    python scripts/run_a7.py --stage part3 --max-hours 8       # Part 3: KV mode with each codec, paired with bf16
 
-Part 3 (task accuracy in KV mode) runs through the evaluation runner once Gate G2 is known (D-050).
+Part 3 (task accuracy in KV mode, D-050) needs E6's tuned fix (results/E6_kv/ape_choice.json) and is run only
+if Gate G2 passed; otherwise the report gives Part 1's fidelity measures in its place.
 Results go to results/E7_codecs/; page token ids and the fitted bases to data/cache/codecs/ (git-ignored).
 A lost GPU stops the run with exit status 75; rerun the same command once the GPU is back.
 """
@@ -36,6 +39,7 @@ from pcm.tasks.common import load_task_config  # noqa: E402
 CONFIG = REPO_ROOT / "configs" / "a7_codecs.yaml"
 OUT = REPO_ROOT / "results" / "E7_codecs"
 STAGES = ("pages", "fit", "part1", "part2", "part4")
+EXP3 = "E7_codecs"
 GIB = 1024**3
 
 
@@ -549,13 +553,77 @@ def stage_part4(cfg: dict, ctx: Ctx) -> int:
     return 0
 
 
+# ---------------------------------------------------------------- stage: part3 (the evaluation runner)
+def part3_cells(cfg: dict) -> list[dict]:
+    sys.path.insert(0, str(REPO_ROOT / "scripts"))
+    import run_a6
+
+    cfg6 = run_a6.load_config()
+    ape = run_a6.ape_choice(cfg6)
+    if ape is None:
+        raise SystemExit("Part 3 needs results/E6_kv/ape_choice.json (A6 tuning)")
+    base = run_a6.mode_config(cfg6, "kv-ape", ape=ape)
+    p3 = cfg["part3"]
+    names = []
+    for c in p3["codecs"]:
+        if c == "best_lowrank":
+            names.append(choose_lowrank(cfg)["choice"])
+        elif c == "int4_lossless":
+            continue  # decodes to the int4 cache bit for bit: its accuracy is int4's (D-050); its cost is Part 4's
+        else:
+            names.append(c)
+    out = []
+    for name in names:
+        kv = {**base["kv"], "codec": name, "group": int(cfg["group"])}
+        if "lowrank" in name:
+            kv["basis"] = f"{cfg['basis_dir']}/basis.pt"
+        m = {**base, "kv": kv, "name": f"{base['name']}-{name}"}
+        for L in p3["lengths"]:
+            for t in p3["tasks"]:
+                out.append({"method": m["name"], "mcfg": m, "task": t, "length": L, "n": int(p3["n"])})
+    return out
+
+
+def stage_part3(cfg: dict, args) -> int:
+    sys.path.insert(0, str(REPO_ROOT / "scripts"))
+    import run_a6
+    from run_a4 import Session, cell_stats, read_rows
+    from run_a5 import project
+
+    cfg6 = run_a6.load_config()
+    tcfg = load_task_config()
+    todo = part3_cells(cfg)
+    exp_dir = REPO_ROOT / "results" / EXP3
+    run_a6._LOG_FILE = REPO_ROOT / "logs" / "A7" / "part3.log"
+    run_a6._LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
+    session = Session()
+    log(f"part3: {len(todo)} cells")
+    run_a6.run_cells(todo, EXP3, cfg6, tcfg, cell_stats(read_rows(exp_dir)), session, True, ["E6_kv"])
+    stats = cell_stats(read_rows(exp_dir))
+    proj = project(todo, stats)
+    atomic_write_json(exp_dir / "projection_part3.json", proj)
+    log(f"part3: projected {proj['remaining_h']:.2f} h for what is left")
+    if args.pilot:
+        return 0
+    if proj["remaining_h"] > args.max_hours:
+        log(f"part3 is projected at {proj['remaining_h']:.1f} h, above --max-hours {args.max_hours}: rerun with a larger value")
+        return 3
+    summaries = run_a6.run_cells(todo, EXP3, cfg6, tcfg, stats, session, False, ["E6_kv"])
+    log(f"part3 done: {sum(s['ok'] for s in summaries)} ok, {sum(s['failed'] for s in summaries)} failed")
+    return 0
+
+
 # ---------------------------------------------------------------- main
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stage", choices=STAGES + ("all",), required=True)
+    ap.add_argument("--stage", choices=STAGES + ("all", "part3"), required=True)
+    ap.add_argument("--pilot", action="store_true")
+    ap.add_argument("--max-hours", type=float, default=12.0)
     args = ap.parse_args()
     cfg = load_config()
     OUT.mkdir(parents=True, exist_ok=True)
+    if args.stage == "part3":
+        return stage_part3(cfg, args)
     stages = STAGES if args.stage == "all" else (args.stage,)
     if stages == ("pages",):
         return stage_pages(cfg)

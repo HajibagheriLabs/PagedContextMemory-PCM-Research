@@ -790,6 +790,16 @@ class PCMKV(PCMText):
         self.store_gpu_bytes = int(float(kv.get("store_gpu_gib", 8.0)) * 1024**3)
         self.inv_freq = rope_inv_freq(self.model)
         self._prefix_memo: dict = {}
+        # Store codec (A7, D-049, D-050): absent or "bf16" = the page caches as they are, in the page store.
+        self.codec_name = str(kv.get("codec", "bf16"))
+        self.codec = None
+        if self.codec_name != "bf16":
+            from pcm.store.codecs import LowRankBasis, make_codec
+
+            basis = None
+            if "lowrank" in self.codec_name:
+                basis = LowRankBasis.load(repo_path(kv["basis"]), device=self.model.device)
+            self.codec = make_codec(self.codec_name, basis, self.inv_freq, int(kv.get("group", 128)))
 
     def _shared_caches(self, prefix_ids, timings: dict):
         """(cache of P, cache of the gap marker encoded after P), once per distinct prefix."""
@@ -810,6 +820,8 @@ class PCMKV(PCMText):
     def kv_sha(self, text_sha: str) -> str:
         """The prompt hash of text mode, extended by everything that makes the KV answer differ from it."""
         spec = {"mode": "kv", "page": self.page, "temperature": self.temperature, "scale": self.scale}
+        if self.codec is not None:
+            spec["codec"] = self.codec_name
         return hashlib.sha256((text_sha + json.dumps(spec, sort_keys=True)).encode("utf-8")).hexdigest()[:24]
 
     def execute(self, prepared):
@@ -846,16 +858,26 @@ class PCMKV(PCMText):
         else:
             P, G = self._shared_caches(prefix, timings)
             store = PageStore(self.store_gpu_bytes, device=self.model.device)
+            coded: dict = {}
             try:
                 t = time.perf_counter()
                 block = int(self.config.get("block", 2048))
                 for kind, a, b in layout:  # ingest: every selected page encoded on its own after P
                     if kind == "page":
-                        store.put(a, encode_page(self.model, P, ctx[a:b], block=block))
+                        page = encode_page(self.model, P, ctx[a:b], block=block)
+                        if self.codec is None:
+                            store.put(a, page)
+                        else:  # compacted: only the codec's payload is kept
+                            coded[a] = self.codec.encode(page, len(prefix))
+                        del page
                 self.sync()
                 timings["kv_encode_s"] = time.perf_counter() - t
-                t = time.perf_counter()  # query time: read the pages back, re-base, stitch
-                segs = [store.get(a) if kind == "page" else G for kind, a, _ in layout]
+                t = time.perf_counter()  # query time: read the pages back (decode them), re-base, stitch
+                if self.codec is None:
+                    segs = [store.get(a) if kind == "page" else G for kind, a, _ in layout]
+                else:
+                    segs = [self.codec.decode(coded[a]) if kind == "page" else G for kind, a, _ in layout]
+                    timings["store_codec_bytes"] = int(sum(e.nbytes for e in coded.values()))
                 cache, n_ctx = expand_kv(P, segs, self.inv_freq, self.temperature)
                 self.sync()
                 timings["expand_s"] = time.perf_counter() - t
@@ -870,11 +892,12 @@ class PCMKV(PCMText):
                 del cache, segs
             finally:
                 store.clear()
+                coded.clear()
         n_pages = sum(1 for kind, _, _ in layout if kind == "page")
         timings.update({"query_prefill_tokens": int(len(suffix)), "encoded_tokens": int(len(body) - gaps * len(self.gap_ids))})
         result = self._answer_record(prepared, s, gaps, text_sha, sha, pred, hit)
         result["selection"].update({"mode": "kv", "kv_pages": n_pages, "kv_segments": len(layout), "stitched_boundaries": len(layout) - 1,
-                                    "temperature": self.temperature, "scale": self.scale})
+                                    "temperature": self.temperature, "scale": self.scale, "codec": self.codec_name})
         result["prompt_tokens"] = int(n_text)
         return result
 
