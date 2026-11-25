@@ -12,8 +12,8 @@ prefix_from: {task: "synth:S1", length: 32k}
 pages:
   book_cache: data/cache/pg19
   skip_tokens: 2000          # Gutenberg header and front matter
-  calibration: {split: validation, n: 64, page_tokens: 1024, per_book: 1}
-  heldout: {split: test, n: 256, page_tokens: 1024, continuation: 256, per_book: 3, stride: 20000}
+  calibration: {split: validation, n: 64, page_tokens: 1024, per_book: 2, stride: 20000}   # 50 validation books on disk
+  heldout: {split: test, n: 256, page_tokens: 1024, continuation: 256, per_book: 4, stride: 20000}
 basis_dir: data/cache/codecs  # page ids and fitted bases (about 118 MB, every direction; regenerable, git-ignored)
 
 # Part 1: every lossy codec of section 4.6 on the held-out pages, against the bf16 page cache.

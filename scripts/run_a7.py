@@ -156,7 +156,7 @@ def stage_pages(cfg: dict) -> int:
 
     cal = pc["calibration"]
     held = pc["heldout"]
-    calib = windows(cal["split"], int(cal["n"]), int(cal["page_tokens"]), int(cal["per_book"]), 0)
+    calib = windows(cal["split"], int(cal["n"]), int(cal["page_tokens"]), int(cal["per_book"]), int(cal.get("stride", 0)))
     test = windows(held["split"], int(held["n"]), int(held["page_tokens"]) + int(held["continuation"]), int(held["per_book"]), int(held["stride"]))
     assert not ({p["book"] for p in calib} & {p["book"] for p in test})
     data = {"calibration": calib, "heldout": test}
