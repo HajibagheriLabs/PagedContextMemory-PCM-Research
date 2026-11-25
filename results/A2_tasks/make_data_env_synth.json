@@ -1,6 +1,6 @@
 {
-  "timestamp_utc": "2026-11-14T13:47:05+00:00",
-  "git_commit": "0b39c33597b93ea7ba937b6d98eec02af13864d1",
+  "timestamp_utc": "2026-11-25T10:57:11+00:00",
+  "git_commit": "919e46cb56b1b2c93f85a2d9bd408c772fa3ea4a",
   "git_dirty": false,
   "python": "3.11.15",
   "platform": "Windows-10-10.0.19044-SP0",
@@ -17,7 +17,9 @@
     "numpy": "2.4.6",
     "scipy": "1.17.1",
     "pandas": "3.0.6",
-    "pyarrow": "26.0.0"
+    "pyarrow": "26.0.0",
+    "spacy": "3.8.18",
+    "en-core-web-sm": "3.8.0"
   },
   "cuda_build": "12.6",
   "ram_total_gib": 15.85,
@@ -30,7 +32,17 @@
   ],
   "argv": [
     "--synth",
+    "--split",
+    "train",
+    "--seeds",
+    "1000",
+    "--tasks",
+    "S1",
+    "S2_multikey",
+    "S2_multivalue",
     "--lengths",
-    "32k"
+    "128k",
+    "--n",
+    "30"
   ]
 }
