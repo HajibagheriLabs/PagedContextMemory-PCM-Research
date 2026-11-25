@@ -1,0 +1,52 @@
+# A7: Pillar 3, the store: compaction. E7 (specification, section 4.6; D-049, D-050). Run with scripts/run_a7.py.
+reader: reader
+dtype: bfloat16
+seed: 0
+pilot_n: 5
+group: 128                 # quantization group: tokens per channel group, and the head dimension per token group
+# The shared prefix P of the pages: the chat text before the context of a synthetic S1 prompt (system message,
+# user header, instruction), as KV mode builds it. No document text, no question.
+prefix_from: {task: "synth:S1", length: 32k}
+
+# PG-19 pages (D-049). Calibration: validation books; held-out: test books; never a benchmark document.
+pages:
+  book_cache: data/cache/pg19
+  skip_tokens: 2000          # Gutenberg header and front matter
+  calibration: {split: validation, n: 64, page_tokens: 1024, per_book: 1}
+  heldout: {split: test, n: 256, page_tokens: 1024, continuation: 256, per_book: 3, stride: 20000}
+basis_dir: data/cache/codecs  # page ids and fitted bases (about 118 MB, every direction; regenerable, git-ignored)
+
+# Part 1: every lossy codec of section 4.6 on the held-out pages, against the bf16 page cache.
+part1:
+  quant_bits: [8, 4, 2]
+  granularities: [kcvt, ktvc, kcvc, ktvt]   # keys/values per channel (c) or per token (t); kcvt = KIVI
+  lowrank_ranks: [512, 256, 128]
+  lowrank_bits: [8, 4]
+  text: true
+
+# Part 2: lossless coders on raw bf16 bytes (with and without byte shuffling), on the stored payload of the
+# KIVI int8/int4/int2 codecs (packed codes and their float16 parameters), and on the token ids and UTF-8 text
+# of the Part 4 document.
+part2:
+  pages: 4                   # held-out pages (each 117 MB of bf16 KV): the slow coders run at a few MB/s
+  coders: [zstd-3, zstd-19, lz4, lzma, deflate, ppmd]
+  codecs: [int8, int4, int2]
+  # The coder for "int4 + best lossless" (Part 3, Part 4), fixed before Part 2: the highest ratio on the int4
+  # payload among coders that decompress at >= 200 MB/s (expansion decompresses on demand); ties: faster.
+  min_decompress_mb_s: 200
+
+# Part 3: PCM KV mode (configs/pcm_text.yaml pages, the tuned APE fix) with each codec, paired against bf16.
+part3:
+  codecs: [int8, int4, int2, best_lowrank, int4_lossless]
+  tasks: [synth:S1, synth:S2_multikey, synth:S2_multivalue, babilong:qa1, babilong:qa2, babilong:qa3, babilong:qa4, babilong:qa5]
+  lengths: [256k, 128k]
+  n: 100
+  # The best low-rank setting, fixed before Part 1: the smallest stored bytes per token among low-rank codecs
+  # whose mean next-token KL is at most that of int4 (KIVI); none qualifying: the lowest KL.
+
+# Part 4: a 256K-token document's whole store (pages of configs/pcm_text.yaml).
+part4:
+  document: {task: "synth:S2_multikey", length: 256k, index: 0}
+  budget_tokens: 28672       # a full budget of pages, decompressed versus recomputed
+  window_tokens: 32768       # the active window allocated beside the store
+  vram_gib: 24.0
