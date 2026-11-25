@@ -342,7 +342,8 @@ def stage_part2(cfg: dict, ctx: Ctx) -> int:
         del ref
         for name, (data, extra) in items.items():
             for cn in coders:
-                measure(f"{i}|{name}", data, cn, {"page": i, **extra})
+                if cn not in cfg["part2"].get("kv_skip_coders", []):
+                    measure(f"{i}|{name}", data, cn, {"page": i, **extra})
     # token ids (uint32) and UTF-8 text of the Part 4 document
     ex, chat, _, _, units, _, _ = doc_for_part4(cfg, ctx.tok, ctx.tcfg)
     ids = np.asarray(units.ids, dtype="<u4").tobytes()

@@ -30,6 +30,9 @@ part1:
 part2:
   pages: 4                   # held-out pages (each 117 MB of bf16 KV): the slow coders run at a few MB/s
   coders: [zstd-3, zstd-19, lz4, lzma, deflate, ppmd]
+  # pyppmd 1.3.1 does not round-trip KV bytes on this machine (D-049): PPMd runs on the document's ids and text
+  # only, with every round trip verified.
+  kv_skip_coders: [ppmd]
   codecs: [int8, int4, int2]
   # The coder for "int4 + best lossless" (Part 3, Part 4), fixed before Part 2: the highest ratio on the int4
   # payload among coders that decompress at >= 200 MB/s (expansion decompresses on demand); ties: faster.

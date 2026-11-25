@@ -69,10 +69,19 @@ def _deflate():
 
 
 def _ppmd():
+    """PPMd variant H (as in 7-Zip), order 6, 16 MiB, with an end mark; the input length is kept in an 8-byte
+    header. pyppmd 1.3.1 does not round-trip large binary inputs here (D-049): callers must verify."""
     import pyppmd
 
-    return (lambda b: pyppmd.compress(b, max_order=6, mem_size=16 << 20),
-            lambda b: pyppmd.decompress(b, max_order=6, mem_size=16 << 20))
+    def comp(b):
+        e = pyppmd.Ppmd7Encoder(6, 16 << 20)
+        return len(b).to_bytes(8, "little") + e.encode(b) + e.flush(endmark=True)
+
+    def decomp(b):
+        n = int.from_bytes(b[:8], "little")
+        return pyppmd.Ppmd7Decoder(6, 16 << 20).decode(b[8:], n)
+
+    return comp, decomp
 
 
 CODERS = {
