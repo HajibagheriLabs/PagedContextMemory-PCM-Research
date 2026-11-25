@@ -4,6 +4,7 @@
     python scripts/run_a7.py --stage fit       # low-rank bases from the calibration pages
     python scripts/run_a7.py --stage part1     # every lossy codec on the held-out pages (GPU)
     python scripts/run_a7.py --stage part2     # lossless coders (CPU)
+    python scripts/run_a7.py --stage timing    # encode and decode ms per page, on an otherwise idle GPU
     python scripts/run_a7.py --stage part4     # a 256K document's store: sizes, VRAM fit, expansion latency
     python scripts/run_a7.py --stage all       # the five in order
     python scripts/run_a7.py --stage part3 --pilot             # Part 3 cells: pilot rows and projection
@@ -38,7 +39,7 @@ from pcm.tasks.common import load_task_config  # noqa: E402
 
 CONFIG = REPO_ROOT / "configs" / "a7_codecs.yaml"
 OUT = REPO_ROOT / "results" / "E7_codecs"
-STAGES = ("pages", "fit", "part1", "part2", "part4")
+STAGES = ("pages", "fit", "part1", "part2", "timing", "part4")
 EXP3 = "E7_codecs"
 GIB = 1024**3
 
@@ -279,6 +280,56 @@ def stage_part1(cfg: dict, ctx: Ctx) -> int:
             log(f"part1: page {i + 1}/{len(pages)}")
         del ref, ref_lp
     log("part1: done")
+    return 0
+
+
+# ---------------------------------------------------------------- stage: timing
+def stage_timing(cfg: dict, ctx: Ctx) -> int:
+    """Encode and decode ms per page of every Part 1 codec (median of 5 repeats per page) on the first 32 held-out
+    pages, run with nothing else on the GPU (D-049: Part 1's fidelity pass shared it with A6 tuning)."""
+    from pcm.store import codecs as C
+
+    env = require_clean()
+    pages = load_pages(cfg)["heldout"][:32]
+    basis = load_basis(cfg, ctx.model.device)
+    names = codec_names(cfg)
+    codecs = {n: C.make_codec(n, basis, ctx.inv_freq, int(cfg["group"])) for n in names}
+    out = JsonlLog(OUT / "timing.jsonl")
+    done = out.done_ids()
+    L = int(cfg["pages"]["heldout"]["page_tokens"])
+    w = ctx.encode(pages[0]["ids"][:L])
+    for c in codecs.values():
+        c.decode(c.encode(w, ctx.start))
+    sync()
+    for i, p in enumerate(pages):
+        ids = p["ids"][:L]
+        ref = ctx.encode(ids)
+        for n in names + ["text"]:
+            if f"{i}|{n}" in done:
+                continue
+            enc_t, dec_t = [], []
+            for _ in range(5):
+                if n == "text":
+                    codec = C.TextCodec(ctx.model, ctx.P)
+                    sync()
+                    t = time.perf_counter()
+                    enc = codec.encode_ids(ids, ctx.start)
+                else:
+                    codec = codecs[n]
+                    sync()
+                    t = time.perf_counter()
+                    enc = codec.encode(ref, ctx.start)
+                sync()
+                enc_t.append(1000 * (time.perf_counter() - t))
+                t = time.perf_counter()
+                dec = codec.decode(enc)
+                sync()
+                dec_t.append(1000 * (time.perf_counter() - t))
+                del dec
+            out.append({"id": f"{i}|{n}", "page": i, "codec": n, "encode_ms": statistics.median(enc_t), "decode_ms": statistics.median(dec_t),
+                        "git_commit": env["git_commit"], "git_dirty": env["git_dirty"]})
+        del ref
+    log("timing: done")
     return 0
 
 
@@ -640,7 +691,7 @@ def main() -> int:
                 if s == "pages":
                     continue
                 log(f"stage {s}")
-                {"fit": stage_fit, "part1": stage_part1, "part2": stage_part2, "part4": stage_part4}[s](cfg, ctx)
+                {"fit": stage_fit, "part1": stage_part1, "part2": stage_part2, "timing": stage_timing, "part4": stage_part4}[s](cfg, ctx)
     except Exception as e:  # noqa: BLE001
         if classify_failure(e) == "gpu_lost":
             atomic_write_json(OUT / f"interrupted_{int(time.time())}.json", interruption_record(e))
