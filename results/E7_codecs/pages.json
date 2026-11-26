@@ -1,0 +1,1611 @@
+{
+  "calibration": [
+    {
+      "book": "validation_0000",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0001",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0001",
+      "token_offset": 22000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0002",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0002",
+      "token_offset": 22000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0003",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0003",
+      "token_offset": 22000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0004",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0004",
+      "token_offset": 22000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0005",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0005",
+      "token_offset": 22000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0006",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0006",
+      "token_offset": 22000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0007",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0007",
+      "token_offset": 22000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0008",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0008",
+      "token_offset": 22000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0009",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0009",
+      "token_offset": 22000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0010",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0011",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0011",
+      "token_offset": 22000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0012",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0012",
+      "token_offset": 22000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0013",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0014",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0015",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0016",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0016",
+      "token_offset": 22000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0017",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0017",
+      "token_offset": 22000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0018",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0018",
+      "token_offset": 22000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0019",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0020",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0020",
+      "token_offset": 22000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0021",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0021",
+      "token_offset": 22000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0022",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0022",
+      "token_offset": 22000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0023",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0023",
+      "token_offset": 22000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0024",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0024",
+      "token_offset": 22000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0025",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0025",
+      "token_offset": 22000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0026",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0026",
+      "token_offset": 22000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0027",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0028",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0028",
+      "token_offset": 22000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0029",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0029",
+      "token_offset": 22000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0030",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0030",
+      "token_offset": 22000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0031",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0031",
+      "token_offset": 22000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0032",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0032",
+      "token_offset": 22000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0033",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0033",
+      "token_offset": 22000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0034",
+      "token_offset": 2000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0034",
+      "token_offset": 22000,
+      "tokens": 1024
+    },
+    {
+      "book": "validation_0035",
+      "token_offset": 2000,
+      "tokens": 1024
+    }
+  ],
+  "heldout": [
+    {
+      "book": "test_0000",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0000",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0000",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0001",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0001",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0001",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0001",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0002",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0002",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0002",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0002",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0003",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0003",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0003",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0003",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0004",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0005",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0005",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0005",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0006",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0006",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0006",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0006",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0007",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0007",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0008",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0008",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0008",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0008",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0009",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0009",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0010",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0010",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0010",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0010",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0011",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0011",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0012",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0012",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0012",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0012",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0013",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0013",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0013",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0013",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0014",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0014",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0014",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0014",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0015",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0016",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0016",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0016",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0016",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0017",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0017",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0017",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0017",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0018",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0018",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0018",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0018",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0019",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0020",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0020",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0021",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0021",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0021",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0021",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0022",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0022",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0023",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0023",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0023",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0023",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0024",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0024",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0024",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0025",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0025",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0026",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0026",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0026",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0026",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0027",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0028",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0029",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0029",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0029",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0029",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0030",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0030",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0030",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0030",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0031",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0031",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0031",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0031",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0032",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0032",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0032",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0032",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0033",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0033",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0033",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0033",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0034",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0034",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0034",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0035",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0035",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0035",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0035",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0036",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0036",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0036",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0037",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0037",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0037",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0037",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0038",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0038",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0039",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0039",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0040",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0040",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0041",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0041",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0042",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0043",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0043",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0043",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0043",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0044",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0044",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0044",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0044",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0045",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0045",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0045",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0045",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0046",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0046",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0047",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0047",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0048",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0048",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0048",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0048",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0049",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0049",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0049",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0049",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0050",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0050",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0050",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0050",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0051",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0051",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0052",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0052",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0053",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0053",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0053",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0053",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0054",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0054",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0054",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0054",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0055",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0055",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0055",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0055",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0056",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0056",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0056",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0056",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0057",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0058",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0059",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0059",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0060",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0060",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0060",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0061",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0061",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0061",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0061",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0062",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0062",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0062",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0063",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0063",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0063",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0063",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0064",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0064",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0064",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0064",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0065",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0065",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0065",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0065",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0066",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0066",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0067",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0068",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0068",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0068",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0068",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0069",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0069",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0069",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0069",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0070",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0070",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0071",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0071",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0071",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0071",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0072",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0072",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0073",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0073",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0073",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0073",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0074",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0074",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0074",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0074",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0075",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0075",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0075",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0075",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0076",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0076",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0076",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0076",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0077",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0077",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0077",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0078",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0079",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0079",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0079",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0079",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0080",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0080",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0080",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0080",
+      "token_offset": 62000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0081",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0081",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0082",
+      "token_offset": 2000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0082",
+      "token_offset": 22000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0082",
+      "token_offset": 42000,
+      "tokens": 1280
+    },
+    {
+      "book": "test_0082",
+      "token_offset": 62000,
+      "tokens": 1280
+    }
+  ],
+  "sha256_of_ids": "d50cd2189fda49ad012b47306f74a21ff06364c3c6ccd02732cec84f8550dbe8",
+  "books": {
+    "calibration": 36,
+    "heldout": 83
+  }
+}

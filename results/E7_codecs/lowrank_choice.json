@@ -1,0 +1,38 @@
+{
+  "rule": "smallest bytes per token among low-rank codecs with mean KL <= int4 (KIVI); none: the lowest KL",
+  "int4_kl": 0.003001565035447129,
+  "lowrank": {
+    "lowrank512-int8": {
+      "kl": 0.007090983147463703,
+      "bytes_per_token": 29568.0,
+      "n": 256
+    },
+    "lowrank512-int4": {
+      "kl": 0.009671789490312221,
+      "bytes_per_token": 15232.0,
+      "n": 256
+    },
+    "lowrank256-int8": {
+      "kl": 0.0336615869346133,
+      "bytes_per_token": 14784.0,
+      "n": 256
+    },
+    "lowrank256-int4": {
+      "kl": 0.03576752204025979,
+      "bytes_per_token": 7616.0,
+      "n": 256
+    },
+    "lowrank128-int8": {
+      "kl": 0.10611149184114765,
+      "bytes_per_token": 7392.0,
+      "n": 256
+    },
+    "lowrank128-int4": {
+      "kl": 0.10718867066316307,
+      "bytes_per_token": 3808.0,
+      "n": 256
+    }
+  },
+  "choice": "lowrank512-int8",
+  "qualified": false
+}
