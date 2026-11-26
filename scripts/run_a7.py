@@ -417,6 +417,8 @@ def choose_coder(cfg: dict) -> dict:
     agg = {}
     for cn in cfg["part2"]["coders"]:
         rs = [r for r in rows if r["coder"] == cn]
+        if not rs:  # not run on KV bytes (PPMd, D-049)
+            continue
         raw, comp = sum(r["raw_bytes"] for r in rs), sum(r["compressed_bytes"] for r in rs)
         agg[cn] = {"ratio": raw / comp, "decompress_mb_s": raw / 1e6 / sum(r["decompress_s"] for r in rs),
                    "compress_mb_s": raw / 1e6 / sum(r["compress_s"] for r in rs)}
