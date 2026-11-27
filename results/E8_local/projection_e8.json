@@ -1,0 +1,966 @@
+{
+  "remaining_s": 29616.25036510137,
+  "remaining_h": 8.226736212528158,
+  "cells": [
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "synth:S1",
+      "length": "32k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 3.074,
+      "remaining_s": 292.0
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "synth:S2_multikey",
+      "length": "32k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 3.098,
+      "remaining_s": 294.3
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "synth:S2_multivalue",
+      "length": "32k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 6.386,
+      "remaining_s": 606.7
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa1",
+      "length": "32k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 3.124,
+      "remaining_s": 296.8
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa2",
+      "length": "32k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 2.982,
+      "remaining_s": 283.3
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa3",
+      "length": "32k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 3.18,
+      "remaining_s": 302.1
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa4",
+      "length": "32k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 2.582,
+      "remaining_s": 245.3
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa5",
+      "length": "32k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 2.525,
+      "remaining_s": 239.8
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa6",
+      "length": "32k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 2.565,
+      "remaining_s": 243.7
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa7",
+      "length": "32k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 2.573,
+      "remaining_s": 244.4
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa8",
+      "length": "32k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 2.551,
+      "remaining_s": 242.3
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa9",
+      "length": "32k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 2.561,
+      "remaining_s": 243.3
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa10",
+      "length": "32k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 2.592,
+      "remaining_s": 246.3
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "synth:S1",
+      "length": "64k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 3.463,
+      "remaining_s": 329.0
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "synth:S2_multikey",
+      "length": "64k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 3.621,
+      "remaining_s": 344.0
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "synth:S2_multivalue",
+      "length": "64k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 3.621,
+      "remaining_s": 344.0
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa1",
+      "length": "64k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 3.262,
+      "remaining_s": 309.9
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa2",
+      "length": "64k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 3.31,
+      "remaining_s": 314.5
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa3",
+      "length": "64k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 3.466,
+      "remaining_s": 329.3
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa4",
+      "length": "64k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 2.764,
+      "remaining_s": 262.6
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa5",
+      "length": "64k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 2.726,
+      "remaining_s": 259.0
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa6",
+      "length": "64k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 2.596,
+      "remaining_s": 246.6
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa7",
+      "length": "64k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 2.606,
+      "remaining_s": 247.6
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa8",
+      "length": "64k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 2.691,
+      "remaining_s": 255.6
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa9",
+      "length": "64k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 2.609,
+      "remaining_s": 247.9
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa10",
+      "length": "64k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 2.683,
+      "remaining_s": 254.9
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "synth:S1",
+      "length": "128k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 3.178,
+      "remaining_s": 301.9
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 3.362,
+      "remaining_s": 319.4
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "synth:S2_multivalue",
+      "length": "128k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 3.75,
+      "remaining_s": 356.3
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa1",
+      "length": "128k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 3.407,
+      "remaining_s": 323.6
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 3.28,
+      "remaining_s": 311.6
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 3.331,
+      "remaining_s": 316.5
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa4",
+      "length": "128k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 2.68,
+      "remaining_s": 254.6
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa5",
+      "length": "128k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 2.615,
+      "remaining_s": 248.4
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa6",
+      "length": "128k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 2.61,
+      "remaining_s": 248.0
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa7",
+      "length": "128k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 2.628,
+      "remaining_s": 249.7
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa8",
+      "length": "128k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 2.703,
+      "remaining_s": 256.8
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa9",
+      "length": "128k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 2.625,
+      "remaining_s": 249.3
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa10",
+      "length": "128k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 2.635,
+      "remaining_s": 250.3
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "infbench:passkey",
+      "length": "full",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 3.306,
+      "remaining_s": 314.1
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "infbench:number_string",
+      "length": "full",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 5.611,
+      "remaining_s": 533.0
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "infbench:kv_retrieval",
+      "length": "full",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 6.951,
+      "remaining_s": 660.3
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "infbench:longbook_choice_eng",
+      "length": "full",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 3.505,
+      "remaining_s": 332.9
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa1",
+      "length": "256k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 3.33,
+      "remaining_s": 316.3
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 3.344,
+      "remaining_s": 317.6
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 3.367,
+      "remaining_s": 319.9
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa4",
+      "length": "256k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 2.812,
+      "remaining_s": 267.2
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa5",
+      "length": "256k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 2.757,
+      "remaining_s": 262.0
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa6",
+      "length": "256k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 2.759,
+      "remaining_s": 262.1
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa7",
+      "length": "256k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 2.766,
+      "remaining_s": 262.8
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa8",
+      "length": "256k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 2.798,
+      "remaining_s": 265.8
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa9",
+      "length": "256k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 2.741,
+      "remaining_s": 260.4
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "babilong:qa10",
+      "length": "256k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 2.784,
+      "remaining_s": 264.4
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "synth:S1",
+      "length": "256k",
+      "range": [
+        0,
+        300
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 3.128,
+      "remaining_s": 922.8
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "range": [
+        0,
+        300
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 3.434,
+      "remaining_s": 1012.9
+    },
+    {
+      "label": "P-KV",
+      "method": "pcm-kv-ape-int4",
+      "task": "synth:S2_multivalue",
+      "length": "256k",
+      "range": [
+        0,
+        300
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 4.113,
+      "remaining_s": 1213.2
+    },
+    {
+      "label": "P-T",
+      "method": "pcm-p512-b8192",
+      "task": "synth:S1",
+      "length": "256k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 5,
+      "seconds_per_example": 1.191,
+      "remaining_s": 113.2
+    },
+    {
+      "label": "P-T",
+      "method": "pcm-p512-b8192",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 5,
+      "seconds_per_example": 1.308,
+      "remaining_s": 124.3
+    },
+    {
+      "label": "P-T",
+      "method": "pcm-p512-b8192",
+      "task": "synth:S2_multivalue",
+      "length": "256k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 5,
+      "seconds_per_example": 1.165,
+      "remaining_s": 110.6
+    },
+    {
+      "label": "P-T",
+      "method": "pcm-p512-b8192",
+      "task": "synth:S1",
+      "length": "256k",
+      "range": [
+        100,
+        300
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 9.274,
+      "remaining_s": 1808.3
+    },
+    {
+      "label": "P-T",
+      "method": "pcm-p512-b8192",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "range": [
+        100,
+        300
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 9.221,
+      "remaining_s": 1798.0
+    },
+    {
+      "label": "P-T",
+      "method": "pcm-p512-b8192",
+      "task": "synth:S2_multivalue",
+      "length": "256k",
+      "range": [
+        100,
+        300
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 11.639,
+      "remaining_s": 2269.7
+    },
+    {
+      "label": "M2",
+      "method": "m2-hybrid-1.7B",
+      "task": "synth:S1",
+      "length": "256k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 5,
+      "seconds_per_example": 1.18,
+      "remaining_s": 112.1
+    },
+    {
+      "label": "M2",
+      "method": "m2-hybrid-1.7B",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 5,
+      "seconds_per_example": 1.146,
+      "remaining_s": 108.9
+    },
+    {
+      "label": "M2",
+      "method": "m2-hybrid-1.7B",
+      "task": "synth:S2_multivalue",
+      "length": "256k",
+      "range": [
+        0,
+        100
+      ],
+      "done": 5,
+      "reused": 5,
+      "seconds_per_example": 1.181,
+      "remaining_s": 112.2
+    },
+    {
+      "label": "M2",
+      "method": "m2-hybrid-1.7B",
+      "task": "synth:S1",
+      "length": "256k",
+      "range": [
+        100,
+        300
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 6.083,
+      "remaining_s": 1186.2
+    },
+    {
+      "label": "M2",
+      "method": "m2-hybrid-1.7B",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "range": [
+        100,
+        300
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 6.113,
+      "remaining_s": 1192.0
+    },
+    {
+      "label": "M2",
+      "method": "m2-hybrid-1.7B",
+      "task": "synth:S2_multivalue",
+      "length": "256k",
+      "range": [
+        100,
+        300
+      ],
+      "done": 5,
+      "reused": 0,
+      "seconds_per_example": 8.622,
+      "remaining_s": 1681.4
+    }
+  ],
+  "unmeasured": [],
+  "stage": "e8",
+  "by_method_h": {
+    "M2": 1.22,
+    "P-KV": 5.28,
+    "P-T": 1.73
+  },
+  "pilot_elapsed_s": 0.0
+}

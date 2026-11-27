@@ -1,6 +1,6 @@
 {
-  "timestamp_utc": "2026-11-25T10:57:11+00:00",
-  "git_commit": "919e46cb56b1b2c93f85a2d9bd408c772fa3ea4a",
+  "timestamp_utc": "2026-11-27T03:14:03+00:00",
+  "git_commit": "89a63bc80b05bc5ff9a2cd087f4d4c9e74f31234",
   "git_dirty": false,
   "python": "3.11.15",
   "platform": "Windows-10-10.0.19044-SP0",
@@ -32,17 +32,15 @@
   ],
   "argv": [
     "--synth",
-    "--split",
-    "train",
-    "--seeds",
-    "1000",
     "--tasks",
     "S1",
     "S2_multikey",
     "S2_multivalue",
     "--lengths",
-    "128k",
+    "256k",
+    "--seeds",
+    "0",
     "--n",
-    "30"
+    "300"
   ]
 }

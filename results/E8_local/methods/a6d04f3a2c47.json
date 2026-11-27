@@ -1,0 +1,35 @@
+{
+  "window": 32768,
+  "unit": 128,
+  "snap": 32,
+  "budget": 28672,
+  "gap_marker": "\n[...]\n",
+  "min_free_vram_gib": 10.0,
+  "reader": "reader",
+  "dtype": "bfloat16",
+  "block": 2048,
+  "min_free_ram_gib": 2.0,
+  "max_new_tokens": {
+    "infbench:passkey": 64,
+    "infbench:number_string": 64,
+    "infbench:kv_retrieval": 128,
+    "synth:S1": 64,
+    "synth:S2_multikey": 64,
+    "synth:S2_multivalue": 128
+  },
+  "method": "retrieve",
+  "embedder": "embedder",
+  "reranker": "reranker",
+  "embed_batch": 128,
+  "rerank_batch": 32,
+  "rrf_k": 60,
+  "bm25": {
+    "k1": 1.5,
+    "b": 0.75,
+    "epsilon": 0.25
+  },
+  "rerank_top": 64,
+  "index_cache": "data/cache/index",
+  "name": "m2-hybrid-1.7B",
+  "ranker": "hybrid"
+}
