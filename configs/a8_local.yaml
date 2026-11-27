@@ -1,0 +1,77 @@
+# A8: E8, the integrated local comparison, and Gate G3 (specification, prompt A8; D-052, D-053).
+# Run with scripts/run_a8.py. Task data and scorers: configs/a2_tasks.yaml. Reader: Qwen3-1.7B, R0, greedy, thinking off.
+#
+# E8 compares M0, M1 (up to 128K), M2 hybrid, M3, P-T and P-KV on identical examples at 32K, 64K, 128K and 256K, one data
+# seed. Rows that earlier steps measured with the same method configuration on the same examples are used as they are
+# (D-052); this file names the cells E8 adds, and where every series of the comparison comes from.
+n: 100            # examples per cell (section 5.2)
+seed: 0           # data seed
+pilot_n: 5        # examples per cell in the pilot
+ask_above_hours: 12
+
+# The methods E8 runs. Each entry names a file and the key of the method configuration inside it; the configuration is
+# used exactly as written there, so its hash equals the hash of the earlier rows of the same method.
+methods:
+  P-T: {file: configs/pcm_text.yaml, key: pcm_text}                    # pcm-p512-b8192 (A5), hash a9f9fa050cff
+  P-KV: {file: configs/pcm_kv.yaml, key: pcm_kv}                       # pcm-kv-ape-int4 (A6 + A7)
+  M2: {file: configs/a4_baselines.yaml, key: [methods, m2-hybrid-1.7B]}  # A4, hash a6d04f3a2c47
+
+task_sets:
+  h1: [synth:S1, synth:S2_multikey, synth:S2_multivalue, babilong:qa1, babilong:qa2, babilong:qa3, babilong:qa4, babilong:qa5]
+  ext: [babilong:qa6, babilong:qa7, babilong:qa8, babilong:qa9, babilong:qa10]
+  infbench: [infbench:passkey, infbench:number_string, infbench:kv_retrieval, infbench:longbook_choice_eng]
+  synth: [synth:S1, synth:S2_multikey, synth:S2_multivalue]
+  babilong: [babilong:qa1, babilong:qa2, babilong:qa3, babilong:qa4, babilong:qa5, babilong:qa6, babilong:qa7, babilong:qa8, babilong:qa9, babilong:qa10]
+
+# Cells E8 runs, in this order. `range`: example indices [lo, hi) of the cell (default [0, n)). `answer_from`: earlier
+# experiments whose answers are reused for identical prompts (exact by the prompt hash), so the rows of the first 100
+# synthetic examples at 256K are this commit's selection with the stored answer, and a changed prompt would be answered
+# anew and show up as not reused.
+cells:
+  # P-KV: every retained task at every length (nothing of it was measured before: the int4 store is new in A7).
+  - {method: P-KV, tasks: [h1, ext], lengths: [32k, 64k, 128k]}
+  - {method: P-KV, tasks: [infbench], lengths: [full]}
+  - {method: P-KV, tasks: [babilong], lengths: [256k]}
+  - {method: P-KV, tasks: [synth], lengths: [256k], range: [0, 300]}
+  # N = 300 at 256K on the synthetic tasks for PCM and M2 (prompt A8): the first 100 reuse the earlier answers.
+  - {method: P-T, tasks: [synth], lengths: [256k], range: [0, 100], answer_from: [E4_pages, E5_graph]}
+  - {method: P-T, tasks: [synth], lengths: [256k], range: [100, 300]}
+  - {method: M2, tasks: [synth], lengths: [256k], range: [0, 100], answer_from: [E3_retrieval]}
+  - {method: M2, tasks: [synth], lengths: [256k], range: [100, 300]}
+
+# The integrated system at 256K on one card (Gate G3, second part; report section 3): for a few documents, in one
+# process with the reader and the embedder loaded, the index is built cold, every page of the document is encoded into
+# the int4 store (kept on the GPU), and the example's question is answered from that store in KV mode and from the
+# token ids in text mode. Peak VRAM (allocated and reserved), store bytes, ingest and question seconds are recorded,
+# and both answers are compared with the E8 rows of the same example (which encode only the pages they keep).
+store:
+  tasks: [synth:S1, synth:S2_multikey, babilong:qa1]
+  length: 256k
+  index: 0
+  vram_gib: 24.0   # the card; "inside 24 GB" = peak reserved at or below this (D-053)
+
+# Where each series of the comparison comes from (scripts/a8_summary.py). `from`: the first grid length at which the
+# method's own rows are used; below it the curve is the native run, because the method changes nothing there (as in A4).
+series:
+  native: {label: "native", exp: E0_floor, method: native-1.7B, budget_rerun: {exp: E0_a4budget, method: native-1.7B-a4budget, tasks: [synth:S2_multivalue]}}
+  M0: {label: "M0 last 32K", exp: E1_truncation, method: m0-tail-1.7B, from: 64k, infbench: m0-tail-1.7B-budget}
+  M1: {label: "M1 dense YaRN", exp: E2_dense, method: m1-yarn-1.7B, from: 64k}
+  M2: {label: "M2 hybrid", exp: [E3_retrieval, E8_local], method: m2-hybrid-1.7B, from: 32k}
+  M3: {label: "M3 oracle", exp: E3o_oracle, method: m3-oracle-1.7B, from: 32k}
+  M3-tight: {label: "M3 tight oracle (supplementary)", exp: E3o_oracle, method: m3-oracle-tight-1.7B, from: 8k}
+  P-T: {label: "P-T PCM text", exp: [E6_kv, E8_local], method: [pcm-text, pcm-p512-b8192], from: 32k}
+  P-KV: {label: "P-KV PCM KV (int4)", exp: E8_local, method: pcm-kv-ape-int4, from: 32k}
+
+families:
+  S1: [synth:S1]
+  S2: [synth:S2_multikey, synth:S2_multivalue]
+  BABILong: [babilong:qa1, babilong:qa2, babilong:qa3, babilong:qa4, babilong:qa5]
+  BABILong-ext: [babilong:qa6, babilong:qa7, babilong:qa8, babilong:qa9, babilong:qa10]
+h1_families: [S1, S2, BABILong]   # BABILong-ext has no ECL90 (D-032); H1 needs all three (section 2, D-032)
+
+# Gate G3 and H1 as read in D-053, fixed before any E8 row.
+g3:
+  h1_length: 128k        # H1 must hold locally at 128K: ECL90 of P-T >= 128K on every H1 family
+  h1_min_families: 3
+  pcm_length: 256k       # and PCM must run at 256K inside the card
+  vram_gib: 24.0
