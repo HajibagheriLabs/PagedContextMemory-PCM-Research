@@ -86,6 +86,10 @@ def main() -> int:
     source = {}
     for exp in ("E4_pages", "E5_graph"):
         for r in rows_of(exp):
+            # E5's no-graph rows share ids with E4's final rows (same method hash) and reuse their answers: keep the
+            # row that produced the answer.
+            if r["id"] in source and not (source[r["id"]].get("timings") or {}).get("reused"):
+                continue
             source[r["id"]] = r
 
     cells = defaultdict(list)
@@ -106,12 +110,17 @@ def main() -> int:
     def pair(ra, rb):
         return M.paired_by_id([r for r in ra if r.get("score") is not None], [r for r in rb if r.get("score") is not None])
 
+    def origin(r):
+        """The row that produced a reused answer, following reuse across experiments (E6 -> E5 -> E4)."""
+        seen = 0
+        while (r.get("timings") or {}).get("reused") and r.get("reused_from") in source and seen < 5:
+            r = source[r["reused_from"]]
+            seen += 1
+        return r
+
     def text_timing(r, key):
         """A text-mode timing; reused answers take it from the A5 row that produced the answer."""
-        t = r.get("timings") or {}
-        if t.get("reused") and r.get("reused_from") in source:
-            t = source[r["reused_from"]].get("timings") or {}
-        return t.get(key)
+        return (origin(r).get("timings") or {}).get(key)
 
     retained = expand_tasks(cfg, ["h1", "ext"])
     infb = cfg["task_sets"]["infbench"]
@@ -171,7 +180,8 @@ def main() -> int:
             if mname == "text":
                 rec = {"rows": len(rs), "query_prefill_tokens": mean([r.get("prompt_tokens") for r in rs]),
                        "ttft_s": mean([text_timing(r, "prefill_s") for r in rs]), "expand_ms": None, "encode_s": None,
-                       "peak_vram_gib": max([(source.get(r.get("reused_from")) or r).get("peak_vram_gib") or 0 for r in rs])}
+                       "timed_rows": sum(1 for r in rs if text_timing(r, "prefill_s") is not None),
+                       "peak_vram_gib": max([origin(r).get("peak_vram_gib") or 0 for r in rs])}
             else:
                 fresh = [r for r in rs if not (r.get("timings") or {}).get("reused")]
                 rec = {"rows": len(rs), "timed_rows": len(fresh), "query_prefill_tokens": mean([(r.get("timings") or {}).get("query_prefill_tokens") for r in rs]),

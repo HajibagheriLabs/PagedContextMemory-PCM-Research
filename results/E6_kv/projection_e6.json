@@ -1,0 +1,1963 @@
+{
+  "remaining_s": 39961.56956460049,
+  "remaining_h": 11.100435990166803,
+  "cells": [
+    {
+      "method": "pcm-text",
+      "task": "synth:S1",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.21,
+      "remaining_s": 115.0
+    },
+    {
+      "method": "pcm-text",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.17,
+      "remaining_s": 111.1
+    },
+    {
+      "method": "pcm-text",
+      "task": "synth:S2_multivalue",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.177,
+      "remaining_s": 111.8
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa1",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.14,
+      "remaining_s": 108.3
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.108,
+      "remaining_s": 105.3
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.127,
+      "remaining_s": 107.0
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa4",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.128,
+      "remaining_s": 107.1
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa5",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.138,
+      "remaining_s": 108.1
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa6",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.125,
+      "remaining_s": 106.9
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa7",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.083,
+      "remaining_s": 102.9
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa8",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.096,
+      "remaining_s": 104.1
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa9",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.112,
+      "remaining_s": 105.6
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa10",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.102,
+      "remaining_s": 104.7
+    },
+    {
+      "method": "pcm-text",
+      "task": "infbench:passkey",
+      "length": "full",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.481,
+      "remaining_s": 45.7
+    },
+    {
+      "method": "pcm-text",
+      "task": "infbench:number_string",
+      "length": "full",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.477,
+      "remaining_s": 45.4
+    },
+    {
+      "method": "pcm-text",
+      "task": "infbench:kv_retrieval",
+      "length": "full",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.542,
+      "remaining_s": 51.5
+    },
+    {
+      "method": "pcm-text",
+      "task": "infbench:longbook_choice_eng",
+      "length": "full",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.173,
+      "remaining_s": 111.4
+    },
+    {
+      "method": "pcm-text",
+      "task": "synth:S1",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.611,
+      "remaining_s": 58.0
+    },
+    {
+      "method": "pcm-text",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.57,
+      "remaining_s": 54.1
+    },
+    {
+      "method": "pcm-text",
+      "task": "synth:S2_multivalue",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.627,
+      "remaining_s": 59.6
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa1",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.565,
+      "remaining_s": 53.7
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.589,
+      "remaining_s": 56.0
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.589,
+      "remaining_s": 56.0
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa4",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.571,
+      "remaining_s": 54.3
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa5",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.589,
+      "remaining_s": 56.0
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa6",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.591,
+      "remaining_s": 56.1
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa7",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.576,
+      "remaining_s": 54.7
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa8",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.572,
+      "remaining_s": 54.4
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa9",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.588,
+      "remaining_s": 55.9
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa10",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.597,
+      "remaining_s": 56.7
+    },
+    {
+      "method": "pcm-text",
+      "task": "synth:S1",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.298,
+      "remaining_s": 28.3
+    },
+    {
+      "method": "pcm-text",
+      "task": "synth:S2_multikey",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.343,
+      "remaining_s": 32.6
+    },
+    {
+      "method": "pcm-text",
+      "task": "synth:S2_multivalue",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.301,
+      "remaining_s": 28.6
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa1",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.332,
+      "remaining_s": 31.5
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa2",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.289,
+      "remaining_s": 27.4
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa3",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.331,
+      "remaining_s": 31.4
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa4",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.28,
+      "remaining_s": 26.6
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa5",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.328,
+      "remaining_s": 31.2
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa6",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.293,
+      "remaining_s": 27.9
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa7",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.323,
+      "remaining_s": 30.7
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa8",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.278,
+      "remaining_s": 26.4
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa9",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.333,
+      "remaining_s": 31.6
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa10",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.292,
+      "remaining_s": 27.7
+    },
+    {
+      "method": "pcm-text",
+      "task": "synth:S1",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.165,
+      "remaining_s": 15.6
+    },
+    {
+      "method": "pcm-text",
+      "task": "synth:S2_multikey",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.196,
+      "remaining_s": 18.7
+    },
+    {
+      "method": "pcm-text",
+      "task": "synth:S2_multivalue",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.161,
+      "remaining_s": 15.3
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa1",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.161,
+      "remaining_s": 15.3
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa2",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.148,
+      "remaining_s": 14.1
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa3",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.213,
+      "remaining_s": 20.2
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa4",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.147,
+      "remaining_s": 14.0
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa5",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.157,
+      "remaining_s": 14.9
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa6",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.148,
+      "remaining_s": 14.1
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa7",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.161,
+      "remaining_s": 15.3
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa8",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.173,
+      "remaining_s": 16.5
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa9",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.16,
+      "remaining_s": 15.2
+    },
+    {
+      "method": "pcm-text",
+      "task": "babilong:qa10",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.144,
+      "remaining_s": 13.7
+    },
+    {
+      "method": "pcm-kv",
+      "task": "synth:S1",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.626,
+      "remaining_s": 249.5
+    },
+    {
+      "method": "pcm-kv",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.941,
+      "remaining_s": 279.4
+    },
+    {
+      "method": "pcm-kv",
+      "task": "synth:S2_multivalue",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 3.262,
+      "remaining_s": 309.9
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa1",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.589,
+      "remaining_s": 246.0
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.532,
+      "remaining_s": 240.5
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.533,
+      "remaining_s": 240.6
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa4",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.988,
+      "remaining_s": 188.9
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa5",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.994,
+      "remaining_s": 189.4
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa6",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.954,
+      "remaining_s": 185.6
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa7",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.008,
+      "remaining_s": 190.8
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa8",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.934,
+      "remaining_s": 183.8
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa9",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.987,
+      "remaining_s": 188.8
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa10",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.92,
+      "remaining_s": 182.4
+    },
+    {
+      "method": "pcm-kv",
+      "task": "infbench:passkey",
+      "length": "full",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.453,
+      "remaining_s": 233.1
+    },
+    {
+      "method": "pcm-kv",
+      "task": "infbench:number_string",
+      "length": "full",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 4.647,
+      "remaining_s": 441.5
+    },
+    {
+      "method": "pcm-kv",
+      "task": "infbench:kv_retrieval",
+      "length": "full",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.023,
+      "remaining_s": 477.1
+    },
+    {
+      "method": "pcm-kv",
+      "task": "infbench:longbook_choice_eng",
+      "length": "full",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.693,
+      "remaining_s": 255.9
+    },
+    {
+      "method": "pcm-kv",
+      "task": "synth:S1",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.571,
+      "remaining_s": 244.3
+    },
+    {
+      "method": "pcm-kv",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.709,
+      "remaining_s": 257.3
+    },
+    {
+      "method": "pcm-kv",
+      "task": "synth:S2_multivalue",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.809,
+      "remaining_s": 266.9
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa1",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.43,
+      "remaining_s": 230.9
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.273,
+      "remaining_s": 215.9
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.443,
+      "remaining_s": 232.1
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa4",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.899,
+      "remaining_s": 180.4
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa5",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.893,
+      "remaining_s": 179.8
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa6",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.784,
+      "remaining_s": 169.5
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa7",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.79,
+      "remaining_s": 170.1
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa8",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.891,
+      "remaining_s": 179.7
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa9",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.856,
+      "remaining_s": 176.3
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa10",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.848,
+      "remaining_s": 175.5
+    },
+    {
+      "method": "pcm-kv",
+      "task": "synth:S1",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.624,
+      "remaining_s": 249.3
+    },
+    {
+      "method": "pcm-kv",
+      "task": "synth:S2_multikey",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.844,
+      "remaining_s": 270.2
+    },
+    {
+      "method": "pcm-kv",
+      "task": "synth:S2_multivalue",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.982,
+      "remaining_s": 283.3
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa1",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.376,
+      "remaining_s": 225.7
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa2",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.316,
+      "remaining_s": 220.0
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa3",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.347,
+      "remaining_s": 223.0
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa4",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.741,
+      "remaining_s": 165.4
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa5",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.802,
+      "remaining_s": 171.2
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa6",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.717,
+      "remaining_s": 163.1
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa7",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.736,
+      "remaining_s": 164.9
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa8",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.783,
+      "remaining_s": 169.4
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa9",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.751,
+      "remaining_s": 166.3
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa10",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.711,
+      "remaining_s": 162.5
+    },
+    {
+      "method": "pcm-kv",
+      "task": "synth:S1",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.288,
+      "remaining_s": 217.4
+    },
+    {
+      "method": "pcm-kv",
+      "task": "synth:S2_multikey",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.311,
+      "remaining_s": 219.5
+    },
+    {
+      "method": "pcm-kv",
+      "task": "synth:S2_multivalue",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.207,
+      "remaining_s": 494.6
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa1",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.29,
+      "remaining_s": 217.6
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa2",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.213,
+      "remaining_s": 210.2
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa3",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.325,
+      "remaining_s": 220.8
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa4",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.746,
+      "remaining_s": 165.9
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa5",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.667,
+      "remaining_s": 158.4
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa6",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.677,
+      "remaining_s": 159.3
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa7",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.694,
+      "remaining_s": 161.0
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa8",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.736,
+      "remaining_s": 164.9
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa9",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.699,
+      "remaining_s": 161.4
+    },
+    {
+      "method": "pcm-kv",
+      "task": "babilong:qa10",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.702,
+      "remaining_s": 161.7
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "synth:S1",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.597,
+      "remaining_s": 246.7
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.666,
+      "remaining_s": 253.2
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "synth:S2_multivalue",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 3.13,
+      "remaining_s": 297.4
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa1",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.592,
+      "remaining_s": 246.2
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.606,
+      "remaining_s": 247.6
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa3",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.537,
+      "remaining_s": 241.0
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa4",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.032,
+      "remaining_s": 193.0
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa5",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.954,
+      "remaining_s": 185.6
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa6",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.949,
+      "remaining_s": 185.1
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa7",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.967,
+      "remaining_s": 186.9
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa8",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.007,
+      "remaining_s": 190.7
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa9",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.924,
+      "remaining_s": 182.8
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa10",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.97,
+      "remaining_s": 187.2
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "infbench:passkey",
+      "length": "full",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.533,
+      "remaining_s": 240.6
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "infbench:number_string",
+      "length": "full",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 4.816,
+      "remaining_s": 457.5
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "infbench:kv_retrieval",
+      "length": "full",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 6.781,
+      "remaining_s": 644.2
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "infbench:longbook_choice_eng",
+      "length": "full",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.799,
+      "remaining_s": 265.9
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "synth:S1",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.275,
+      "remaining_s": 216.2
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.604,
+      "remaining_s": 247.4
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "synth:S2_multivalue",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.602,
+      "remaining_s": 247.2
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa1",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.551,
+      "remaining_s": 242.4
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.363,
+      "remaining_s": 224.5
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa3",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.61,
+      "remaining_s": 248.0
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa4",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.85,
+      "remaining_s": 175.7
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa5",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.824,
+      "remaining_s": 173.3
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa6",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.841,
+      "remaining_s": 174.9
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa7",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.796,
+      "remaining_s": 170.6
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa8",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.891,
+      "remaining_s": 179.6
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa9",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.774,
+      "remaining_s": 168.6
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa10",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.807,
+      "remaining_s": 171.7
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "synth:S1",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.4,
+      "remaining_s": 228.0
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "synth:S2_multikey",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.592,
+      "remaining_s": 246.3
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "synth:S2_multivalue",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.668,
+      "remaining_s": 253.5
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa1",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.358,
+      "remaining_s": 224.0
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa2",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.286,
+      "remaining_s": 217.1
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa3",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.364,
+      "remaining_s": 224.5
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa4",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.776,
+      "remaining_s": 168.7
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa5",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.742,
+      "remaining_s": 165.5
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa6",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.809,
+      "remaining_s": 171.9
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa7",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.694,
+      "remaining_s": 160.9
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa8",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.858,
+      "remaining_s": 176.5
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa9",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.743,
+      "remaining_s": 165.6
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa10",
+      "length": "64k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.706,
+      "remaining_s": 162.0
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "synth:S1",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.186,
+      "remaining_s": 207.7
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "synth:S2_multikey",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.16,
+      "remaining_s": 205.2
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "synth:S2_multivalue",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 5.491,
+      "remaining_s": 521.7
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa1",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.314,
+      "remaining_s": 219.8
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa2",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.143,
+      "remaining_s": 203.6
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa3",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.362,
+      "remaining_s": 224.4
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa4",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.726,
+      "remaining_s": 164.0
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa5",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.738,
+      "remaining_s": 165.1
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa6",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.72,
+      "remaining_s": 163.4
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa7",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.709,
+      "remaining_s": 162.4
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa8",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.707,
+      "remaining_s": 162.2
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa9",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.736,
+      "remaining_s": 164.9
+    },
+    {
+      "method": "pcm-kv-ape",
+      "task": "babilong:qa10",
+      "length": "32k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.687,
+      "remaining_s": 160.2
+    },
+    {
+      "method": "pcm-text-p128",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.144,
+      "remaining_s": 108.7
+    },
+    {
+      "method": "pcm-text-p128",
+      "task": "synth:S2_multivalue",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 3.088,
+      "remaining_s": 293.4
+    },
+    {
+      "method": "pcm-text-p128",
+      "task": "babilong:qa1",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.755,
+      "remaining_s": 166.7
+    },
+    {
+      "method": "pcm-text-p128",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.121,
+      "remaining_s": 106.5
+    },
+    {
+      "method": "pcm-text-p128",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.563,
+      "remaining_s": 53.5
+    },
+    {
+      "method": "pcm-text-p128",
+      "task": "synth:S2_multivalue",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.856,
+      "remaining_s": 271.3
+    },
+    {
+      "method": "pcm-text-p128",
+      "task": "babilong:qa1",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.673,
+      "remaining_s": 158.9
+    },
+    {
+      "method": "pcm-text-p128",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.562,
+      "remaining_s": 53.4
+    },
+    {
+      "method": "pcm-kv-ape-p128",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 7.78,
+      "remaining_s": 739.1
+    },
+    {
+      "method": "pcm-kv-ape-p128",
+      "task": "synth:S2_multivalue",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 10.431,
+      "remaining_s": 990.9
+    },
+    {
+      "method": "pcm-kv-ape-p128",
+      "task": "babilong:qa1",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 6.554,
+      "remaining_s": 622.7
+    },
+    {
+      "method": "pcm-kv-ape-p128",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 6.668,
+      "remaining_s": 633.5
+    },
+    {
+      "method": "pcm-kv-ape-p128",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 7.783,
+      "remaining_s": 739.4
+    },
+    {
+      "method": "pcm-kv-ape-p128",
+      "task": "synth:S2_multivalue",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 10.073,
+      "remaining_s": 956.9
+    },
+    {
+      "method": "pcm-kv-ape-p128",
+      "task": "babilong:qa1",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 6.489,
+      "remaining_s": 616.4
+    },
+    {
+      "method": "pcm-kv-ape-p128",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 6.466,
+      "remaining_s": 614.2
+    },
+    {
+      "method": "pcm-text-p2048",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.143,
+      "remaining_s": 108.6
+    },
+    {
+      "method": "pcm-text-p2048",
+      "task": "synth:S2_multivalue",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 3.785,
+      "remaining_s": 359.6
+    },
+    {
+      "method": "pcm-text-p2048",
+      "task": "babilong:qa1",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.794,
+      "remaining_s": 170.5
+    },
+    {
+      "method": "pcm-text-p2048",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.095,
+      "remaining_s": 104.0
+    },
+    {
+      "method": "pcm-text-p2048",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.588,
+      "remaining_s": 55.8
+    },
+    {
+      "method": "pcm-text-p2048",
+      "task": "synth:S2_multivalue",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 3.037,
+      "remaining_s": 288.5
+    },
+    {
+      "method": "pcm-text-p2048",
+      "task": "babilong:qa1",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.568,
+      "remaining_s": 149.0
+    },
+    {
+      "method": "pcm-text-p2048",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.572,
+      "remaining_s": 54.4
+    },
+    {
+      "method": "pcm-kv-ape-p2048",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.811,
+      "remaining_s": 172.0
+    },
+    {
+      "method": "pcm-kv-ape-p2048",
+      "task": "synth:S2_multivalue",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.107,
+      "remaining_s": 200.1
+    },
+    {
+      "method": "pcm-kv-ape-p2048",
+      "task": "babilong:qa1",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.956,
+      "remaining_s": 185.9
+    },
+    {
+      "method": "pcm-kv-ape-p2048",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.884,
+      "remaining_s": 179.0
+    },
+    {
+      "method": "pcm-kv-ape-p2048",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.693,
+      "remaining_s": 160.8
+    },
+    {
+      "method": "pcm-kv-ape-p2048",
+      "task": "synth:S2_multivalue",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.991,
+      "remaining_s": 189.1
+    },
+    {
+      "method": "pcm-kv-ape-p2048",
+      "task": "babilong:qa1",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.908,
+      "remaining_s": 181.2
+    },
+    {
+      "method": "pcm-kv-ape-p2048",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.795,
+      "remaining_s": 170.6
+    },
+    {
+      "method": "pcm-text-p4096",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.132,
+      "remaining_s": 107.5
+    },
+    {
+      "method": "pcm-text-p4096",
+      "task": "synth:S2_multivalue",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.221,
+      "remaining_s": 211.0
+    },
+    {
+      "method": "pcm-text-p4096",
+      "task": "babilong:qa1",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.734,
+      "remaining_s": 164.7
+    },
+    {
+      "method": "pcm-text-p4096",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.115,
+      "remaining_s": 105.9
+    },
+    {
+      "method": "pcm-text-p4096",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.548,
+      "remaining_s": 52.0
+    },
+    {
+      "method": "pcm-text-p4096",
+      "task": "synth:S2_multivalue",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.048,
+      "remaining_s": 194.6
+    },
+    {
+      "method": "pcm-text-p4096",
+      "task": "babilong:qa1",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.793,
+      "remaining_s": 170.3
+    },
+    {
+      "method": "pcm-text-p4096",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 0.562,
+      "remaining_s": 53.4
+    },
+    {
+      "method": "pcm-kv-ape-p4096",
+      "task": "synth:S2_multikey",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.821,
+      "remaining_s": 172.9
+    },
+    {
+      "method": "pcm-kv-ape-p4096",
+      "task": "synth:S2_multivalue",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.856,
+      "remaining_s": 176.4
+    },
+    {
+      "method": "pcm-kv-ape-p4096",
+      "task": "babilong:qa1",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.957,
+      "remaining_s": 185.9
+    },
+    {
+      "method": "pcm-kv-ape-p4096",
+      "task": "babilong:qa2",
+      "length": "256k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 2.006,
+      "remaining_s": 190.5
+    },
+    {
+      "method": "pcm-kv-ape-p4096",
+      "task": "synth:S2_multikey",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.717,
+      "remaining_s": 163.1
+    },
+    {
+      "method": "pcm-kv-ape-p4096",
+      "task": "synth:S2_multivalue",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.785,
+      "remaining_s": 169.6
+    },
+    {
+      "method": "pcm-kv-ape-p4096",
+      "task": "babilong:qa1",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.883,
+      "remaining_s": 178.8
+    },
+    {
+      "method": "pcm-kv-ape-p4096",
+      "task": "babilong:qa2",
+      "length": "128k",
+      "n": 100,
+      "done": 5,
+      "seconds_per_example": 1.671,
+      "remaining_s": 158.8
+    }
+  ],
+  "unmeasured": [],
+  "stage": "e6",
+  "by_method_h": {
+    "pcm-kv": 3.42,
+    "pcm-kv-ape": 3.44,
+    "pcm-kv-ape-p128": 1.64,
+    "pcm-kv-ape-p2048": 0.4,
+    "pcm-kv-ape-p4096": 0.39,
+    "pcm-text": 0.82,
+    "pcm-text-p128": 0.34,
+    "pcm-text-p2048": 0.36,
+    "pcm-text-p4096": 0.29
+  }
+}
