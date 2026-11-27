@@ -1,0 +1,40 @@
+# PCM, KV mode (P-KV), fixed in A6 and A7 (reports/A6_kv.md, reports/A7_codecs.md). Gate G2 FAILED in A6: KV mode is
+# 18-20 points below text mode with the best training-free fix, so TEXT MODE (configs/pcm_text.yaml) IS THE DEFAULT and
+# this configuration is what A8 runs as P-KV, for comparison.
+# Pages exactly as configs/pcm_text.yaml (page 512, budget 8,192, hybrid ranking, no graph).
+pcm_kv:
+  method: pcm_kv
+  name: pcm-kv-ape-int4
+  reader: reader
+  dtype: bfloat16
+  block: 2048
+  window: 32768
+  min_free_ram_gib: 2.0
+  min_free_vram_gib: 10.0
+  max_new_tokens: {"infbench:passkey": 64, "infbench:number_string": 64, "infbench:kv_retrieval": 128,
+                   "synth:S1": 64, "synth:S2_multikey": 64, "synth:S2_multivalue": 128}
+  unit: 128
+  snap: 32
+  ranker: hybrid
+  embedder: embedder
+  embed_batch: 128
+  rrf_k: 60
+  bm25: {k1: 1.5, b: 0.75, epsilon: 0.25}
+  index_cache: data/cache/index
+  page: 512
+  budget: 8192
+  gap_marker: "\n[...]\n"
+  kv:
+    # APE-style fix chosen on the synthetic train split by the rule of D-047 (results/E6_kv/ape_choice.json).
+    temperature: 1.0
+    scale: 0.9
+    store_gpu_gib: 8.0
+    # Default store codec (A7): int4, keys per channel and values per token (KIVI), groups of 128, float16 parameters.
+    # 30,464 bytes per token on 1,024-token pages (3.76x smaller than bf16); next-token KL 0.0030 and top-1 agreement
+    # 0.974 against bf16 on 256 held-out PG-19 pages; a 256K document's store is 7.45 GiB and fits on the 24 GiB card
+    # beside the model and a 32K window (peak reserved 21.9 GiB); a full 28,672-token budget decodes and stitches in
+    # 1.1 s against 5.4 s to recompute it. A lossless coder on top (int4+zstd-3, 4.26x) changes nothing decoded but
+    # triples expansion time (int4+zstd-19: 3.3 s), so it is not the default. Task accuracy per codec was not measured
+    # (A7 Part 3 is conditional on G2, which failed).
+    codec: int4
+    group: 128

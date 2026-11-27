@@ -192,12 +192,20 @@ def main() -> int:
             marker = "o" if c.endswith("kcvt") or not c.startswith("int") else "x"
             ax.scatter(v["bytes_per_token"], max(v["kl"]["mean"], 1e-6), color=color, marker=marker, s=28)
             ax.annotate(c, (v["bytes_per_token"], max(v["kl"]["mean"], 1e-6)), fontsize=6, xytext=(3, 2), textcoords="offset points")
+        # A lossless coder leaves the decoded cache, hence the KL, unchanged: int8/int4/int2 (KIVI) + the best coder of Part 2.
+        for q in ("int8", "int4", "int2"):
+            best = max(((v["ratio"], k) for k, v in part2.items() if k.startswith(q + "|")), default=None)
+            if best and f"{q}-kcvt" in part1:
+                bpt = part2[best[1]]["bytes_per_token_after"]
+                kl = part1[f"{q}-kcvt"]["kl"]["mean"]
+                ax.scatter(bpt, kl, color="purple", marker="^", s=30)
+                ax.annotate(f"{q} + {best[1].split('|')[1]}", (bpt, kl), fontsize=6, xytext=(3, -8), textcoords="offset points")
         ax.axvline(BF16_PER_TOKEN / 4, color="black", linestyle=":", linewidth=0.8)
         ax.set_xscale("log")
         ax.set_yscale("log")
         ax.set_xlabel("stored bytes per token (log; dotted: 4x smaller than bf16)")
         ax.set_ylabel("next-token KL vs bf16 (log)")
-        ax.set_title("Part 1: 256 held-out PG-19 pages, 256-token continuation", fontsize=9)
+        ax.set_title("Accuracy loss stand-in (Part 3 not run: Gate G2 failed): next-token KL on 256 held-out PG-19 pages (bf16: KL 0, drawn at 1e-6)", fontsize=8)
         if part3:
             ax = axes[1]
             for k, d in part3.items():
