@@ -1,0 +1,31 @@
+{
+  "rule": "highest ratio on the int4 payload among coders decompressing at >= 200 MB/s; ties: faster",
+  "coders": {
+    "zstd-3": {
+      "ratio": 1.1319606442640493,
+      "decompress_mb_s": 683.186202740126,
+      "compress_mb_s": 385.4863507895993
+    },
+    "zstd-19": {
+      "ratio": 1.1320657439732982,
+      "decompress_mb_s": 624.7117216841434,
+      "compress_mb_s": 3.9733073497107516
+    },
+    "lz4": {
+      "ratio": 1.0097885454709248,
+      "decompress_mb_s": 2118.7022283651086,
+      "compress_mb_s": 1234.92517048721
+    },
+    "lzma": {
+      "ratio": 1.1384907463131053,
+      "decompress_mb_s": 23.16373683244708,
+      "compress_mb_s": 3.0119719255122024
+    },
+    "deflate": {
+      "ratio": 1.1265452677238323,
+      "decompress_mb_s": 211.18626317038996,
+      "compress_mb_s": 20.507405700073665
+    }
+  },
+  "choice": "zstd-19"
+}
