@@ -154,14 +154,14 @@ are those whose pages touch, which also differ in content.
 All 28 layers are in `tables.md`. Layer 0 is nearly identical (each page's first-layer keys and values depend only on
 its own tokens and position). From layer 1 on, every token of a stitched page was computed without the pages before it,
 and the error grows with depth: values deviate by up to two-thirds of their norm in the middle layers (12–14), keys by up
-to 0.45 in the upper layers. The question's attention distributions differ by a total variation of 0.25–0.34 in the
+to 0.45 (layers 13–26). The question's attention distributions differ by a total variation of 0.25–0.34 in the
 middle layers. At the first answer token, the next-token distributions differ by KL 1.80 nats and agree on the top token
 in 65% of the 20 examples; with the fix, KL 1.72 and 80%. The fix lowers the attention deviation in every layer but layer
 0, by about 3–7% of its value, which is too little to change answers.
 
 This matches the failure pattern in section 4: when a needle is alone (S1), its page carries the answer in its own
 tokens and the question finds it; when the reader must compare a needle with look-alike needles in other pages (S2
-multi-key: the predictions are the other keys' numbers) or collect values from several pages (S2 multi-value: one or two
+multi-key: in the train-split answers inspected, the reader gave a number other than the queried key's) or collect values from several pages (S2 multi-value: one or two
 of four values, often with invented numbers), the representations, computed without each other, do not support it.
 
 ## 7. Speed and memory per example (mean over the 13 retained tasks)
@@ -194,7 +194,7 @@ reading 16 pages from disk takes longer than re-encoding their 8K tokens. This i
 - **Gate G2 fails; this is the owner's decision point.** As the specification lays out: text mode is the default, and KV
   mode is reported as a negative result for training-free stitching, pending the fusion adapter (R2) in Phase B. The
   numbers that a fix must recover are in section 4: about 19 points overall, 66–74 points on S2.
-- **H3 fails** on accuracy; its efficiency side would have held by a wide margin (340× fewer prefilled tokens, 7–8× faster
+- **H3 fails** on accuracy; its efficiency side would have held by a wide margin (340× fewer prefilled tokens, 6–8× faster
   first token).
 - The APE-style fix as specified (key temperature and a context scale) does not address what goes wrong: the deviation is
   in the pages' own hidden states, not in how much attention the question gives them.
